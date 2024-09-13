@@ -3,12 +3,13 @@
     "name": "teste.02",
     "slug": "teste.02",
     "version": "1.0.0",
+    "scheme": "teste.02",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./img/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./img/splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -16,12 +17,19 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./img/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./img/favicon.png"
+    },
+    "expoGo": {
+      "auth": {
+        "google": {
+          "clientId": "887696697850-s3uevbgvsn1l095fn5dsbc6ui3jpm206.apps.googleusercontent.com"
+        }
+      }
     }
   }
 }

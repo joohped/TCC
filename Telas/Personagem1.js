@@ -1,0 +1,354 @@
+import React, { useState, useRef } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, FlatList, Dimensions, Animated } from 'react-native';
+import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth';
+import { initializeApp } from '@firebase/app';
+import { getFirestore, doc, setDoc } from '@firebase/firestore';
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+
+const characters = [
+  { id: '1', source: require('../img/circuloTommy.png'), route: 'Personagem1' },
+  { id: '2', source: require('../img/circuloToby.png'), route: 'Personagem2' },
+  { id: '3', source: require('../img/circuloBella.png'), route: 'Personagem3' },
+  { id: '4', source: require('../img/circuloBob.png'), route: 'Personagem4' },
+  { id: '5', source: require('../img/circuloBete.png'), route: 'Personagem5' },
+];
+
+const { width } = Dimensions.get('window');
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC7Y3mJQ8EfFbvP9OAJ5Vb4lW5TO284_Fs",
+  authDomain: "nhac-83fd2.firebaseapp.com",
+  projectId: "nhac-83fd2",
+  storageBucket: "nhac-83fd2.appspot.com",
+  messagingSenderId: "971934815200",
+  appId: "1:971934815200:web:7539262764480840bf5185",
+  measurementId: "G-V5NPN7G6FP"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const Personagem1 = ({ route, navigation }) => {
+  const {
+    email,
+    password,
+    nome_r,
+    nome_usuario,
+    data_nasc_resp,
+    data_nasc_usua,
+    alergia,
+    alergia_outro,
+    comida_gosta,
+    comidaFavorita_outro,
+    comidasFavoritas,
+    texturaFavorita_outro,
+    texturasFavoritas,
+    saborFavorito_outro,
+    saboresFavoritos,
+    comida_evita,
+    comidasEvita,
+    comidasEvita_outro,
+    texturasEvita,
+    texturasEvita_outro,
+    saboresEvita,
+    saboresEvita_outro
+  } = route.params;
+
+  const [personagemEscolhido, setPersonagemEscolhido] = useState(null);
+  const auth = getAuth();
+  const Casa = async () => {
+    navigation.navigate('Inicio');
+  };
+
+
+  const handleFinalizarCadastro = async (personagem) => {
+    let personagemImagem;
+    switch (personagem) {
+      case 'personagem1':
+        personagemImagem = require('../img/circuloTommy.png');
+        break;
+      default:
+        personagemImagem = null;
+    }
+
+    setPersonagemEscolhido(personagemImagem);
+
+    try {
+
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      const userDocRef = doc(db, 'users', user.uid);
+      await setDoc(userDocRef, {
+        email,
+        nome_r,
+        nome_usuario,
+        data_nasc_resp,
+        data_nasc_usua,
+        alergia,
+        alergia_outro,
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro,
+        personagemEscolhido: personagem,
+        uid: user.uid
+      });
+
+
+      navigation.navigate('CadastroSplash3', {
+        email,
+        password,
+        nome_r,
+        nome_usuario,
+        data_nasc_resp,
+        data_nasc_usua,
+        alergia,
+        alergia_outro,
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro,
+        personagemEscolhido: personagemImagem
+      });
+    } catch (error) {
+      console.error('Error creating user:', error.message);
+    }
+  };
+
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  const renderCharacter = ({ item, index }) => {
+    const inputRange = [
+      (index - 0.8) * (width * 0.3 + 10),
+      index * (width * 0.3 + 10),
+      (index + 0.8) * (width * 0.3 + 10),
+    ];
+    const scale = scrollX.interpolate({
+      inputRange,
+      outputRange: [0.5, 1.2, 0.5],
+      extrapolate: 'clamp',
+    });
+    const translateY = scrollX.interpolate({
+      inputRange,
+      outputRange: [60, -10, 60],
+      extrapolate: 'clamp',
+    });
+    
+
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate(item.route, 
+          {
+          email,
+          password,
+          nome_r,
+          nome_usuario,
+          data_nasc_resp,
+          data_nasc_usua,
+          alergia,
+          alergia_outro,
+          comida_gosta,
+          comidaFavorita_outro,
+          comidasFavoritas,
+          texturaFavorita_outro,
+          texturasFavoritas,
+          saborFavorito_outro,
+          saboresFavoritos,
+          comida_evita,
+          comidasEvita,
+          comidasEvita_outro,
+          texturasEvita,
+          texturasEvita_outro,
+          saboresEvita,
+          saboresEvita_outro,
+        })}
+        style={styles.itemContainer}
+      >
+        <Animated.View style={[styles.item, { transform: [{ scale }, { translateY }] }]}>
+          <Image source={item.source} style={styles.characterImage} />
+        </Animated.View>
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.mainContent}>
+      <TouchableOpacity onPress={Casa}>
+        <Image source={require('../img/home.png')} style={styles.homeIcon} />
+      </TouchableOpacity>
+        <Image source={require('../img/tommyTomate.png')} style={styles.tommyImage} />
+        <Image source={require('../img/dt1.png')} style={styles.dtImage} />
+        <Image source={require('../img/personagem1.png')} style={styles.personagemImage} />
+
+        <View style={styles.bottomCurve} />
+        <View style={styles.fundo}>
+          <Text style={styles.fundo2}>
+            Tommy Tomate está sempre alegre e é uma ótima companhia.
+          </Text>
+        </View>
+        
+        <View style={styles.characterListContainer}>
+          <AnimatedFlatList
+            horizontal
+            data={characters}
+            keyExtractor={(item) => item.id}
+            bounces={false}
+            decelerationRate="fast"
+            snapToInterval={width * 0.3 + 10}
+            contentContainerStyle={styles.characterList}
+            scrollEventThrottle={16}
+            renderItem={renderCharacter}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              { useNativeDriver: true }
+            )}
+          />
+          <TouchableOpacity style={styles.chooseButton} onPress={() => handleFinalizarCadastro('personagem1')}>
+            <Image
+              source={require('../img/botaoEscolher.png')}
+              style={styles.chooseButtonImage}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  mainContent: {
+    flex: 1,
+    paddingHorizontal: 10,
+  },
+  homeIcon: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
+    marginLeft: 30,
+    marginTop: 40,
+  },
+  tommyImage: {
+    width: 220,
+    height: 120,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    marginTop: -10,
+  },
+  dtImage: {
+    width: 80,
+    height: 110,
+    resizeMode: 'contain',
+    marginLeft: 33,
+    marginTop: 30,
+  },
+  personagemImage: {
+    width: 330,
+    height: 940,
+    resizeMode: 'contain',
+    marginLeft: 50,
+    marginTop: -340,
+  },
+  bottomCurve: {
+    width: Dimensions.get('window').width,
+    height: 190,
+    backgroundColor: '#D1D1D1',
+    borderRadius: 400,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    position: 'absolute',
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  characterListContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 120,
+    width: '110%',
+    justifyContent: 'center',
+  },
+  characterList: {
+    marginLeft: 140,
+    width: '223%',
+    alignItems: 'center',
+  },
+  itemContainer: {
+    width: width * 0.3 + 10, 
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  item: {
+    width: '70%',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  characterImage: {
+    width: '80%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
+  fundo: {
+    marginBottom: 90,
+    position: 'absolute',
+    bottom: 120,
+    paddingHorizontal: 20,
+    backgroundColor: '#E54A4AB2',
+    borderRadius: 50,
+    marginLeft: 40,
+  },
+  fundo2: {
+    width: 300,
+    height: 110,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 22,
+    padding: 20,
+  },
+  chooseButton: {
+    backgroundColor: '#E54A4A',
+    width: Dimensions.get('window').width + 20,
+    height: 110,
+    bottom: -120,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chooseButtonImage: {
+    width: 111,
+    height: 42,
+    resizeMode: 'contain',
+  },
+});
+
+
+export default Personagem1;
+
