@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro7 = ({ route, navigation }) => {
   const {    email, 
-    password, 
+    senha, 
     nome_r, 
     nome_usuario, 
     data_nasc_resp, 
@@ -35,7 +36,7 @@ const Tela_Cadastro7 = ({ route, navigation }) => {
     const saboresSelecionados = Object.keys(saboresFavoritos).filter(key => saboresFavoritos[key]);
     navigation.navigate('Tela_Cadastro8', {
         email, 
-        password, 
+        senha, 
         nome_r, 
         nome_usuario, 
         data_nasc_resp, 
@@ -52,22 +53,30 @@ const Tela_Cadastro7 = ({ route, navigation }) => {
         });
     };
 
+    const [fontsLoaded] = useFonts({
+      'QuickDelight': require('../fonts/QuickDelight.otf'),
+    });
+  
+    if (!fontsLoaded) {
+      return null;
+    }
+
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro9.jpg')} 
-        style={styles.backgroundImage}
+        style={styles.imagemFundo}
       ></ImageBackground>
         <View style={styles.subir}>
-          <View style={styles.centeredButton}>
-            <Text style={styles.Titulo}>
+          <View style={styles.botaoCentralizado}>
+            <Text style={styles.titulo}>
               Quais sabores você prefere ?
             </Text>
           </View>
           {Object.keys(saboresFavoritos).map(sabor => (
             <TouchableOpacity
             key={sabor}
-            style={styles.checkboxContainer}
+            style={styles.containerCheckBox}
             onPress={() => SaboresSelecionados(sabor)}
           >
               <Checkbox
@@ -75,13 +84,13 @@ const Tela_Cadastro7 = ({ route, navigation }) => {
                 onValueChange={() => SaboresSelecionados(sabor)}
                 color={saboresFavoritos[sabor] ? '#00FF00' : '#FF0000'}
               />
-              <Text style={styles.checkboxTextStyle}>
+              <Text style={styles.estiloTextoCheckBox}>
                 {sabor.charAt(0).toUpperCase() + sabor.slice(1).replace('_', ' ')}
               </Text>
           </TouchableOpacity>
           ))}
           
-            <View style={styles.centeredButton}>
+            <View style={styles.botaoCentralizado}>
               <TextInput
                 style={styles.input}
                 value={saborFavorito_outro}
@@ -92,13 +101,13 @@ const Tela_Cadastro7 = ({ route, navigation }) => {
                 textAlign="center"
               />
             </View>
-            <View style={styles.centeredButton}>
+            <View style={styles.botaoCentralizado}>
                 <TouchableHighlight
                   onPress={CadastroParte}
                   style={styles.input2}
                   underlayColor="#F39C12"
                 >
-                  <Image source={require('../img/seta.png')} style={styles.image} />
+                  <Image source={require('../img/seta.png')} style={styles.imagem} />
                 </TouchableHighlight>
             </View>
       </View>
@@ -107,11 +116,11 @@ const Tela_Cadastro7 = ({ route, navigation }) => {
 };
       
 const styles = StyleSheet.create({
-  checkboxTextStyle: {
+  estiloTextoCheckBox: {
     color: '#FFBE23',
-    fontSize: 18,
+    fontSize: 21,
+    fontFamily: 'QuickDelight',
     marginLeft: 10,
-    fontWeight: 'bold',
   },
   container: {
     flex: 1,
@@ -119,15 +128,16 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f0f0f0',
   },
-  Titulo: {
-    fontSize: 18,
+  titulo: {
+    fontSize: 21,
     marginBottom: 5,
+    fontFamily: 'QuickDelight',
     textAlign: 'center',
   },
   subir: {
     marginBottom: 470,
   },
-  checkboxContainer: {
+  containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 9,
@@ -138,18 +148,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FDCB53',
     padding: 12,
+    fontFamily: 'QuickDelight',
     borderRadius: 20,
     width: 300,
-    fontSize: 18,
+    fontSize: 21,
     marginTop: 15,
     
   },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 12,
     marginTop: 0,
   },
-  image: {
+  imagem: {
     width: 30, 
     height: 30, 
   },
@@ -162,7 +173,7 @@ const styles = StyleSheet.create({
     width: 58,
     fontSize: 18,
   },
-  backgroundImage: {
+  imagemFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,

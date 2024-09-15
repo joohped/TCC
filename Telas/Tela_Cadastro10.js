@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro10 = ({ route, navigation }) => {
   const {
     email, 
-    password, 
+    senha, 
     nome_r, 
     nome_usuario, 
     data_nasc_resp, 
@@ -43,7 +44,7 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
     const texturasSelecionadas = Object.keys(texturasEvita).filter(key => texturasEvita[key]);
     navigation.navigate('Tela_Cadastro11', {
       email, 
-      password, 
+      senha, 
       nome_r, 
       nome_usuario, 
       data_nasc_resp, 
@@ -65,15 +66,23 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
         });
     };
 
+    const [fontsLoaded] = useFonts({
+      'QuickDelight': require('../fonts/QuickDelight.otf'),
+    });
+  
+    if (!fontsLoaded) {
+      return null;
+    }
+
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro12.jpg')} 
-        style={styles.backgroundImage}
+        style={styles.imagemFundo}
       ></ImageBackground>
         <View style={styles.subir}>
-          <View style={styles.centeredButton}>
-            <Text style={styles.Titulo}>
+          <View style={styles.botaoCentralizado}>
+            <Text style={styles.titulo}>
             Quais texturas você evita?
             </Text>
           </View>
@@ -81,7 +90,7 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
           {Object.keys(texturasEvita).map(textura => (
             <TouchableOpacity
             key={textura}
-            style={styles.checkboxContainer}
+            style={styles.containerCheckBox}
             onPress={() => texturasSelecionadas(textura)}
           >
               <Checkbox
@@ -89,13 +98,13 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
                 onValueChange={() => texturasSelecionadas(textura)}
                 color={texturasEvita[textura] ? '#00FF00' : '#FF0000'}
               />
-              <Text style={styles.checkboxTextStyle}>
+              <Text style={styles.estiloTextoCheckBox}>
                 {textura.charAt(0).toUpperCase() + textura.slice(1).replace('_', ' ')}
               </Text>
           </TouchableOpacity>
           ))}
           
-            <View style={styles.centeredButton}>
+            <View style={styles.botaoCentralizado}>
               <TextInput
                 style={styles.input}
                 value={texturasEvita_outro}
@@ -106,13 +115,13 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
                 textAlign="center"
               />
             </View>
-            <View style={styles.centeredButton}>
+            <View style={styles.botaoCentralizado}>
                 <TouchableHighlight
                   onPress={CadastroParte}
                   style={styles.input2}
                   underlayColor="#F39C12"
                 >
-                  <Image source={require('../img/seta.png')} style={styles.image} />
+                  <Image source={require('../img/seta.png')} style={styles.imagem} />
                 </TouchableHighlight>
             </View>
       </View>
@@ -122,11 +131,12 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
       
 const styles = StyleSheet.create({
 
-  checkboxTextStyle: {
+  estiloTextoCheckBox: {
     color: '#FFBE23',
-    fontSize: 18,
+    fontSize: 21,
+    fontFamily: 'QuickDelight',
     marginLeft: 10,
-    fontWeight: 'bold',
+
   },
   container: {
     flex: 1,
@@ -134,9 +144,10 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f0f0f0',
   },
-  Titulo: {
-    fontSize: 18,
+  titulo: {
+    fontSize: 21,
     width: 320,
+    fontFamily: 'QuickDelight',
     marginBottom: 10,
     marginLeft: 10,
     textAlign: 'center',
@@ -144,7 +155,7 @@ const styles = StyleSheet.create({
   subir: {
     marginBottom: 412,
   },
-  checkboxContainer: {
+  containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 9,
@@ -155,19 +166,20 @@ const styles = StyleSheet.create({
   input: {
     alignItems: 'center',
     backgroundColor: '#FDCB53',
+    fontFamily: 'QuickDelight',
     padding: 12,
     borderRadius: 20,
     width: 300,
-    fontSize: 18,
+    fontSize: 21,
     marginTop: 15,
     
   },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 5,
     marginTop: 0,
   },
-  image: {
+  imagem: {
     width: 30, 
     height: 30, 
   },
@@ -181,7 +193,7 @@ const styles = StyleSheet.create({
     width: 58,
     fontSize: 18,
   },
-  backgroundImage: {
+  imagemFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,

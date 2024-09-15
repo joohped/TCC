@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, FlatList
 import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth';
 import { initializeApp } from '@firebase/app';
 import { getFirestore, doc, setDoc } from '@firebase/firestore';
+import {useFonts} from 'expo-font';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -34,7 +35,7 @@ const db = getFirestore(app);
 const Personagem4 = ({ route, navigation }) => {
   const {
     email,
-    password,
+    senha,
     nome_r,
     nome_usuario,
     data_nasc_resp,
@@ -76,12 +77,13 @@ const Personagem4 = ({ route, navigation }) => {
     setPersonagemEscolhido(personagemImagem);
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      const CadUsuario = await createUserWithEmailAndPassword(auth, email, senha);
+      const usuario = CadUsuario.Usuario;
 
-      const userDocRef = doc(db, 'users', user.uid);
-      await setDoc(userDocRef, {
+      const InfoUsuario = doc(db, 'users', usuario.uid);
+      await setDoc(InfoUsuario, {
         email,
+        senha,
         nome_r,
         nome_usuario,
         data_nasc_resp,
@@ -103,13 +105,13 @@ const Personagem4 = ({ route, navigation }) => {
         saboresEvita,
         saboresEvita_outro,
         personagemEscolhido: personagem,
-        uid: user.uid 
+        uid: usuario.uid
       });
 
 
       navigation.navigate('CadastroSplash3', {
         email,
-        password,
+        senha,
         nome_r,
         nome_usuario,
         data_nasc_resp,
@@ -133,7 +135,7 @@ const Personagem4 = ({ route, navigation }) => {
         personagemEscolhido: personagemImagem
       });
     } catch (error) {
-      console.error('Error creating user:', error.message);
+      console.error('Erro na criação do usuário:', error.message);
     }
   };
 
@@ -161,7 +163,7 @@ const Personagem4 = ({ route, navigation }) => {
         onPress={() => navigation.navigate(item.route, 
             {
             email,
-            password,
+            senha,
             nome_r,
             nome_usuario,
             data_nasc_resp,
@@ -192,14 +194,18 @@ const Personagem4 = ({ route, navigation }) => {
     );
   };
 
+  const [fontsLoaded] = useFonts({
+    'QuickDelight': require('../fonts/QuickDelight.otf'),
+  });
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.mainContent}>
+      <View style={styles.container2}>
       <TouchableOpacity onPress={Casa} style={{ zIndex: 1000}}>
-        <Image source={require('../img/home.png')} style={styles.homeIcon} />
+        <Image source={require('../img/home.png')} style={styles.iconeCasa} />
       </TouchableOpacity>
-        <Image source={require('../img/bobBanana.png')} style={styles.tommyImage} />
-        <Image source={require('../img/personagem4.png')} style={styles.personagemImage} />
+        <Image source={require('../img/bobBanana.png')} style={styles.imagemTitulo} />
+        <Image source={require('../img/personagem4.png')} style={styles.imagemPersonagem} />
 
         <View style={styles.bottomCurve} />
         <View style={styles.fundo}>
@@ -241,25 +247,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  mainContent: {
+  container2: {
     flex: 1,
     paddingHorizontal: 10,
   },
-  homeIcon: {
+  iconeCasa: {
     width: 30,
     height: 30,
     resizeMode: 'contain',
     marginLeft: 30,
     marginTop: 25,
   },
-  tommyImage: {
+  imagemTitulo: {
     width: 220,
     height: 120,
     resizeMode: 'contain',
     alignSelf: 'center',
     marginTop: 50,
   },
-  personagemImage: {
+  imagemPersonagem: {
     width: 350,
     height: 940,
     resizeMode: 'contain',
@@ -320,8 +326,9 @@ const styles = StyleSheet.create({
     width: 300,
     height: 110,
     color: 'white',
+    fontFamily: 'QuickDelight',
     textAlign: 'center',
-    fontSize: 22,
+    fontSize: 24,
     padding: 20,
   },
   chooseButton: {

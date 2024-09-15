@@ -4,14 +4,11 @@ import { signInWithEmailAndPassword, onAuthStateChanged,  initializeAuth, getRea
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { initializeApp } from '@firebase/app';
 import { getFirestore, doc, getDoc } from '@firebase/firestore';
-import * as Google from 'expo-auth-session/providers/google';
-import * as WebBrowser from 'expo-web-browser';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import { useFonts } from 'expo-font';
 
-WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
-const googleLogo = require('../img/google-logo.png');
 
 const firebaseConfig = {
   apiKey: "AIzaSyC7Y3mJQ8EfFbvP9OAJ5Vb4lW5TO284_Fs",
@@ -34,64 +31,6 @@ const Tela_Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-      if (user) {
-        try {
-
-          const userDocRef = doc(db, 'users', user.uid);
-          const userDoc = await getDoc(userDocRef);
-
-          if (userDoc.exists()) {
-            navigation.navigate('Tela_Home', { userData: userDoc.data() });
-          } else {
-            console.error('No such document!');
-          }
-        } catch (error) {
-          console.error('Error fetching user data:', error.message);
-          Alert.alert('Error', 'Failed to fetch user data.');
-        }
-      }
-    });
-
-    return () => unsubscribe();
-  }, [auth, navigation]);
-
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: '887696697850-s3uevbgvsn1l095fn5dsbc6ui3jpm206.apps.googleusercontent.com'
-  });
-
-  useEffect(() => {
-    if (response?.type === 'success') {
-      const { id_token } = response.params;
-      console.log('Google Login successful, ID token:', id_token);
-
-      const fetchGoogleUser = async () => {
-        try {
-          const credential = Google.GoogleAuthProvider.credential(id_token);
-          const userCredential = await signInWithCredential(auth, credential);
-          const user = userCredential.user;
-
-          const userDocRef = doc(db, 'users', user.uid);
-          const userDoc = await getDoc(userDocRef);
-
-          if (userDoc.exists()) {
-            console.log('User data:', userDoc.data());
-            navigation.navigate('HomeScreen', { userData: userDoc.data() });
-          } else {
-            console.error('No such document!');
-          }
-        } catch (error) {
-          console.error('Error with Google login:', error.message);
-          Alert.alert('Error', 'Failed to login with Google.');
-        }
-      };
-
-      fetchGoogleUser();
-    }
-  }, [response]);
-
   const logarUsuario = async () => {
     try {
       if (!email || !password) {
@@ -99,14 +38,14 @@ const Tela_Login = ({ navigation }) => {
         return;
       }
 
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      const CadUsuario = await createUserWithEmailAndPassword(auth, email, senha);
+      const usuario = CadUsuario.Usuario;
 
-      const userDocRef = doc(db, 'users', user.uid);
-      const userDoc = await getDoc(userDocRef);
+      const InfoUsuario = doc(db, 'users', usuario.uid);
+      const docUsuario = await setDoc(InfoUsuario);
 
-      if (userDoc.exists()) {
-        navigation.navigate('Tela_Home', { userData: userDoc.data() });
+      if (docUsuario.exists()) {
+        navigation.navigate('Tela_Home', { usuarioData: docUsuario.data() });
       } else {
         console.error('Nenhum documento !!');
       }
@@ -115,24 +54,21 @@ const Tela_Login = ({ navigation }) => {
     }
   };
 
+  const [fontsLoaded] = useFonts({
+    'QuickDelight': require('../fonts/QuickDelight.otf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_login.jpg')}
-        style={styles.backgroundImage}
+        style={styles.imagemFundo}
       >
-        <View style={styles.centeredButton}>
-          <TouchableHighlight
-            style={{ marginTop: -30 }}
-            onPress={() => promptAsync()}
-            underlayColor="#ddd"
-            disabled={!request}
-          >
-            <Image source={googleLogo} style={styles.image} />
-          </TouchableHighlight>
-        </View>
-
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TextInput
             style={styles.input}
             value={email}
@@ -143,7 +79,7 @@ const Tela_Login = ({ navigation }) => {
             textAlign="center"
           />
         </View>
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TextInput
             style={styles.input}
             value={password}
@@ -154,13 +90,13 @@ const Tela_Login = ({ navigation }) => {
             textAlign="center"
           />
         </View>
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TouchableHighlight title="Login" onPress={logarUsuario} style={styles.input2} underlayColor="#F39C12">
-            <Text style={{ color: 'white', fontSize: 18 }}>Entrar</Text>
+            <Text style={{ color: 'white', fontSize: 21, fontFamily: 'QuickDelight' }}>Entrar</Text>
           </TouchableHighlight>
         </View>
 
-        <Text style={styles.toggleText} onPress={() => navigation.navigate('Inicio')}>
+        <Text style={styles.textoVoltar} onPress={() => navigation.navigate('Inicio')}>
           Voltar
         </Text>
       </ImageBackground>
@@ -169,7 +105,7 @@ const Tela_Login = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
+  imagemFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,
@@ -191,7 +127,8 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 20,
     width: 330,
-    fontSize: 18,
+    fontFamily: 'QuickDelight',
+    fontSize: 21,
   },
   input2: {
     alignItems: 'center',
@@ -201,19 +138,20 @@ const styles = StyleSheet.create({
     width: 140,
     fontSize: 18,
   },
-  toggleText: {
+  textoVoltar: {
     color: '#3498db',
     textAlign: 'center',
+    fontFamily: 'QuickDelight',
     marginTop: 18,
-    fontSize: 18,
+    fontSize: 24,
     marginLeft: -260,
   },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 10,
     marginTop: 10,
   },
-  image: {
+  imagem: {
     width: 90,
     height: 90,
     marginBottom: 30,

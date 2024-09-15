@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
 import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight } from 'react-native';
+import {useFonts} from 'expo-font'
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro2 = ({ route, navigation }) => {
-  const { email, password, nome_r, data_nasc_resp } = route.params;
+  const { email, senha, nome_r, data_nasc_resp } = route.params;
   const [nome_usuario, setNome_usuario] = useState('');
 
   const CadastroParte = async () => {
-      navigation.navigate('Tela_Cadastro3', { email, password, nome_r, nome_usuario, data_nasc_resp });
+      navigation.navigate('Tela_Cadastro3', { email, senha, nome_r, nome_usuario, data_nasc_resp });
   };
+
+  const [fontsLoaded] = useFonts({
+    'QuickDelight': require('../fonts/QuickDelight.otf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro2.jpg')}
-        style={styles.backgroundImage}
+        style={styles.backgroundimagem}
       >
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TextInput
             style={styles.input}
             value={nome_usuario}
@@ -30,9 +39,9 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
         </View>
 
 
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TouchableHighlight title="Concluir Cadastro" onPress={CadastroParte} style={styles.input2} underlayColor="#F39C12">
-          <Image source={require('../img/seta.png')} style={styles.image} />
+          <Image source={require('../img/seta.png')} style={styles.imagem} />
           </TouchableHighlight>
         </View>
 
@@ -42,7 +51,7 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
+  backgroundimagem: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,
@@ -61,11 +70,12 @@ const styles = StyleSheet.create({
   input: {
     alignItems: 'center',
     backgroundColor: '#FDCB53',
+    fontFamily: 'QuickDelight',
     marginTop: -160,
     padding: 12,
     borderRadius: 20,
     width: 300,
-    fontSize: 18,
+    fontSize: 21,
   },
   input2: {
     alignItems: 'center',
@@ -76,19 +86,12 @@ const styles = StyleSheet.create({
     width: 58,
     fontSize: 18,
   },
-  toggleText: {
-    color: '#3498db',
-    textAlign: 'center',
-    marginTop: 18,
-    fontSize: 18,
-    marginLeft: -260,
-  },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 0,
     marginTop: 5,
   },
-  image: {
+  imagem: {
     width: 30, 
     height: 30, 
   },

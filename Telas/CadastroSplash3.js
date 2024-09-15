@@ -1,13 +1,13 @@
 
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
 const CadastroSplash3 = ({ navigation, route }) => {
   const {       
     email,
-        password,
+    senha,
         nome_r,
         nome_usuario,
         data_nasc_resp,
@@ -34,7 +34,7 @@ const CadastroSplash3 = ({ navigation, route }) => {
     const timer = setTimeout(() => {
       navigation.navigate('Tela_Login', {       
         email, 
-        password, 
+        senha, 
         nome_r, 
         nome_usuario, 
         data_nasc_resp, 
@@ -61,7 +61,7 @@ const CadastroSplash3 = ({ navigation, route }) => {
     return () => clearTimeout(timer); 
   }, [navigation,       
     email, 
-    password, 
+    senha, 
     nome_r, 
     nome_usuario, 
     data_nasc_resp, 
@@ -88,7 +88,7 @@ const CadastroSplash3 = ({ navigation, route }) => {
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/splash_cadastro.png')} 
-        style={styles.backgroundImage}
+        style={styles.imagemFundo}
       />
     </View>
   );
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  backgroundImage: {
+  imagemFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: 0,

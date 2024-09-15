@@ -1,13 +1,13 @@
-// SignupScreen6.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Image, Dimensions } from 'react-native';
+import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro12 = ({ route, navigation }) => {
   const { 
     email, 
-    password, 
+    senha, 
     nome_r, 
     nome_usuario, 
     data_nasc_resp, 
@@ -33,7 +33,7 @@ const Tela_Cadastro12 = ({ route, navigation }) => {
   const CadastroParte = async () => {
     navigation.navigate('CadastroSplash2', { 
       email, 
-      password, 
+      senha, 
       nome_r, 
       nome_usuario, 
       data_nasc_resp, 
@@ -56,28 +56,36 @@ const Tela_Cadastro12 = ({ route, navigation }) => {
       saboresEvita_outro});
   };
 
+  const [fontsLoaded] = useFonts({
+    'QuickDelight': require('../fonts/QuickDelight.otf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro6.jpg')} 
-        style={styles.backgroundImage}
+        style={styles.imagemFundo}
       >
         <View style={styles.desce}>
-          <View style={styles.centeredButton}>
-            <Text style={styles.Titulo}>
+          <View style={styles.botaoCentralizado}>
+            <Text style={styles.titulo}>
             Iremos nos conhecer melhor em breve! 
             Enquanto isso, escolha seu personagem favorito!
             </Text>
           </View>
 
-          <View style={styles.centeredButton}>
+          <View style={styles.botaoCentralizado}>
             <TouchableHighlight
               title="Concluir Cadastro"
               onPress={CadastroParte}
               style={styles.input2}
               underlayColor="#F39C12"
             >
-              <Image source={require('../img/seta.png')} style={styles.image} />
+              <Image source={require('../img/seta.png')} style={styles.imagem} />
             </TouchableHighlight>
           </View>
         </View>
@@ -87,7 +95,7 @@ const Tela_Cadastro12 = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
+  imagemFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,
@@ -115,20 +123,21 @@ const styles = StyleSheet.create({
     width: 58,
     fontSize: 18,
   },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 10,
     marginTop: 5,
   },
-  image: {
+  imagem: {
     width: 30,
     height: 30,
   },
-  Titulo: {
+  titulo: {
     marginBottom: 10,
     width: 290,
+    fontFamily: 'QuickDelight',
     textAlign: 'center',
-    fontSize: 22,
+    fontSize: 24,
   },
 });
 

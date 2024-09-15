@@ -1,32 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Image } from 'react-native';
-import * as Google from 'expo-auth-session/providers/google';
-import * as WebBrowser from 'expo-web-browser';
-
-WebBrowser.maybeCompleteAuthSession();
+import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
-const googleLogo = require('../img/google-logo.png');
 
 const Tela_Cadastro1 = ({ navigation }) => {
 
   const [email, setEmail] = useState('');
   const [nome_r, setNome_r] = useState('');
   const [data_nasc_resp, setData_nasc_resp] = useState('');
-  const [password, setPassword] = useState('');
-
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: '887696697850-s3uevbgvsn1l095fn5dsbc6ui3jpm206.apps.googleusercontent.com'
-  });
-
-  useEffect(() => {
-    if (response?.type === 'success') {
-      const { id_token } = response.params;
-      console.log('Google Login successful, ID token:', id_token);
-      setEmail('Google User');
-      navigation.navigate('CadastroSplash', { email, password, nome_r, data_nasc_resp });
-    }
-  }, [response]);
+  const [senha, setSenha] = useState('');
 
   const formatData = (nasci) => {
     const limpo = ('' + nasci).replace(/\D/g, '');
@@ -47,26 +30,24 @@ const Tela_Cadastro1 = ({ navigation }) => {
   };
 
   const Cadastro = async () => {
-      navigation.navigate('CadastroSplash', { email, password, nome_r, data_nasc_resp });
+      navigation.navigate('CadastroSplash', { email, senha, nome_r, data_nasc_resp });
   };
+  
+  const [fontsLoaded] = useFonts({
+    'QuickDelight': require('../fonts/QuickDelight.otf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro.jpg')}
-        style={styles.backgroundImage}
+        style={styles.imagemmFundo}
       >
-        <View style={styles.centeredButton}>
-          <TouchableHighlight
-              style={{marginTop: 40}}
-              onPress={() => promptAsync()}
-              underlayColor="#ddd" 
-              disabled={!request}
-            >
-              <Image source={googleLogo} style={styles.image} />
-            </TouchableHighlight>
-          </View>
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado2}>
           <TextInput
             style={styles.input}
             value={nome_r}
@@ -77,7 +58,7 @@ const Tela_Cadastro1 = ({ navigation }) => {
             textAlign="center"
           />
         </View>
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TextInput
             style={styles.input}
             value={email}
@@ -88,7 +69,7 @@ const Tela_Cadastro1 = ({ navigation }) => {
             textAlign="center"
           />
         </View>
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TextInput
             style={styles.input}
             value={data_nasc_resp}
@@ -97,27 +78,29 @@ const Tela_Cadastro1 = ({ navigation }) => {
             autoCapitalize="none"
             placeholderTextColor="#ffffff"
             textAlign="center"
+            keyboardType="numeric" 
           />
         </View>
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TextInput
             style={styles.input}
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Senha"
+            value={senha}
+            onChangeText={setSenha}
+            autoCapitalize="none"
             secureTextEntry
+            placeholder="Senha"
             placeholderTextColor="#ffffff"
             textAlign="center"
           />
         </View>
 
-        <View style={styles.centeredButton}>
+        <View style={styles.botaoCentralizado}>
           <TouchableHighlight title="Cadastrar" onPress={Cadastro} style={styles.input2} underlayColor="#F39C12">
-            <Text style={{color: 'white', fontSize: 18}}>Criar</Text>
+            <Text style={{color: 'white', fontSize: 21, fontFamily: 'QuickDelight'}}>Criar</Text>
           </TouchableHighlight>
         </View>
 
-        <Text style={styles.toggleText} onPress={() => navigation.navigate('Inicio')}>
+        <Text style={styles.textoVoltar} onPress={() => navigation.navigate('Inicio')}>
           Voltar
         </Text>
       </ImageBackground>
@@ -126,7 +109,7 @@ const Tela_Cadastro1 = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
+  imagemmFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,
@@ -147,9 +130,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FDCB53',
     padding: 9,
+    fontFamily: 'QuickDelight',
     borderRadius: 20,
     width: 330,
-    fontSize: 18,
+    fontSize: 21,
   },
   input2: {
     alignItems: 'center',
@@ -159,19 +143,25 @@ const styles = StyleSheet.create({
     width: 140,
     fontSize: 18,
   },
-  toggleText: {
+  textoVoltar: {
     color: '#3498db',
     textAlign: 'center',
     marginTop: 18,
-    fontSize: 18,
+    fontFamily: 'QuickDelight',
+    fontSize: 24,
     marginLeft: -260,
   },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 10,
-    marginTop: 5,
+    marginTop: 10,
   },
-  image: {
+  botaoCentralizado2: {
+    alignItems: 'center',
+    marginVertical: 10,
+    marginTop: 40,
+  },
+  imagem: {
     width: 60, 
     height: 60, 
     marginBottom: 10,

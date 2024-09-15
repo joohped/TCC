@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, FlatList
 import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth';
 import { initializeApp } from '@firebase/app';
 import { getFirestore, doc, setDoc } from '@firebase/firestore';
+import {useFonts} from 'expo-font';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -33,7 +34,7 @@ const db = getFirestore(app);
 const Personagem2 = ({ route, navigation }) => {
   const {
     email,
-    password,
+    senha,
     nome_r,
     nome_usuario,
     data_nasc_resp,
@@ -77,12 +78,13 @@ const Personagem2 = ({ route, navigation }) => {
 
     try {
 
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      const CadUsuario = await createUserWithEmailAndPassword(auth, email, senha);
+      const usuario = CadUsuario.Usuario;
 
-      const userDocRef = doc(db, 'users', user.uid);
-      await setDoc(userDocRef, {
+      const InfoUsuario = doc(db, 'users', usuario.uid);
+      await setDoc(InfoUsuario, {
         email,
+        senha,
         nome_r,
         nome_usuario,
         data_nasc_resp,
@@ -104,13 +106,13 @@ const Personagem2 = ({ route, navigation }) => {
         saboresEvita,
         saboresEvita_outro,
         personagemEscolhido: personagem,
-        uid: user.uid 
+        uid: usuario.uid
       });
 
 
       navigation.navigate('CadastroSplash3', {
         email,
-        password,
+        senha,
         nome_r,
         nome_usuario,
         data_nasc_resp,
@@ -134,7 +136,7 @@ const Personagem2 = ({ route, navigation }) => {
         personagemEscolhido: personagemImagem
       });
     } catch (error) {
-      console.error('Error creating user:', error.message);
+      console.error('Erro na criação do usuário:', error.message);
     }
   };
 
@@ -162,7 +164,7 @@ const Personagem2 = ({ route, navigation }) => {
         onPress={() => navigation.navigate(item.route, 
             {
             email,
-            password,
+            senha,
             nome_r,
             nome_usuario,
             data_nasc_resp,
@@ -184,7 +186,7 @@ const Personagem2 = ({ route, navigation }) => {
             saboresEvita,
             saboresEvita_outro,
           })}
-        style={styles.itemContainer}
+        style={styles.containerItem}
       >
         <Animated.View style={[styles.item, { transform: [{ scale }, { translateY }] }]}>
           <Image source={item.source} style={styles.characterImage} />
@@ -193,23 +195,27 @@ const Personagem2 = ({ route, navigation }) => {
     );
   };
 
+  const [fontsLoaded] = useFonts({
+    'QuickDelight': require('../fonts/QuickDelight.otf'),
+  });
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.mainContent}>
+      <View style={styles.container2}>
       <TouchableOpacity onPress={Casa}>
-        <Image source={require('../img/home.png')} style={styles.homeIcon} />
+        <Image source={require('../img/home.png')} style={styles.iconeCasa} />
       </TouchableOpacity>
-        <Image source={require('../img/tobyCenoura.png')} style={styles.tommyImage} />
-        <Image source={require('../img/personagem2.png')} style={styles.personagemImage} />
+        <Image source={require('../img/tobyCenoura.png')} style={styles.imagemTitulo} />
+        <Image source={require('../img/personagem2.png')} style={styles.personagemImagem} />
 
-        <View style={styles.bottomCurve} />
+        <View style={styles.botaoCurvado} />
         <View style={styles.fundo}>
           <Text style={styles.fundo2}>
             Toby Cenoura é inteligente e intenso, ama livros e tudo que seja cultural.
           </Text>
         </View>
         
-        <View style={styles.characterListContainer}>
+        <View style={styles.containerListaPernagem}>
           <AnimatedFlatList
             horizontal
             data={characters}
@@ -218,7 +224,7 @@ const Personagem2 = ({ route, navigation }) => {
             
             decelerationRate="fast"
             snapToInterval={width * 0.3 + 10}
-            contentContainerStyle={styles.characterList}
+            contentContainerStyle={styles.listaPersonagem}
             scrollEventThrottle={16}
             renderItem={renderCharacter}
             onScroll={Animated.event(
@@ -226,10 +232,10 @@ const Personagem2 = ({ route, navigation }) => {
               { useNativeDriver: true }
             )}
           />
-          <TouchableOpacity style={styles.chooseButton} onPress={() => handleFinalizarCadastro('personagem2')}>
+          <TouchableOpacity style={styles.botaoEscolhido} onPress={() => handleFinalizarCadastro('personagem2')}>
             <Image
               source={require('../img/botaoEscolher.png')}
-              style={styles.chooseButtonImage}
+              style={styles.imagemBotaoEscolhido}
             />
           </TouchableOpacity>
         </View>
@@ -243,32 +249,32 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  mainContent: {
+  container2: {
     flex: 1,
     paddingHorizontal: 10,
   },
-  homeIcon: {
+  iconeCasa: {
     width: 30,
     height: 30,
     resizeMode: 'contain',
     marginLeft: 30,
     marginTop: 25,
   },
-  tommyImage: {
+  imagemTitulo: {
     width: 220,
     height: 120,
     resizeMode: 'contain',
     alignSelf: 'center',
     marginTop: 50,
   },
-  personagemImage: {
+  personagemImagem: {
     width: 270,
     height: 940,
     resizeMode: 'contain',
     marginLeft: 70,
     marginTop: -220,
   },
-  bottomCurve: {
+  botaoCurvado: {
     width: Dimensions.get('window').width,
     height: 190,
     backgroundColor: '#D1D1D1',
@@ -280,7 +286,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  characterListContainer: {
+  containerListaPernagem: {
     flexDirection: 'row',
     alignItems: 'center',
     position: 'absolute',
@@ -288,12 +294,12 @@ const styles = StyleSheet.create({
     width: '110%',
     justifyContent: 'center',
   },
-  characterList: {
+  listaPersonagem: {
     marginLeft: 140,
     width: '223%',
     alignItems: 'center',
   },
-  itemContainer: {
+  containerItem: {
     width: width * 0.3 + 10, 
     alignItems: 'center',
     justifyContent: 'center',
@@ -323,10 +329,11 @@ const styles = StyleSheet.create({
     height: 110,
     color: 'white',
     textAlign: 'center',
+    fontFamily: 'QuickDelight',
     fontSize: 22,
     padding: 20,
   },
-  chooseButton: {
+  botaoEscolhido: {
     backgroundColor: '#F7B61A',
     width: Dimensions.get('window').width + 20,
     height: 110,
@@ -335,7 +342,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  chooseButtonImage: {
+  imagemBotaoEscolhido: {
     width: 111,
     height: 42,
     resizeMode: 'contain',

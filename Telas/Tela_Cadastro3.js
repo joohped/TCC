@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro3 = ({ route, navigation }) => {
-  const { email, password, nome_r, data_nasc_resp, nome_usuario } = route.params;
+  const { email, senha, nome_r, data_nasc_resp, nome_usuario } = route.params;
   const [data_nasc_usua, setData_nasc_usua] = useState('');
   const [alergia, setAlergia] = useState('');
 
@@ -29,26 +30,34 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
 
   const CadastroParte = async () => {
     if (alergia === 'sim') {
-      navigation.navigate('Tela_Alergia', { email, password, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua });
+      navigation.navigate('Tela_Alergia', { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua });
     } else {
-      navigation.navigate('Tela_Cadastro4', { email, password, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia });
+      navigation.navigate('Tela_Cadastro4', { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia });
     }
   };
+
+  const [fontsLoaded] = useFonts({
+    'QuickDelight': require('../fonts/QuickDelight.otf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro4.jpg')} 
-        style={styles.backgroundImage}
+        style={styles.imagemmFundo}
       >
         <View style={styles.subir}>
-          <View style={styles.centeredButton}>
-            <Text style={styles.Titulo}>
+          <View style={styles.botaoCentralizado}>
+            <Text style={styles.titulo}>
               Muito prazer {nome_usuario}!! preciso de algumas informações que vocé deve preencher com um responsável tá?
             </Text>
           </View>
 
-          <View style={styles.centeredButton}>
+          <View style={styles.botaoCentralizado}>
             <TextInput
               style={styles.input}
               value={data_nasc_usua}
@@ -58,12 +67,11 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
               placeholderTextColor="#ffffff"
               textAlign="center"
               keyboardType="numeric" 
-              maxLength={10}
             />
           </View>
 
-          <View style={styles.centeredButton}>
-            <View style={styles.pickerContainer}>
+          <View style={styles.botaoCentralizado}>
+            <View style={styles.containerPicker}>
               <Picker
                 selectedValue={alergia}
                 style={styles.picker}
@@ -76,13 +84,13 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
             </View>
           </View>
 
-          <View style={styles.centeredButton}>
+          <View style={styles.botaoCentralizado}>
             <TouchableHighlight
               onPress={CadastroParte}
               style={styles.input2}
               underlayColor="#F39C12"
             >
-              <Image source={require('../img/seta.png')} style={styles.image} />
+              <Image source={require('../img/seta.png')} style={styles.imagem} />
             </TouchableHighlight>
           </View>
         </View>
@@ -92,7 +100,7 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
+  imagemmFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,
@@ -114,11 +122,12 @@ const styles = StyleSheet.create({
   input: {
     marginLeft: 10,
     alignItems: 'center',
+    fontFamily: 'QuickDelight',
     backgroundColor: '#FDCB53',
     padding: 12,
     borderRadius: 20,
     width: 300,
-    fontSize: 18,
+    fontSize: 21,
   },
   input2: {
     alignItems: 'center',
@@ -139,12 +148,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center'
   },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 5,
     marginTop: 10,
   },
-  pickerContainer: {
+  containerPicker: {
     marginLeft: 10,
     height: 50,
     width: 300,
@@ -152,16 +161,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
   },
-  image: {
+  imagem: {
     width: 30, 
     height: 30, 
   },
-  Titulo: {
+  titulo: {
+    fontFamily: 'QuickDelight',
     marginBottom: 10,
     width: 290,
     textAlign: 'center',
     marginTop: 25,
-    fontSize: 22,
+    fontSize: 21,
   },
 });
 

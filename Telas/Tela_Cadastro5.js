@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro5 = ({ route, navigation }) => {
-  const { email, password, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia, alergia_outro, comida_gosta } = route.params;
+  const { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia, alergia_outro, comida_gosta } = route.params;
 
   const [comidaFavorita_outro, setComidaFavorita_outro] = useState('');
   const [comidasFavoritas, setComidasFavoritas] = useState({
@@ -25,7 +26,7 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
     const comidasSelecionadas = Object.keys(comidasFavoritas).filter(key => comidasFavoritas[key]);
     navigation.navigate('Tela_Cadastro6', { 
         email, 
-        password, 
+        senha, 
         nome_r, 
         nome_usuario, 
         data_nasc_resp, 
@@ -38,15 +39,24 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
         });
     };
 
+    const [fontsLoaded] = useFonts({
+      'QuickDelight': require('../fonts/QuickDelight.otf'),
+    });
+  
+    if (!fontsLoaded) {
+      return null;
+    }
+  
+
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro7.jpg')} 
-        style={styles.backgroundImage}
+        style={styles.imagemFundo}
       ></ImageBackground>
           <View style={styles.subir}>
-            <View style={styles.centeredButton}>
-              <Text style={styles.Titulo}>
+            <View style={styles.botaoCentralizado}>
+              <Text style={styles.titulo}>
                 Jura? Eu também amo esses alimentos, quais são seus preferidos ?
               </Text>
             </View>
@@ -55,7 +65,7 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
             {Object.keys(comidasFavoritas).map((comida) => (
           <TouchableOpacity
           key={comida}
-          style={styles.checkboxContainer}
+          style={styles.containerCheckBox}
           onPress={() => ComidasSelecionadas(comida)}
         >
             <Checkbox
@@ -63,13 +73,13 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
               onValueChange={() => ComidasSelecionadas(comida)}
               color={comidasFavoritas[comida] ? '#00FF00' : '#FF0000'}
             />
-            <Text style={styles.checkboxTextStyle}>
+            <Text style={styles.estiloTextoCheckBox}>
               {comida.charAt(0).toUpperCase() + comida.slice(1).replace('_', ' ')}
             </Text>
         </TouchableOpacity>
         ))}
         
-          <View style={styles.centeredButton}>
+          <View style={styles.botaoCentralizado}>
             <TextInput
               style={styles.input}
               value={comidaFavorita_outro}
@@ -80,13 +90,13 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
               textAlign="center"
             />
           </View>
-          <View style={styles.centeredButton}>
+          <View style={styles.botaoCentralizado}>
               <TouchableHighlight
                 onPress={CadastroParte}
                 style={styles.input2}
                 underlayColor="#F39C12"
               >
-                <Image source={require('../img/seta.png')} style={styles.image} />
+                <Image source={require('../img/seta.png')} style={styles.imagem} />
               </TouchableHighlight>
           </View>
       </View>
@@ -97,11 +107,11 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
 
-  checkboxTextStyle: {
+  estiloTextoCheckBox: {
     color: '#FFBE23',
-    fontSize: 18,
+    fontFamily: 'QuickDelight',
+    fontSize: 21,
     marginLeft: 10,
-    fontWeight: 'bold',
   },
   container: {
     flex: 1,
@@ -109,9 +119,10 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f0f0f0',
   },
-  Titulo: {
-    fontSize: 18,
+  titulo: {
+    fontSize: 21,
     width: 320,
+    fontFamily: 'QuickDelight',
     marginBottom: 2,
     marginLeft: 10,
     textAlign: 'center',
@@ -119,7 +130,7 @@ const styles = StyleSheet.create({
   subir: {
     marginBottom: 360,
   },
-  checkboxContainer: {
+  containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 9,
@@ -131,18 +142,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FDCB53',
     padding: 12,
+    fontFamily: 'QuickDelight',
     borderRadius: 20,
     width: 300,
-    fontSize: 18,
+    fontSize: 20,
     marginTop: 15,
     
   },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 20,
     marginTop: 0,
   },
-  image: {
+  imagem: {
     width: 30, 
     height: 30, 
   },
@@ -155,7 +167,7 @@ const styles = StyleSheet.create({
     width: 58,
     fontSize: 18,
   },
-  backgroundImage: {
+  imagemFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,

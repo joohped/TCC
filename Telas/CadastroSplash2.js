@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get('window');
 const CadastroSplash2 = ({ navigation, route }) => {
   const {       
     email, 
-    password, 
+    senha, 
     nome_r, 
     nome_usuario, 
     data_nasc_resp, 
@@ -32,7 +32,7 @@ const CadastroSplash2 = ({ navigation, route }) => {
     const timer = setTimeout(() => {
       navigation.navigate('Personagem1', {       
         email, 
-        password, 
+        senha, 
         nome_r, 
         nome_usuario, 
         data_nasc_resp, 
@@ -58,7 +58,7 @@ const CadastroSplash2 = ({ navigation, route }) => {
     return () => clearTimeout(timer); 
   }, [navigation,       
     email, 
-    password, 
+    senha, 
     nome_r, 
     nome_usuario, 
     data_nasc_resp, 
@@ -84,7 +84,7 @@ const CadastroSplash2 = ({ navigation, route }) => {
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/splash_cadastro.png')} 
-        style={styles.backgroundImage}
+        style={styles.imagemFundo}
       />
     </View>
   );
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  backgroundImage: {
+  imagemFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: 0,

@@ -89,12 +89,12 @@ export default function Tela_Home() {
           style={{width: 130, height: 55, resizeMode:'contain', top: 50, marginLeft: "auto", marginRight: "auto", left: -15}} source={require('../img/logo.png')}/>
         </View>
 
-        <View style={styles.characterContainer}>
+        <View style={styles.containerPersonagem}>
           <TouchableOpacity>
           {personageEscolhido && (
             <Image 
               source={personageEscolhido} 
-              style={styles.characterImage}
+              style={styles.imagemPersonagem}
             />
           )}
           </TouchableOpacity>
@@ -277,14 +277,13 @@ export default function Tela_Home() {
             left: -25}} 
             source={require('../img/botao6J.png')}/>
         </TouchableOpacity>
-        <Text>{email}</Text>
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  characterImage: {
+  imagemPersonagem: {
     width: 70,
     height: 70,
     resizeMode: 'contain',
@@ -293,7 +292,7 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     position: 'absolute'
   },
-  characterContainer: {
+  containerPersonagem: {
     zIndex: 1000,
   }
 });

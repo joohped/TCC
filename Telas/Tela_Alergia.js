@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import {View, StyleSheet, Text, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity, Image, Dimensions } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import { useFonts } from 'expo-font';
 
 
 const { width, height } = Dimensions.get('window');
 
 
+
+
 const Tela_Alergia = ({ route, navigation }) => {
-  const { email, password, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua } = route.params;
+  const { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua } = route.params;
   const [alergia_outro, setAlergia_outro] = useState('');
   const [alergias, setAlergias] = useState( {
     Gluten: false,
@@ -23,7 +26,7 @@ const Tela_Alergia = ({ route, navigation }) => {
     const Selecionadas = Object.keys(alergias).filter(key => alergias[key]);
     navigation.navigate('Tela_Cadastro4', {
       email,
-      password,
+      senha,
       nome_r,
       nome_usuario,
       data_nasc_resp,
@@ -36,18 +39,26 @@ const Tela_Alergia = ({ route, navigation }) => {
     setAlergias(prevState => ({ ...prevState, [alergia]: !prevState[alergia] }));
   };
 
+  const [fontsLoaded] = useFonts({
+    'QuickDelight': require('../fonts/QuickDelight.otf'),
+  });
+  
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro4.jpg')} 
-        style={styles.backgroundImage}
+        style={styles.imagemFundo}
       ></ImageBackground>
       <View style={styles.subir}>
-        <Text style={styles.title}>Poderia me informar suas alergias:</Text>
+        <Text style={styles.titulo}>Poderia me informar suas alergias:</Text>
         {Object.keys(alergias).map((alergia) => (
           <TouchableOpacity
           key={alergia}
-          style={styles.checkboxContainer}
+          style={styles.containerCheckBox}
           onPress={() => AlergiasSelecionadas(alergia)}
         >
             <Checkbox
@@ -55,13 +66,13 @@ const Tela_Alergia = ({ route, navigation }) => {
               onValueChange={() => AlergiasSelecionadas(alergia)}
               color={alergias[alergia] ? '#00FF00' : '#FF0000'}
             />
-            <Text style={styles.checkboxTextStyle}>
-              {alergia.charAt(0).toUpperCase() + alergia.slice(1).replace('_', ' ')}
+            <Text style={styles.estiloTextoCheckBox}>
+              {alergia.charAt(0).toUpperCase() + alergia.slice(1).replace('_do_', ' do ')}
             </Text>
         </TouchableOpacity>
         ))}
         
-          <View style={styles.centeredButton}>
+          <View style={styles.botaoCentralizado}>
             <TextInput
               style={styles.input}
               value={alergia_outro}
@@ -72,13 +83,13 @@ const Tela_Alergia = ({ route, navigation }) => {
               textAlign="center"
             />
           </View>
-          <View style={styles.centeredButton}>
+          <View style={styles.botaoCentralizado}>
               <TouchableHighlight
                 onPress={Salvar}
                 style={styles.input2}
                 underlayColor="#F39C12"
               >
-                <Image source={require('../img/seta.png')} style={styles.image} />
+                <Image source={require('../img/seta.png')} style={styles.imagem} />
               </TouchableHighlight>
           </View>
       </View>
@@ -88,11 +99,11 @@ const Tela_Alergia = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  checkboxTextStyle: {
+  estiloTextoCheckBox: {
     color: '#FFBE23',
-    fontSize: 18,
+    fontFamily: 'QuickDelight',
+    fontSize: 21,
     marginLeft: 10,
-    fontWeight: 'bold',
   },
   container: {
     flex: 1,
@@ -100,15 +111,16 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f0f0f0',
   },
-  title: {
-    fontSize: 18,
+  titulo: {
+    fontSize: 22,
     marginBottom: 15,
+    fontFamily: 'QuickDelight',
     textAlign: 'center',
   },
   subir: {
     marginBottom: 390,
   },
-  checkboxContainer: {
+  containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 9,
@@ -119,18 +131,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FDCB53',
     padding: 12,
+    fontFamily: 'QuickDelight',
     borderRadius: 20,
     width: 300,
-    fontSize: 18,
+    fontSize: 20,
     marginTop: 15,
     
   },
-  centeredButton: {
+  botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 10,
     marginTop: 0,
   },
-  image: {
+  imagem: {
     width: 30, 
     height: 30, 
   },
@@ -143,7 +156,7 @@ const styles = StyleSheet.create({
     width: 58,
     fontSize: 18,
   },
-  backgroundImage: {
+  imagemFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,
