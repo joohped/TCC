@@ -55,7 +55,7 @@ const CadastroSplash3 = ({ navigation, route }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
-        personagemEscolhido: personagemImagem });
+        personagemEscolhido: personagemImagem});
     }, 3000); 
 
     return () => clearTimeout(timer); 
@@ -83,7 +83,7 @@ const CadastroSplash3 = ({ navigation, route }) => {
     saboresEvita,
     saboresEvita_outro,
     personagemImagem  ]);
-
+ 
   return (
     <View style={styles.container}>
       <ImageBackground

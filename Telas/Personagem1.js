@@ -77,11 +77,11 @@ const Personagem1 = ({ route, navigation }) => {
 
     try {
 
-      const CadUsuario = await createUserWithEmailAndPassword(auth, email, senha);
-      const usuario = CadUsuario.Usuario;
+      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+      const user = userCredential.user;
 
-      const InfoUsuario = doc(db, 'users', usuario.uid);
-      await setDoc(InfoUsuario, {
+      const userDocRef = doc(db, 'users', user.uid);
+      await setDoc(userDocRef, {
         email,
         nome_r,
         nome_usuario,
@@ -104,7 +104,7 @@ const Personagem1 = ({ route, navigation }) => {
         saboresEvita,
         saboresEvita_outro,
         personagemEscolhido: personagem,
-        uid: usuario.uid
+        uid: user.uid
       });
 
 
@@ -131,7 +131,7 @@ const Personagem1 = ({ route, navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
-        personagemEscolhido: personagemImagem
+        personagemEscolhido: personagem
       });
     } catch (error) {
       console.error('Erro na criação do usuário:', error.message);

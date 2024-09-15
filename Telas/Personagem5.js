@@ -78,11 +78,11 @@ const Personagem5 = ({ route, navigation }) => {
 
     try {
 
-      const CadUsuario = await createUserWithEmailAndPassword(auth, email, senha);
-      const usuario = CadUsuario.Usuario;
+      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+      const user = userCredential.user;
 
-      const InfoUsuario = doc(db, 'users', usuario.uid);
-      await setDoc(InfoUsuario, {
+      const userDocRef = doc(db, 'users', user.uid);
+      await setDoc(userDocRef, {
         email,
         senha,
         nome_r,
@@ -106,7 +106,7 @@ const Personagem5 = ({ route, navigation }) => {
         saboresEvita,
         saboresEvita_outro,
         personagemEscolhido: personagem,
-        uid: usuario.uid
+        uid: user.uid
       });
 
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { StyleSheet, View, TouchableOpacity, Image, ScrollView, Text} from 'react-native';
+import { useFonts } from 'expo-font';
 
 export default function Tela_Home() {
   const route = useRoute();
@@ -62,7 +63,13 @@ export default function Tela_Home() {
     setPersonageEscolhido(imagem);
   }, [personagemEscolhido]);
 
+  const [fontsLoaded] = useFonts({
+    'Lollypop': require('../fonts/Lollypop.otf'),
+  });
 
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: 'white'}}>
@@ -100,8 +107,8 @@ export default function Tela_Home() {
           </TouchableOpacity>
         </View>
         
-        
-          <Text style={{fontSize: 26, zIndex: 1000, marginTop: -60, color: 'white', marginLeft: 30, fontWeight: 'bold'}}>Olá! {'\n'}{nome_usuario}</Text>
+          <Text style={{fontSize: 30, zIndex: 1000, marginTop: -60, color: 'white', marginLeft: 30, fontFamily: 'QuickDelight' }}>Olá!,</Text>
+          <Text style={{fontSize: 30, zIndex: 1000, marginTop: -10, color: 'white', marginLeft: 30, fontFamily: 'Lollypop' }}>{nome_usuario}</Text>
           <Image
           style={{width: 505, height: 740, resizeMode:'contain', left: -50, top: -450}}
           source={require('../img/circulo.png')}

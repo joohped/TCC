@@ -28,30 +28,31 @@ const db = getFirestore(app);
 
 const Tela_Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
   const [user, setUser] = useState(null);
 
   const logarUsuario = async () => {
     try {
-      if (!email || !password) {
+      if (!email || !senha) {
         Alert.alert('Login Error', 'Por favor coloque email e senha');
         return;
       }
 
-      const CadUsuario = await createUserWithEmailAndPassword(auth, email, senha);
-      const usuario = CadUsuario.Usuario;
+      const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+      const user = userCredential.user;
 
-      const InfoUsuario = doc(db, 'users', usuario.uid);
-      const docUsuario = await setDoc(InfoUsuario);
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
 
-      if (docUsuario.exists()) {
-        navigation.navigate('Tela_Home', { usuarioData: docUsuario.data() });
+      if (userDoc.exists()) {
+        navigation.navigate('Tela_Home', { userData: userDoc.data() });
       } else {
         console.error('Nenhum documento !!');
       }
     } catch (error) {
       Alert.alert('Login Error', error.message);
     }
+
   };
 
   const [fontsLoaded] = useFonts({
@@ -82,8 +83,8 @@ const Tela_Login = ({ navigation }) => {
         <View style={styles.botaoCentralizado}>
           <TextInput
             style={styles.input}
-            value={password}
-            onChangeText={setPassword}
+            value={senha}
+            onChangeText={setSenha}
             placeholder="Senha"
             secureTextEntry
             placeholderTextColor="#ffffff"
