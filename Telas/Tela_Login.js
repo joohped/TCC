@@ -34,7 +34,7 @@ const Tela_Login = ({ navigation }) => {
   const logarUsuario = async () => {
     try {
       if (!email || !senha) {
-        Alert.alert('Login Error', 'Por favor coloque email e senha');
+        Alert.alert('Login Error', 'Por favor coloque email e senha, certos');
         return;
       }
 

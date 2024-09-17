@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Image } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Image, Alert } from 'react-native';
 import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro1 = ({ navigation }) => {
-
   const [email, setEmail] = useState('');
   const [nome_r, setNome_r] = useState('');
   const [data_nasc_resp, setData_nasc_resp] = useState('');
   const [senha, setSenha] = useState('');
+  
 
   const formatData = (nasci) => {
     const limpo = ('' + nasci).replace(/\D/g, '');
@@ -30,7 +30,33 @@ const Tela_Cadastro1 = ({ navigation }) => {
   };
 
   const Cadastro = async () => {
-      navigation.navigate('CadastroSplash', { email, senha, nome_r, data_nasc_resp });
+    try {
+      if (email === "" ) {
+        Alert.alert('Erro de cadastro','Coloque o Email');
+        return;
+      }
+      if (senha === "" ) {
+        Alert.alert('Erro de cadastro','Coloque a Senha');
+        return;
+      }
+      if (senha.length < 7) {
+        Alert.alert('Erro de cadastro','Coloque uma senha maior que 6 dígitos');
+        return;
+      }
+      if (nome_r === "") {
+        Alert.alert('Erro de cadastro','Coloque o Nome do Responsável');
+        return;
+      }
+      if (data_nasc_resp === "") {
+        Alert.alert('Erro de cadastro','Coloque a Data de Nascimento do Responsável');
+        return;
+      }else {
+        navigation.navigate('CadastroSplash', { email, senha, nome_r, data_nasc_resp });
+      }
+    } catch (error) {
+      Alert.alert('Login Error', error.message);
+    };
+      
   };
   
   const [fontsLoaded] = useFonts({
