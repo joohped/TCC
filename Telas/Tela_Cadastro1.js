@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Image, Alert } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Alert, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
@@ -31,8 +31,16 @@ const Tela_Cadastro1 = ({ navigation }) => {
 
   const Cadastro = async () => {
     try {
+      if (nome_r === "") {
+        Alert.alert('Erro de cadastro','Coloque o Nome do Responsável');
+        return;
+      }
       if (email === "" ) {
         Alert.alert('Erro de cadastro','Coloque o Email');
+        return;
+      }
+      if (data_nasc_resp === "") {
+        Alert.alert('Erro de cadastro','Coloque a Data de Nascimento do Responsável');
         return;
       }
       if (senha === "" ) {
@@ -41,14 +49,6 @@ const Tela_Cadastro1 = ({ navigation }) => {
       }
       if (senha.length < 7) {
         Alert.alert('Erro de cadastro','Coloque uma senha maior que 6 dígitos');
-        return;
-      }
-      if (nome_r === "") {
-        Alert.alert('Erro de cadastro','Coloque o Nome do Responsável');
-        return;
-      }
-      if (data_nasc_resp === "") {
-        Alert.alert('Erro de cadastro','Coloque a Data de Nascimento do Responsável');
         return;
       }else {
         navigation.navigate('CadastroSplash', { email, senha, nome_r, data_nasc_resp });
@@ -68,69 +68,69 @@ const Tela_Cadastro1 = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../img/fundo_cadastro.jpg')}
-        style={styles.imagemmFundo}
-      >
-        <View style={styles.botaoCentralizado2}>
-          <TextInput
-            style={styles.input}
-            value={nome_r}
-            onChangeText={setNome_r}
-            placeholder="Nome do Responsável"
-            autoCapitalize="none"
-            placeholderTextColor="#ffffff"
-            textAlign="center"
-          />
-        </View>
-        <View style={styles.botaoCentralizado}>
-          <TextInput
-            style={styles.input}
-            value={email}
-            onChangeText={setEmail}
-            placeholder="Email"
-            autoCapitalize="none"
-            placeholderTextColor="#ffffff"
-            textAlign="center"
-          />
-        </View>
-        <View style={styles.botaoCentralizado}>
-          <TextInput
-            style={styles.input}
-            value={data_nasc_resp}
-            onChangeText={(nasci) => setData_nasc_resp(formatData(nasci))}
-            placeholder="Data de Nascimento"
-            autoCapitalize="none"
-            placeholderTextColor="#ffffff"
-            textAlign="center"
-            keyboardType="numeric" 
-          />
-        </View>
-        <View style={styles.botaoCentralizado}>
-          <TextInput
-            style={styles.input}
-            value={senha}
-            onChangeText={setSenha}
-            autoCapitalize="none"
-            secureTextEntry
-            placeholder="Senha"
-            placeholderTextColor="#ffffff"
-            textAlign="center"
-          />
-        </View>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require('../img/fundo_cadastro.jpg')}
+          style={styles.imagemmFundo}
+        >
+          <View style={styles.botaoCentralizado2}>
+            <TextInput
+              style={styles.input}
+              value={nome_r}
+              onChangeText={setNome_r}
+              placeholder="Nome do Responsável"
+              autoCapitalize="none"
+              placeholderTextColor="#ffffff"
+              textAlign="center"
+            />
+          </View>
+          <View style={styles.botaoCentralizado}>
+            <TextInput
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Email"
+              autoCapitalize="none"
+              placeholderTextColor="#ffffff"
+              textAlign="center"
+            />
+          </View>
+          <View style={styles.botaoCentralizado}>
+            <TextInput
+              style={styles.input}
+              value={data_nasc_resp}
+              onChangeText={(nasci) => setData_nasc_resp(formatData(nasci))}
+              placeholder="Data de Nascimento"
+              autoCapitalize="none"
+              placeholderTextColor="#ffffff"
+              textAlign="center"
+              keyboardType="numeric" 
+            />
+          </View>
+          <View style={styles.botaoCentralizado}>
+            <TextInput
+              style={styles.input}
+              value={senha}
+              onChangeText={setSenha}
+              autoCapitalize="none"
+              secureTextEntry
+              placeholder="Senha"
+              placeholderTextColor="#ffffff"
+              textAlign="center"
+            />
+          </View>
 
-        <View style={styles.botaoCentralizado}>
-          <TouchableHighlight title="Cadastrar" onPress={Cadastro} style={styles.input2} underlayColor="#F39C12">
-            <Text style={{color: 'white', fontSize: 21, fontFamily: 'QuickDelight'}}>Criar</Text>
-          </TouchableHighlight>
-        </View>
+          <View style={styles.botaoCentralizado}>
+            <TouchableHighlight title="Cadastrar" onPress={Cadastro} style={styles.input2} underlayColor="#F39C12">
+              <Text style={{color: 'white', fontSize: 21, fontFamily: 'QuickDelight'}}>Criar</Text>
+            </TouchableHighlight>
+          </View>
 
-        <Text style={styles.textoVoltar} onPress={() => navigation.navigate('Inicio')}>
-          Voltar
-        </Text>
-      </ImageBackground>
-    </View>
+          <Text style={styles.textoVoltar} onPress={() => navigation.navigate('Inicio')}>
+            Voltar
+          </Text>
+        </ImageBackground>
+      </View>
   );
 };
 
@@ -172,10 +172,11 @@ const styles = StyleSheet.create({
   textoVoltar: {
     color: '#3498db',
     textAlign: 'center',
+    width: 100,
     marginTop: 18,
     fontFamily: 'QuickDelight',
     fontSize: 24,
-    marginLeft: -260,
+    marginLeft: 26,
   },
   botaoCentralizado: {
     alignItems: 'center',
@@ -186,6 +187,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 10,
     marginTop: 40,
+
   },
   imagem: {
     width: 60, 

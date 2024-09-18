@@ -144,8 +144,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'QuickDelight',
     marginTop: 18,
+    width: 100,
     fontSize: 24,
-    marginLeft: -260,
+    marginLeft: 26,
   },
   botaoCentralizado: {
     alignItems: 'center',

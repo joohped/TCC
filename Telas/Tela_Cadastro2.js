@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight } from 'react-native';
+import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, KeyboardAvoidingView, Platform } from 'react-native';
 import {useFonts} from 'expo-font'
 
 const { width, height } = Dimensions.get('window');
@@ -21,32 +21,32 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../img/fundo_cadastro2.jpg')}
-        style={styles.backgroundimagem}
-      >
-        <View style={styles.botaoCentralizado}>
-          <TextInput
-            style={styles.input}
-            value={nome_usuario}
-            onChangeText={setNome_usuario}
-            placeholder="Nome de Usuário"
-            autoCapitalize="none"
-            placeholderTextColor="#ffffff"
-            textAlign="center"
-          />
-        </View>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require('../img/fundo_cadastro2.jpg')}
+          style={styles.backgroundimagem}
+        ></ImageBackground>
+          <View style={styles.botaoCentralizado}>
+            <TextInput
+              style={styles.input}
+              value={nome_usuario}
+              onChangeText={setNome_usuario}
+              placeholder="Nome de Usuário"
+              autoCapitalize="none"
+              placeholderTextColor="#ffffff"
+              textAlign="center"
+            />
+          </View>
 
 
-        <View style={styles.botaoCentralizado}>
-          <TouchableHighlight title="Concluir Cadastro" onPress={CadastroParte} style={styles.input2} underlayColor="#F39C12">
-          <Image source={require('../img/seta.png')} style={styles.imagem} />
-          </TouchableHighlight>
-        </View>
+          <View style={styles.botaoCentralizado}>
+            <TouchableHighlight title="Concluir Cadastro" onPress={CadastroParte} style={styles.input2} underlayColor="#F39C12">
+            <Image source={require('../img/seta.png')} style={styles.imagem} />
+            </TouchableHighlight>
+          </View>
 
-      </ImageBackground>
-    </View>
+        
+      </View>
   );
 };
 
@@ -82,14 +82,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDCB53',
     padding: 12,
     borderRadius: 50,
-    marginTop: -100,
+    marginTop: -540,
     width: 58,
     fontSize: 18,
   },
   botaoCentralizado: {
     alignItems: 'center',
     marginVertical: 0,
-    marginTop: 5,
+    marginTop: 440,
   },
   imagem: {
     width: 30, 

@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   input2: {
     alignItems: 'center',
-    backgroundColor: '#FDCB53',
+    backgroundColor: '#FDCB53', 
     padding: 12,
     borderRadius: 50,
     marginTop: 20,
