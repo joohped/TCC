@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, FlatList, Dimensions, Animated } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, FlatList, Dimensions, Animated, Alert } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth';
 import { initializeApp } from '@firebase/app';
 import { getFirestore, doc, setDoc } from '@firebase/firestore';
@@ -136,7 +136,7 @@ const Personagem3 = ({ route, navigation }) => {
         personagemEscolhido: personagemImagem
       });
     } catch (error) {
-      console.error('Erro na criação do usuário:', error.message);
+      Alert.alert('Erro na criação do usuário:', error.message);
     }
   };
 
@@ -148,7 +148,7 @@ const Personagem3 = ({ route, navigation }) => {
       index * (width * 0.3 + 10),
       (index + 0.8) * (width * 0.3 + 10),
     ];
-    const escala = scrollX.interpolate({
+    const scale = scrollX.interpolate({
       inputRange,
       outputRange: [0.5, 1.2, 0.5],
       extrapolate: 'clamp',
@@ -188,7 +188,7 @@ const Personagem3 = ({ route, navigation }) => {
           })}
         style={styles.containerLista}
       >
-        <Animated.View style={[styles.item, { transform: [{ escala }, { translateY }] }]}>
+        <Animated.View style={[styles.item, { transform: [{ scale }, { translateY }] }]}>
           <Image source={item.source} style={styles.personagemImagem} />
         </Animated.View>
       </TouchableOpacity>

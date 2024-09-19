@@ -54,7 +54,7 @@ const CadastroSplash2 = ({ navigation, route }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro });
-    }, 3000); 
+    }, 3500); 
 
     return () => clearTimeout(timer); 
   }, [navigation,       
@@ -86,6 +86,7 @@ const CadastroSplash2 = ({ navigation, route }) => {
     source={require("../splash/Tela_Splash_2.json")}
     style={{width: width+10, height: height+50, marginTop: -10}}
     autoPlay
+    speed={0.75}
   />
   );
 };
