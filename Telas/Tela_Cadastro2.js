@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Alert } from 'react-native';
 import {useFonts} from 'expo-font'
 
 const { width, height } = Dimensions.get('window');
@@ -9,7 +9,13 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
   const [nome_usuario, setNome_usuario] = useState('');
 
   const CadastroParte = async () => {
+    if (nome_usuario === "" ) {
+      Alert.alert('Erro de cadastro','Coloque o nome de usuario');
+      return;
+    }else{
       navigation.navigate('Tela_Cadastro3', { email, senha, nome_r, nome_usuario, data_nasc_resp });
+    }
+
   };
 
   const [fontsLoaded] = useFonts({
@@ -19,6 +25,7 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
   if (!fontsLoaded) {
     return null;
   }
+
 
   return (
       <View style={styles.container}>

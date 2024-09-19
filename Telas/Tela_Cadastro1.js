@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Alert, Image } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Alert, Linking, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
+import { getAuth, fetchSignInMethodsForEmail } from '@firebase/auth';
+import { initializeApp } from 'firebase/app';
+import Checkbox from 'expo-checkbox';
 
 const { width, height } = Dimensions.get('window');
+
 
 const Tela_Cadastro1 = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [nome_r, setNome_r] = useState('');
   const [data_nasc_resp, setData_nasc_resp] = useState('');
   const [senha, setSenha] = useState('');
+  const [checked, setChecked] = useState(false);
+
+
+
+  const Abrir_Link = () => {
+    Linking.openURL("https://docs.google.com/document/d/1Mi5noCxCcrHsHKSwEoxK4dK63FK6QEmZ/edit?usp=drivesdk&ouid=103203236061127780906&rtpof=true&sd=true");
+  };
+
+  const validar = (email) => {
+      const dominios = /^[\w-\.]+@(gmail\.com|hotmail\.com|yahoo\.com|outllook\.com)$/;
+      return dominios.test(email);
+  };
   
 
   const formatData = (nasci) => {
     const limpo = ('' + nasci).replace(/\D/g, '');
+
     const junto = limpo.match(/^(\d{2})(\d{2})(\d{4})$/);
 
     if (junto) {
@@ -28,8 +45,12 @@ const Tela_Cadastro1 = ({ navigation }) => {
 
     return nasci;
   };
+  const Concordou = () => {
+    setChecked(prevChecked => !prevChecked);
+  };
 
   const Cadastro = async () => {
+
     try {
       if (nome_r === "") {
         Alert.alert('Erro de cadastro','Coloque o Nome do Responsável');
@@ -37,6 +58,10 @@ const Tela_Cadastro1 = ({ navigation }) => {
       }
       if (email === "" ) {
         Alert.alert('Erro de cadastro','Coloque o Email');
+        return;
+      }
+      if (!validar(email)) {
+        Alert.alert('Erro de cadastro','Coloque um Email válido, \n@gmail.com | @hotmail.com | @outlook.com | @yahoo.com');
         return;
       }
       if (data_nasc_resp === "") {
@@ -49,6 +74,10 @@ const Tela_Cadastro1 = ({ navigation }) => {
       }
       if (senha.length < 7) {
         Alert.alert('Erro de cadastro','Coloque uma senha maior que 6 dígitos');
+        return;
+      }
+      if (!checked) {
+        Alert.alert('Erro de cadastro','Precisa-se que aceite os termos de uso');
         return;
       }else {
         navigation.navigate('CadastroSplash', { email, senha, nome_r, data_nasc_resp });
@@ -66,6 +95,8 @@ const Tela_Cadastro1 = ({ navigation }) => {
   if (!fontsLoaded) {
     return null;
   }
+
+
 
   return (
       <View style={styles.container}>
@@ -101,6 +132,7 @@ const Tela_Cadastro1 = ({ navigation }) => {
               value={data_nasc_resp}
               onChangeText={(nasci) => setData_nasc_resp(formatData(nasci))}
               placeholder="Data de Nascimento"
+              maxLength={10}
               autoCapitalize="none"
               placeholderTextColor="#ffffff"
               textAlign="center"
@@ -125,6 +157,27 @@ const Tela_Cadastro1 = ({ navigation }) => {
               <Text style={{color: 'white', fontSize: 21, fontFamily: 'QuickDelight'}}>Criar</Text>
             </TouchableHighlight>
           </View>
+
+            <TouchableOpacity
+            style={styles.containerCheckBox}
+            onPress={Concordou}
+          >
+            <Checkbox
+              value={checked}
+              onValueChange={Concordou}
+              color={checked ? '#00FF00' : '#FF0000'}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity
+            style={styles.containerCheckBox}
+            onPress={Abrir_Link}
+          >
+            <Text style={styles.estiloTextoCheckBox}>
+              Aceito e concordo com todos os termos de uso do aplicativo Nhac
+            </Text>
+            </TouchableOpacity>
+        
+
 
           <Text style={styles.textoVoltar} onPress={() => navigation.navigate('Inicio')}>
             Voltar
@@ -193,6 +246,23 @@ const styles = StyleSheet.create({
     width: 60, 
     height: 60, 
     marginBottom: 10,
+  },
+  estiloTextoCheckBox: {
+    color: 'red',
+    fontFamily: 'QuickDelight',
+    display: 'flex',
+    flexDirection: 'row',
+    fontSize: 19,
+    marginLeft: 30,
+    marginTop: -45,
+  },
+  containerCheckBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 9,
+    width: 320,
+    marginTop: 12,
+    marginLeft: 50,
   },
 });
 

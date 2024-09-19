@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
-import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+import LottieView from 'lottie-react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -10,18 +11,18 @@ const CadastroSplash = ({ navigation, route }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate('Tela_Cadastro2', { email, senha, nome_r, data_nasc, data_nasc_resp });
-    }, 3000); 
+    }, 3700); 
 
     return () => clearTimeout(timer); 
   }, [navigation, email, senha, nome_r, data_nasc]);
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../img/splash_cadastro.png')} 
-        style={styles.imagemFundo}
-      />
-    </View>
+    <LottieView
+    source={require("../splash/Tela_Splash_2.json")}
+    style={{width: width+10, height: height+50, marginTop: -10}}
+    autoPlay
+    speed={0.75}
+  />
   );
 };
 

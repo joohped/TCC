@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Image, Dimensions, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useFonts } from 'expo-font';
 
@@ -10,7 +10,12 @@ const Tela_Cadastro4 = ({ route, navigation }) => {
   const [comida_gosta, setComida_gosta] = useState('');
 
   const CadastroParte = async () => {
-    navigation.navigate('Tela_Cadastro5', { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia, alergia_outro , comida_gosta });
+    if (comida_gosta === ""){
+      Alert.alert('Erro de cadastro','Precisamos que coloque os tipos de comida que mais gosta');
+      return;
+    }else{
+      navigation.navigate('Tela_Cadastro5', { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia, alergia_outro , comida_gosta });
+    }
   };
 
   const [fontsLoaded] = useFonts({

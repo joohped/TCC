@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro9 = ({ route, navigation }) => {
-  const {         email, 
+  const { email, 
     senha, 
     nome_r, 
     nome_usuario, 
@@ -39,6 +39,14 @@ const Tela_Cadastro9 = ({ route, navigation }) => {
 
   const CadastroParte = async () => {
     const comidasSelecionadas = Object.keys(comidasEvita).filter(key => comidasEvita[key]);
+
+    if (comidasSelecionadas.length === 0){
+      Alert.alert('Erro de cadastro','Escolha pelo menos uma, a que mais te agrada dentre as opções');
+      return;
+    }
+    if (comidasEvita_outro === ""){
+      setcomidasEvita_outro('não informou');
+    }
     navigation.navigate('Tela_Cadastro10', { 
       email, 
       senha, 

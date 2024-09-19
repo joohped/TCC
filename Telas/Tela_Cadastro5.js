@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useFonts } from 'expo-font';
 
@@ -24,6 +24,14 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
 
   const CadastroParte = async () => {
     const comidasSelecionadas = Object.keys(comidasFavoritas).filter(key => comidasFavoritas[key]);
+
+    if (comidasSelecionadas.length === 0){
+      Alert.alert('Erro de cadastro','Escolha pelo menos uma, a que mais te agrada dentre as opções');
+      return;
+    }
+    if (comidaFavorita_outro === ""){
+      setComidaFavorita_outro('não informou');
+    }
     navigation.navigate('Tela_Cadastro6', { 
         email, 
         senha, 
@@ -34,7 +42,7 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
         alergia, 
         alergia_outro, 
         comida_gosta,
-        comidaFavorita_outro,
+        comidaFavorita_outro: comidaFavorita_outro === '' ? 'não informou':comidaFavorita_outro, 
         comidasFavoritas: comidasSelecionadas.join(', ')
         });
     };

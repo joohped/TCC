@@ -147,7 +147,7 @@ const Personagem4 = ({ route, navigation }) => {
       index * (width * 0.3 + 10),
       (index + 0.8) * (width * 0.3 + 10),
     ];
-    const scale = scrollX.interpolate({
+    const escala = scrollX.interpolate({
       inputRange,
       outputRange: [0.5, 1.2, 0.5],
       extrapolate: 'clamp',
@@ -187,7 +187,7 @@ const Personagem4 = ({ route, navigation }) => {
           })}
         style={styles.itemContainer}
       >
-        <Animated.View style={[styles.item, { transform: [{ scale }, { translateY }] }]}>
+        <Animated.View style={[styles.item, { transform: [{ escala }, { translateY }] }]}>
           <Image source={item.source} style={styles.characterImage} />
         </Animated.View>
       </TouchableOpacity>

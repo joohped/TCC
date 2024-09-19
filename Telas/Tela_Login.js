@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, ImageBackground, Dimensions, Image, Alert } from 'react-native';
-import { signInWithEmailAndPassword, onAuthStateChanged,  initializeAuth, getReactNativePersistence } from '@firebase/auth';
+import React, { useState } from 'react';
+import { View, TextInput, StyleSheet, Text, ImageBackground, Dimensions, Alert } from 'react-native';
+import { signInWithEmailAndPassword,  initializeAuth, getReactNativePersistence } from '@firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { initializeApp } from '@firebase/app';
 import { getFirestore, doc, getDoc } from '@firebase/firestore';
@@ -32,11 +32,27 @@ const Tela_Login = ({ navigation }) => {
   const [user, setUser] = useState(null);
 
   const logarUsuario = async () => {
+    const validar = (email) => {
+      const dominios = /^[\w-\.]+@(gmail\.com|hotmail\.com|yahoo\.com|outllook\.com)$/;
+      return dominios.test(email);
+  };
+
     try {
       if (!email || !senha) {
-        Alert.alert('Login Error', 'Por favor coloque email e senha, certos');
+        Alert.alert('Erro de Login', 'Por favor coloque email e senha');
         return;
       }
+      if (!validar(email)) {
+        Alert.alert('Erro de cadastro','Coloque um Email válido, \n@gmail.com | @hotmail.com | @outlook.com | @yahoo.com');
+        return;
+      }
+      if (senha.length < 7) {
+        Alert.alert('Erro de cadastro','Coloque a senha, que deve ser maior que 6 dígitos');
+        return;
+      }
+      
+
+
 
       const userCredential = await signInWithEmailAndPassword(auth, email, senha);
       const user = userCredential.user;
@@ -44,13 +60,16 @@ const Tela_Login = ({ navigation }) => {
       const userDocRef = doc(db, 'users', user.uid);
       const userDoc = await getDoc(userDocRef);
 
+      
+      if (userCredential.exists()){
+        Alert.alert('Erro no Login', 'Login não encontrado ou não existe')
+        return;
+      }
       if (userDoc.exists()) {
         navigation.navigate('Tela_Home', { userData: userDoc.data() });
-      } else {
-        console.error('Nenhum documento !!');
       }
     } catch (error) {
-      Alert.alert('Login Error', error.message);
+      Alert.alert('Erro de Login', 'Login não existente, veja se digitou tudo de maneira correta');
     }
 
   };

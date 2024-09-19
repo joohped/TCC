@@ -10,7 +10,7 @@ const CadastroSplash = ({ navigation, route }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate('Inicio');
-    }, 3600); 
+    }, 3800); 
 
     return () => clearTimeout(timer); 
   });
@@ -20,6 +20,7 @@ const CadastroSplash = ({ navigation, route }) => {
       source={require("../splash/Tela_Splash_Nhac.json")}
       style={{width: width+10, height: height+50, marginTop: -10}}
       autoPlay
+      speed={0.95}
     />
   );
 };

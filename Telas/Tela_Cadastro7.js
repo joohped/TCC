@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useFonts } from 'expo-font';
 
@@ -34,6 +34,14 @@ const Tela_Cadastro7 = ({ route, navigation }) => {
 
   const CadastroParte = async () => {
     const saboresSelecionados = Object.keys(saboresFavoritos).filter(key => saboresFavoritos[key]);
+
+    if (saboresSelecionados.length === 0){
+      Alert.alert('Erro de cadastro','Escolha pelo menos uma, a que mais te agrada dentre as opções');
+      return;
+    }
+    if (saborFavorito_outro === ""){
+      setSaborFavorito_outro('não informou');
+    }
     navigation.navigate('Tela_Cadastro8', {
         email, 
         senha, 

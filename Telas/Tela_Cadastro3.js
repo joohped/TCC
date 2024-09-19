@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Text } from 'react-native';
+import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Text, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useFonts } from 'expo-font';
 
@@ -9,6 +9,7 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
   const { email, senha, nome_r, data_nasc_resp, nome_usuario } = route.params;
   const [data_nasc_usua, setData_nasc_usua] = useState('');
   const [alergia, setAlergia] = useState('');
+  const [alergia_outro, setAlergia_outro] = useState('');
 
   const formatDate = (text) => {
     const cleaned = ('' + text).replace(/\D/g, '');
@@ -29,11 +30,24 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
   };
 
   const CadastroParte = async () => {
+    if (data_nasc_usua === ""){
+      Alert.alert('Erro de cadastro','Precisamos que coloque a data de nascimento da pessoa com seletividade');
+      return;
+    }
+    if (alergia === ""){
+      Alert.alert('Erro de cadastro','Informe se tem alergia ou não');
+      return;
+    }
+    
     if (alergia === 'sim') {
       navigation.navigate('Tela_Alergia', { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua });
-    } else {
-      navigation.navigate('Tela_Cadastro4', { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia });
     }
+    if (alergia === 'não') {
+      setAlergia('não tem');
+      setAlergia_outro(null);
+    }
+      navigation.navigate('Tela_Cadastro4', { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia: alergia === 'não' ? 'não tem':alergia, alergia_outro });
+ 
   };
 
   const [fontsLoaded] = useFonts({
@@ -62,6 +76,7 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
               style={styles.input}
               value={data_nasc_usua}
               onChangeText={(text) => setData_nasc_usua(formatDate(text))}
+              maxLength={10}
               placeholder="Data de Nascimento"
               autoCapitalize="none"
               placeholderTextColor="#ffffff"
