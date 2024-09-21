@@ -33,7 +33,7 @@ const Tela_Login = ({ navigation }) => {
 
   const logarUsuario = async () => {
     const validar = (email) => {
-      const dominios = /^[\w-\.]+@(gmail\.com|hotmail\.com|yahoo\.com|outllook\.com)$/;
+      const dominios = /^[\w-]+@(gmail\.com|hotmail\.com|yahoo\.com|outllook\.com)$/;
       return dominios.test(email);
   };
 
@@ -61,15 +61,12 @@ const Tela_Login = ({ navigation }) => {
       const userDoc = await getDoc(userDocRef);
 
       
-      if (userCredential.exists()){
-        Alert.alert('Erro no Login', 'Login não encontrado ou não existe')
-        return;
-      }
+      
       if (userDoc.exists()) {
         navigation.navigate('Tela_Home', { userData: userDoc.data() });
       }
     } catch (error) {
-      Alert.alert('Erro de Login', 'Login não existente, veja se digitou tudo de maneira correta');
+      Alert.alert('Erro de Login', 'Login não encontrado, veja se screveu tudo corretamente');
     }
 
   };

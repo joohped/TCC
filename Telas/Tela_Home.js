@@ -3,14 +3,14 @@ import { useRoute } from '@react-navigation/native';
 import { StyleSheet, View, TouchableOpacity, Image, ScrollView, Text} from 'react-native';
 import { useFonts } from 'expo-font';
 
-export default function Tela_Home() {
+export default function Tela_Home({navigation}) {
   const route = useRoute();
   const params = route.params;
 
   const userData = params.userData || params; 
 
   const {
-        email, 
+        email,
         nome_r, 
         nome_usuario, 
         data_nasc_resp, 
@@ -42,18 +42,23 @@ export default function Tela_Home() {
     switch (personagemEscolhido) {
       case 'personagem1':
         imagem = require('../img/circuloTommy.png');
+
         break;
       case 'personagem2':
         imagem = require('../img/circuloToby.png');
+
         break;
       case 'personagem3':
         imagem = require('../img/circuloBella.png');
+
         break;
       case 'personagem4':
         imagem = require('../img/circuloBob.png');
+
         break;
       case 'personagem5':
         imagem = require('../img/circuloBete.png');
+
         break;
 
       default:
@@ -71,6 +76,62 @@ export default function Tela_Home() {
     return null;
   }
 
+  const Perfil = async () => {
+    navigation.navigate('Perfil', { 
+      email,
+      nome_r, 
+      nome_usuario, 
+      data_nasc_resp, 
+      data_nasc_usua, 
+      alergia, 
+      alergia_outro, 
+      comida_gosta,
+      comidaFavorita_outro,
+      comidasFavoritas,
+      texturaFavorita_outro,
+      texturasFavoritas,
+      saborFavorito_outro,
+      saboresFavoritos,
+      comida_evita,
+      comidasEvita,
+      comidasEvita_outro,
+      texturasEvita,
+      texturasEvita_outro,
+      saboresEvita,
+      saboresEvita_outro,
+      personagemEscolhido
+        });
+    };
+
+    const Config = async () => {
+      navigation.navigate('Config', { 
+        email,
+        nome_r, 
+        nome_usuario, 
+        data_nasc_resp, 
+        data_nasc_usua, 
+        alergia, 
+        alergia_outro, 
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro,
+        personagemEscolhido
+          });
+      };
+
+
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: 'white'}}>
 
@@ -79,16 +140,15 @@ export default function Tela_Home() {
         <View style={{width: 450, height: 200, backgroundColor: '#F7B61A', borderRadius: 150, 
         borderTopLeftRadius: 0, borderTopRightRadius: 0, top: -60, marginLeft: -20, marginRight: 0, alignItems: "center", justifyContent: "center", flexDirection: "row", display: 'flex', zIndex: 1000}}>
 
-        <TouchableOpacity style={{zIndex: 1000}} onPress={() => { navigation.navigate(''); }}>
+        <TouchableOpacity style={{zIndex: 1000, left: 65, top: 45}} onPress={Config}>
           <Image
           style={{
             width: 35, 
             height: 20, 
-            resizeMode:'contain', 
-            top: 45, 
+            resizeMode:'contain',
             marginLeft: "auto", 
-            marginRight: "auto", 
-            left: 65}} 
+            marginRight: "auto" 
+            }} 
             source={require('../img/linhas.png')}/>
         </TouchableOpacity>
 
@@ -97,7 +157,7 @@ export default function Tela_Home() {
         </View>
 
         <View style={styles.containerPersonagem}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={Perfil} style={{ width: 70, zIndex: 1000,   marginLeft: 295, marginTop: -150,}}>
           {personageEscolhido && (
             <Image 
               source={personageEscolhido} 
@@ -293,11 +353,7 @@ const styles = StyleSheet.create({
   imagemPersonagem: {
     width: 70,
     height: 70,
-    resizeMode: 'contain',
-    marginLeft: 295,
-    marginTop: -150,
-    zIndex: 1000,
-    position: 'absolute'
+    zIndex: 1000
   },
   containerPersonagem: {
     zIndex: 1000,

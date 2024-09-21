@@ -2,6 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Inicio from './Telas/Inicio';
+import Perfil from './Telas/Perfil';
+import Config from './Telas/Config';
 import Tela_Login from './Telas/Tela_Login';
 import Tela_Cadastro1 from './Telas/Tela_Cadastro1';
 import Tela_Home from './Telas/Tela_Home';
@@ -36,6 +38,8 @@ const Rotas = () => {
       <Stack.Navigator>
         <Stack.Screen name="CadastroSplash1" component={CadastroSplash1} options={{ headerShown: false }}/>
         <Stack.Screen name="Inicio" component={Inicio} options={{ headerShown: false }} />
+        <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
+        <Stack.Screen name="Config" component={Config} options={{ headerShown: false }} />
         <Stack.Screen name="Tela_Login" component={Tela_Login} options={{ headerShown: false }} />
         <Stack.Screen name="Tela_Cadastro1" component={Tela_Cadastro1} options={{ headerShown: false }} />
         <Stack.Screen name="Tela_Cadastro2" component={Tela_Cadastro2} options={{ headerShown: false }}/>
