@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, Modal, Platform } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, Modal } from 'react-native';
 import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
@@ -33,7 +33,9 @@ const { width, height } = Dimensions.get('window');
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
-        personagemEscolhido } = route.params;
+        personagemEscolhido,
+        scale,
+        fontSize } = route.params;
 
     const [fontsLoaded] = useFonts({
         'Lollypop': require('../fonts/Lollypop.otf'),
@@ -46,8 +48,16 @@ const { width, height } = Dimensions.get('window');
 
       const [personageEscolhido, setPersonageEscolhido] = useState(null);
       const [nome, setNome] = useState(null);
+      const [alergias, setAlergias] = useState(null);
 
       useEffect(() => {
+        if (alergia != 'não tem') {
+          setAlergias('tem alergia a');
+        }
+        if (alergia === 'não tem') {
+          setAlergias('não tem');
+        }
+
         var imagem;
         var nome_p;
         
@@ -109,7 +119,9 @@ const { width, height } = Dimensions.get('window');
             texturasEvita_outro,
             saboresEvita,
             saboresEvita_outro,
-            personagemEscolhido});
+            personagemEscolhido,
+            scale,
+            fontSize});
       };
       
 
@@ -120,16 +132,33 @@ const { width, height } = Dimensions.get('window');
             <TouchableOpacity onPress={Voltar} style={{ width: 50, top: 60, left: 50, height: 50}}>
                 <Image source={require('../img/voltar2.png')} style={{ width: 35 , height: 35, left: 5, top: 5 }} />
             </TouchableOpacity>
-            <View>
+            <View style={{     
+              backgroundColor: '#F69343',   
+              marginTop: 80,
+              width: 105,
+              height: 110,
+              borderStyle: 'solid',
+              borderColor: "#F69343",
+              borderRightWidth: 2,
+              borderLeftWidth: 2,
+              borderTopWidth: 1,
+              borderBottomWidth: 5,
+              borderRadius: 57,
+              resizeMode: 'contain',
+              marginLeft: 280,
+              zIndex: 1000,
+              position: 'absolute'}}>
                 {personageEscolhido && (
                     <Image 
                     source={personageEscolhido} 
                     style={styles.imagemPersonagem}
                     />
                 )}
-                <Text style={{fontFamily: 'Lollypop', color: '#F69343', fontSize: 32, textAlign: 'right', marginTop: 40, marginRight: 150}}>{nome_usuario}</Text>
-                <Text style={{fontFamily: 'QuickDelight', color: 'black', fontSize: 24 ,textAlign: 'right', marginRight: 150}} >{nome}</Text>
+                
             </View>
+
+            <Text style={{fontFamily: 'Lollypop', color: '#F69343', fontSize: 32, textAlign: 'right', marginTop: 40, marginRight: 150}}>{nome_usuario}</Text>
+                <Text style={{fontFamily: 'QuickDelight', color: 'black', fontSize: 25,textAlign: 'right', marginRight: 150, top: -4}} >{nome}</Text>
         </View>
 
 
@@ -139,15 +168,15 @@ const { width, height } = Dimensions.get('window');
           
           <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 30, borderRadius: 32, left: 25}}>
             
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5}}>Data de Nascimento:</Text>
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 18,marginLeft: 25}}>{data_nasc_usua}</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>Data de Nascimento:</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>{data_nasc_usua}</Text>
           </View>
 
           <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 35, borderRadius: 32, left: 25}}>
             
             <TouchableOpacity onPress={() => setMostrarModal3(true)}>
-                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5}}>Alergias:</Text>
-                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 18,marginLeft: 25}}>{alergia}...           veja mais</Text>
+                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>Alergias:</Text>
+                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>{alergias}...    veja mais</Text>
             </TouchableOpacity>
           </View>
 
@@ -159,7 +188,7 @@ const { width, height } = Dimensions.get('window');
             >
                 <View style={styles.modal}>
                     <View style={styles.dentroModal}>
-                        <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5, marginBottom: 20}}>{alergia_outro}</Text>
+                        <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginTop: 5, marginBottom: 20}}>{alergia},{alergia_outro}</Text>
                         <TouchableOpacity onPress={() => setMostrarModal3(false)} style={styles.fechar}><Text style={{fontFamily: 'QuickDelight', color: 'white', fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20, height: 20}}>Fechar</Text></TouchableOpacity>
                     </View>
                 </View>
@@ -167,15 +196,15 @@ const { width, height } = Dimensions.get('window');
 
           <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 40, borderRadius: 32, left: 25}}>
             
-          <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5}}>PcD</Text>
-          <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 18,marginLeft: 25}}>Não</Text>
+          <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>PcD</Text>
+          <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>Não</Text>
             
           </View>
 
           <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 45, borderRadius: 32, left: 25}}>
           <TouchableOpacity onPress={() => setMostrarModal2(true)}>
-                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5}}>Gosto de comer:</Text>
-                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 18,marginLeft: 25}}>{comida_gosta}...              veja mais</Text>
+                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>Gosto de comer:</Text>
+                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>{comida_gosta}...    veja mais</Text>
             </TouchableOpacity>
           </View>
 
@@ -187,7 +216,7 @@ const { width, height } = Dimensions.get('window');
             >
                 <View style={styles.modal}>
                     <View style={styles.dentroModal}>
-                        <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5, marginBottom: 20}}>{comidasFavoritas},{comidaFavorita_outro}</Text>
+                        <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginTop: 5, marginBottom: 20}}>{comidasFavoritas},{comidaFavorita_outro}</Text>
                         <TouchableOpacity onPress={() => setMostrarModal2(false)} style={styles.fechar}><Text style={{fontFamily: 'QuickDelight', color: 'white', fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20, height: 20}}>Fechar</Text></TouchableOpacity>
                     </View>
                 </View>
@@ -196,8 +225,8 @@ const { width, height } = Dimensions.get('window');
           <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 50, borderRadius: 32, left: 25}}>
 
           <TouchableOpacity onPress={() => setMostrarModal(true)}>
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5}}>Evito:</Text>
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 18,marginLeft: 25}}>{comida_evita} ...              veja mais</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>Evito:</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>{comida_evita} ...    veja mais</Text>
           </TouchableOpacity>
           </View>
 
@@ -209,7 +238,7 @@ const { width, height } = Dimensions.get('window');
             >
                 <View style={styles.modal}>
                     <View style={styles.dentroModal}>
-                        <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5, marginBottom: 20}}>{comidasEvita},{comidasEvita_outro}</Text>
+                        <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,  marginTop: 5, marginBottom: 20}}>{comidasEvita},{comidasEvita_outro}</Text>
                         <TouchableOpacity onPress={() => setMostrarModal(false)} style={styles.fechar}><Text style={{fontFamily: 'QuickDelight', color: 'white', fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20, height: 20}}>Fechar</Text></TouchableOpacity>
                     </View>
                 </View>
@@ -224,21 +253,21 @@ const { width, height } = Dimensions.get('window');
           
             <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 30, borderRadius: 32, left: 25}}>
               
-                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5}}>Nome:</Text>
-                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 18,marginLeft: 25}}>{nome_r}</Text>
+                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>Nome:</Text>
+                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>{nome_r}</Text>
               
             </View>
             <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 35, borderRadius: 32, left: 25}}>
               
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5}}>Email:</Text>
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 18,marginLeft: 25}}>{email}</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>Email:</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>{email}</Text>
               
             </View>
 
             <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 40, borderRadius: 32, left: 25}}>
               
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 20, marginLeft: 25, marginTop: 5}}>Data de Nascimento:</Text>
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: 18,marginLeft: 25}}>{data_nasc_resp}</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>Data de Nascimento:</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>{data_nasc_resp}</Text>
               
             </View>
 
@@ -273,16 +302,10 @@ const styles = StyleSheet.create({
         height: 45
     },
     imagemPersonagem: {
-        marginTop: 30,
-        width: 104,
-        height: 102,
-        borderWidth: 2,
-        borderColor: '#F69343',
-        borderRadius: 50,
-        resizeMode: 'contain',
-        marginLeft: 280,
-        zIndex: 1000,
-        position: 'absolute'
+      width: 101,
+      height: 101,
+      left: -1,
+      top: 1
       },
 });
 

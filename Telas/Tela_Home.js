@@ -31,7 +31,9 @@ export default function Tela_Home({navigation}) {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
-        personagemEscolhido
+        personagemEscolhido,
+        fontSize,
+        scale
   } = userData;
 
   const [personageEscolhido, setPersonageEscolhido] = useState(null);
@@ -99,7 +101,9 @@ export default function Tela_Home({navigation}) {
       texturasEvita_outro,
       saboresEvita,
       saboresEvita_outro,
-      personagemEscolhido
+      personagemEscolhido,
+      scale,
+      fontSize
         });
     };
 
@@ -126,7 +130,9 @@ export default function Tela_Home({navigation}) {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
-        personagemEscolhido
+        personagemEscolhido,
+        scale,
+        fontSize
           });
       };
 
@@ -140,7 +146,7 @@ export default function Tela_Home({navigation}) {
         <View style={{width: 450, height: 200, backgroundColor: '#F7B61A', borderRadius: 150, 
         borderTopLeftRadius: 0, borderTopRightRadius: 0, top: -60, marginLeft: -20, marginRight: 0, alignItems: "center", justifyContent: "center", flexDirection: "row", display: 'flex', zIndex: 1000}}>
 
-        <TouchableOpacity style={{zIndex: 1000, left: 65, top: 45}} onPress={Config}>
+        <TouchableOpacity style={{zIndex: 1000, left: 75, top: 45}} onPress={Config}>
           <Image
           style={{
             width: 35, 
@@ -153,7 +159,7 @@ export default function Tela_Home({navigation}) {
         </TouchableOpacity>
 
           <Image
-          style={{width: 130, height: 55, resizeMode:'contain', top: 50, marginLeft: "auto", marginRight: "auto", left: -15}} source={require('../img/logo.png')}/>
+          style={{width: 130, height: 55, resizeMode:'contain', top: 50, marginLeft: "auto", marginRight: "auto", left: -20}} source={require('../img/logo.png')}/>
         </View>
 
         <View style={styles.containerPersonagem}>
@@ -167,8 +173,8 @@ export default function Tela_Home({navigation}) {
           </TouchableOpacity>
         </View>
         
-          <Text style={{fontSize: 30, zIndex: 1000, marginTop: -60, color: 'white', marginLeft: 30, fontFamily: 'QuickDelight' }}>Olá!,</Text>
-          <Text style={{fontSize: 30, zIndex: 1000, marginTop: -10, color: 'white', marginLeft: 30, fontFamily: 'Lollypop' }}>{nome_usuario}</Text>
+          <Text style={{fontSize: 26, zIndex: 1000, marginTop: -60, color: 'white', marginLeft: 30, fontFamily: 'QuickDelight' }}>Olá!,</Text>
+          <Text style={{fontSize: 32, zIndex: 1000, marginTop: -10, color: 'white', marginLeft: 30, fontFamily: 'Lollypop' }}>{nome_usuario}</Text>
           <Image
           style={{width: 505, height: 740, resizeMode:'contain', left: -50, top: -450}}
           source={require('../img/circulo.png')}

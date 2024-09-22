@@ -5,7 +5,7 @@ import LottieView from 'lottie-react-native';
 
 const { width, height } = Dimensions.get('window');
 
-const CadastroSplash = ({ navigation, route }) => {
+const CadastroSplash1 = ({ navigation, route }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CadastroSplash;
+export default CadastroSplash1;

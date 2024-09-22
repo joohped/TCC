@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Alert, Linking, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Alert, Linking, TouchableOpacity, BackHandler } from 'react-native';
 import { useFonts } from 'expo-font';
-import { getAuth, fetchSignInMethodsForEmail } from '@firebase/auth';
-import { initializeApp } from 'firebase/app';
 import Checkbox from 'expo-checkbox';
 
 const { width, height } = Dimensions.get('window');
 
 
 const Tela_Cadastro1 = ({ navigation }) => {
+
   const [email, setEmail] = useState('');
   const [nome_r, setNome_r] = useState('');
   const [data_nasc_resp, setData_nasc_resp] = useState('');

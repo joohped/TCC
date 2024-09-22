@@ -1,41 +1,19 @@
-
 import React, { useEffect } from 'react';
+import { useRoute } from '@react-navigation/native';
 import { StyleSheet, Dimensions } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 const { width, height } = Dimensions.get('window');
 
-const CadastroSplash3 = ({ navigation, route }) => {
-  const {       
-    email,
-    senha,
-        nome_r,
-        nome_usuario,
-        data_nasc_resp,
-        data_nasc_usua,
-        alergia,
-        alergia_outro,
-        comida_gosta,
-        comidaFavorita_outro,
-        comidasFavoritas,
-        texturaFavorita_outro,
-        texturasFavoritas,
-        saborFavorito_outro,
-        saboresFavoritos,
-        comida_evita,
-        comidasEvita,
-        comidasEvita_outro,
-        texturasEvita,
-        texturasEvita_outro,
-        saboresEvita,
-        saboresEvita_outro,
-        personagemEscolhido: personagemImagem  } = route.params;
+const CadastroSplash4 = ({ navigation }) => {
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('Tela_Login', {       
-        email, 
-        senha, 
+  const route = useRoute();
+  const params = route.params;
+
+  const userData = params.userData || params; 
+
+  const {
+        email,
         nome_r, 
         nome_usuario, 
         data_nasc_resp, 
@@ -56,13 +34,43 @@ const CadastroSplash3 = ({ navigation, route }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
-        personagemEscolhido: personagemImagem});
-    }, 3700); 
+        personagemEscolhido,
+        fontSize,
+        scale
+  } = userData;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate('Tela_Home', {       
+        email,
+        nome_r, 
+        nome_usuario, 
+        data_nasc_resp, 
+        data_nasc_usua, 
+        alergia, 
+        alergia_outro, 
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro,
+        personagemEscolhido,
+        fontSize,
+        scale});
+    }, 3600); 
 
     return () => clearTimeout(timer); 
   }, [navigation,       
-    email, 
-    senha, 
+    email,
     nome_r, 
     nome_usuario, 
     data_nasc_resp, 
@@ -83,7 +91,9 @@ const CadastroSplash3 = ({ navigation, route }) => {
     texturasEvita_outro,
     saboresEvita,
     saboresEvita_outro,
-    personagemImagem  ]);
+    personagemEscolhido,
+    fontSize,
+    scale ]);
  
   return (
     <LottieView
@@ -112,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CadastroSplash3;
+export default CadastroSplash4;

@@ -1,10 +1,16 @@
-import React from 'react';
-import { Text, View, StyleSheet, ImageBackground, Dimensions, TouchableHighlight } from 'react-native';
+import React, {useEffect} from 'react';
+import { Text, View, StyleSheet, ImageBackground, Dimensions, TouchableHighlight, BackHandler } from 'react-native';
 import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window'); 
 
 const Inicio = ({ navigation }) => {
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      return true
+    })
+  }, [])
 
   const [fontsLoaded] = useFonts({
     'QuickDelight': require('../fonts/QuickDelight.otf'),

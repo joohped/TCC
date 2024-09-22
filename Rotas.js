@@ -11,6 +11,7 @@ import CadastroSplash from './Telas/CadastroSplash';
 import CadastroSplash1 from './Telas/CadastroSplash1';
 import CadastroSplash2 from './Telas/CadastroSplash2';
 import CadastroSplash3 from './Telas/CadastroSplash3';
+import CadastroSplash4 from './Telas/CadastroSplash4';
 import Tela_Cadastro2 from './Telas/Tela_Cadastro2';
 import Tela_Cadastro3 from './Telas/Tela_Cadastro3';
 import Tela_Cadastro4 from './Telas/Tela_Cadastro4';
@@ -62,6 +63,7 @@ const Rotas = () => {
         <Stack.Screen name="CadastroSplash" component={CadastroSplash} options={{ headerShown: false }}/>
         <Stack.Screen name="CadastroSplash2" component={CadastroSplash2} options={{ headerShown: false }}/>
         <Stack.Screen name="CadastroSplash3" component={CadastroSplash3} options={{ headerShown: false }}/>
+        <Stack.Screen name="CadastroSplash4" component={CadastroSplash4} options={{ headerShown: false }}/>
         <Stack.Screen name="Tela_Home" component={Tela_Home} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

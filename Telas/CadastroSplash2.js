@@ -54,7 +54,7 @@ const CadastroSplash2 = ({ navigation, route }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro });
-    }, 3500); 
+    }, 3400); 
 
     return () => clearTimeout(timer); 
   }, [navigation,       

@@ -1,7 +1,6 @@
 
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import Rotas from './Rotas';
 
 export default function App() {

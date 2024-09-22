@@ -63,7 +63,7 @@ const Tela_Login = ({ navigation }) => {
       
       
       if (userDoc.exists()) {
-        navigation.navigate('Tela_Home', { userData: userDoc.data() });
+        navigation.navigate('CadastroSplash4', { userData: userDoc.data() });
       }
     } catch (error) {
       Alert.alert('Erro de Login', 'Login não encontrado, veja se screveu tudo corretamente');

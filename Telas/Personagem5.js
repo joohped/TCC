@@ -256,8 +256,8 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     resizeMode: 'contain',
-    marginLeft: 30,
-    marginTop: 25,
+    left: 30,
+    top: 40,
   },
   imagemTitulo: {
     width: 220,

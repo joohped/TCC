@@ -5,16 +5,12 @@
     "version": "1.0.0",
     "scheme": "teste.02",
     "orientation": "portrait",
-    "icon": "./img/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./img/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+      
     },
     "web": {
       "favicon": "./img/favicon.png"
