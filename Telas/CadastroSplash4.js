@@ -66,7 +66,7 @@ const CadastroSplash4 = ({ navigation }) => {
         personagemEscolhido,
         fontSize,
         scale});
-    }, 3600); 
+    }, 3500); 
 
     return () => clearTimeout(timer); 
   }, [navigation,       

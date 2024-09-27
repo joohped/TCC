@@ -11,7 +11,7 @@ const CadastroSplash = ({ navigation, route }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate('Tela_Cadastro2', { email, senha, nome_r, data_nasc, data_nasc_resp });
-    }, 3700); 
+    }, 3600); 
 
     return () => clearTimeout(timer); 
   }, [navigation, email, senha, nome_r, data_nasc]);

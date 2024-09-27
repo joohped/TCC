@@ -45,8 +45,8 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
     if (alergia === 'não') {
       setAlergia('não tem');
       setAlergia_outro(null);
-    }
       navigation.navigate('Tela_Cadastro4', { email, senha, nome_r, nome_usuario, data_nasc_resp, data_nasc_usua, alergia: alergia === 'não' ? 'não tem':alergia, alergia_outro });
+    }
  
   };
 

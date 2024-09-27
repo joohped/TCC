@@ -39,6 +39,7 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
               value={nome_usuario}
               onChangeText={setNome_usuario}
               placeholder="Nome de Usuário"
+              maxLength={14}
               autoCapitalize="none"
               placeholderTextColor="#ffffff"
               textAlign="center"

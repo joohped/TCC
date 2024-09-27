@@ -136,6 +136,35 @@ export default function Tela_Home({navigation}) {
           });
       };
 
+      const Diario = async () => {
+        navigation.navigate('Diario', { 
+          email,
+          nome_r, 
+          nome_usuario, 
+          data_nasc_resp, 
+          data_nasc_usua, 
+          alergia, 
+          alergia_outro, 
+          comida_gosta,
+          comidaFavorita_outro,
+          comidasFavoritas,
+          texturaFavorita_outro,
+          texturasFavoritas,
+          saborFavorito_outro,
+          saboresFavoritos,
+          comida_evita,
+          comidasEvita,
+          comidasEvita_outro,
+          texturasEvita,
+          texturasEvita_outro,
+          saboresEvita,
+          saboresEvita_outro,
+          personagemEscolhido,
+          scale,
+          fontSize
+            });
+        };
+
 
 
   return (
@@ -220,7 +249,7 @@ export default function Tela_Home({navigation}) {
             borderBottomWidth: 4,
             borderRadius: 57,
 
-            }}>
+            }} onPress={Diario}>
 
             <Image source={require('../img/botao1DA.png')} style={{width: 314,
             height: 247, borderRadius: 52,}}/>

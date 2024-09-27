@@ -57,7 +57,7 @@ const CadastroSplash3 = ({ navigation, route }) => {
         saboresEvita,
         saboresEvita_outro,
         personagemEscolhido: personagemImagem});
-    }, 3700); 
+    }, 3000); 
 
     return () => clearTimeout(timer); 
   }, [navigation,       

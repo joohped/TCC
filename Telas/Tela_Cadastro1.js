@@ -17,7 +17,7 @@ const Tela_Cadastro1 = ({ navigation }) => {
 
 
   const Abrir_Link = () => {
-    Linking.openURL("https://docs.google.com/document/d/1Mi5noCxCcrHsHKSwEoxK4dK63FK6QEmZ/edit?usp=drivesdk&ouid=103203236061127780906&rtpof=true&sd=true");
+    Linking.openURL("https://drive.google.com/file/d/15eQzcm70hyE9OmPwYvxA4qr36mzOduPD/view?usp=drive_link");
   };
 
   const validar = (email) => {
@@ -158,7 +158,7 @@ const Tela_Cadastro1 = ({ navigation }) => {
           </View>
 
             <TouchableOpacity
-            style={styles.containerCheckBox}
+            style={styles.containerCheckBox2}
             onPress={Concordou}
           >
             <Checkbox
@@ -252,15 +252,22 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     fontSize: 19,
-    marginLeft: 30,
-    marginTop: -45,
   },
   containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 9,
     width: 320,
-    marginTop: 12,
+    height: 40,
+    marginTop: -10,
+    left: 80,
+  },
+  containerCheckBox2: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 9,
+    width: 25,
+    top: 30,
     marginLeft: 50,
   },
 });

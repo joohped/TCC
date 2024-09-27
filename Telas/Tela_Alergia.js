@@ -22,8 +22,15 @@ const Tela_Alergia = ({ route, navigation }) => {
     Castanhas: false,
   });
 
+  
+
   const Salvar = () => {
     const Selecionadas = Object.keys(alergias).filter(key => alergias[key]);
+
+    if (alergia_outro === ""){
+      setAlergia_outro('não informou');
+    }
+    
     navigation.navigate('Tela_Cadastro4', {
       email,
       senha,
