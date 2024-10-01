@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { initializeApp} from '@firebase/app';
 import { getAuth } from '@firebase/auth';
-import { doc, getFirestore, setDoc } from '@firebase/firestore';
+import { doc, getFirestore, getDoc, updateDoc } from '@firebase/firestore';
 import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, Linking, Alert } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -28,7 +28,7 @@ const db = getFirestore(app);
 
       const scaleMaxima = 1.28;
       const fontSizeMaxima = 23.5;
-      const fontSizeMinima = 13;
+      const fontSizeMinima = 14.5;
       const scaleMinima = 0.96;
 
         const Insta = () => {
@@ -38,13 +38,7 @@ const db = getFirestore(app);
             Linking.openURL("mailto:nhac.kids00@gmail.com");
         };
 
-        
-        const Diminuir = () => {
-          setFontSize(prevSize => Math.max(prevSize - 0.5, fontSizeMinima));
-          setScale(scale => Math.max(scale - 0.02, scaleMinima));
-        };
-
-        const {    
+        const {   
             email,
             nome_r, 
             nome_usuario, 
@@ -126,6 +120,25 @@ const db = getFirestore(app);
               });
           };
 
+          const Diminuir = async () => {
+            const user = auth.currentUser;
+            
+            setFontSize(prevSize => Math.max(prevSize - 0.5, fontSizeMinima));
+            setScale(scale => Math.max(scale - 0.02, scaleMinima));
+
+            if(user){
+              try { 
+              const userDocRef = doc(db, 'users', user.uid)
+              await updateDoc(userDocRef,{
+                fontSize,
+                scale,
+              });
+            }catch (error) {
+              Alert.alert ('Erro no aumento de fonte:', error.message);
+            }
+          }
+      };
+
           const Aumentar = async () => {
             const user = auth.currentUser;
 
@@ -135,29 +148,7 @@ const db = getFirestore(app);
             if(user){
             try { 
             const userDocRef = doc(db, 'users', user.uid)
-            await setDoc(userDocRef,{
-              email,
-              nome_r, 
-              nome_usuario, 
-              data_nasc_resp, 
-              data_nasc_usua, 
-              alergia, 
-              alergia_outro, 
-              comida_gosta,
-              comidaFavorita_outro,
-              comidasFavoritas,
-              texturaFavorita_outro,
-              texturasFavoritas,
-              saborFavorito_outro,
-              saboresFavoritos,
-              comida_evita,
-              comidasEvita,
-              comidasEvita_outro,
-              texturasEvita,
-              texturasEvita_outro,
-              saboresEvita,
-              saboresEvita_outro,
-              personagemEscolhido,
+            await updateDoc(userDocRef,{
               fontSize,
               scale,
             });
@@ -167,6 +158,44 @@ const db = getFirestore(app);
         }
             
           };
+
+          const Info = async () => {
+            
+            try {
+              const user = auth.currentUser;
+              if (user) {
+                const userDocRef = doc(db, 'users', user.uid);
+                const userDoc = await getDoc(userDocRef);
+        
+                if (userDoc.exists() && userDoc.data().fontSize && userDoc.data().scale) {
+                  const Tamanho = userDoc.data().fontSize;
+                  const Escala = userDoc.data().scale;
+        
+                  if (Tamanho && Escala) {
+                    const tam = Tamanho;
+                    const esc = Escala;
+        
+                    setFontSize(tam);
+                    setScale(esc);
+                  }
+                  if (!Tamanho && !Escala) {
+                    setFontSize(17);
+                    setScale(1);
+                  }
+                } else {
+                  Alert.alert('Aviso', 'Nenhum diário encontrado.');
+                }
+              }
+            } catch (error) {
+              console.error("Erro ao obter diário: ", error);
+              Alert.alert('Erro', 'Falha ao buscar o diário.');
+            }
+          };
+  
+
+useEffect(() => {
+  Info();
+}, []);
 
   return (
     <View>
@@ -211,10 +240,13 @@ const db = getFirestore(app);
 
           <Image source={require('../img/titulo7.png')} style={{ width: 125 , height: 20  , top: 20, left: 40, transform: [{ scale }] }} />
 
-          <View style={{backgroundColor: '#E9E9E9', height: 71, width: 300, top: 40, borderRadius: 32, left: 17}}></View>
-          <TouchableOpacity style={{ top: -25, width: 280, left: 25}} onPress={Aumentar}>
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize , left: 10,top: -5}}>Aumentar tamanho da fonte</Text>
-            <Text style={{fontFamily: 'QuickDelight', color: '#ACACAC', fontSize , left: 10,top: -6, width: 280}}>e melhore o conforto durante a leitura no aplicativo</Text>
+          <View style={{backgroundColor: '#E9E9E9', height: 38, width: 300, top: 30, borderRadius: 32, left: 17}}></View>
+          <TouchableOpacity style={{ top: -4, width: 290, left: 20, height: 30}} onPress={Aumentar}>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize , left: 15,top: 4}}>Aumentar tamanho da fonte</Text>
+        </TouchableOpacity>
+        <View style={{backgroundColor: '#E9E9E9', height: 38, width: 300, top: 8, borderRadius: 32, left: 17}}></View>
+        <TouchableOpacity style={{ top: -25, width: 290, left: 20, height: 30}} onPress={Diminuir}>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize , left: 15,top: 5}}>Diminuir tamanho da fonte</Text>
         </TouchableOpacity>
           </View>
 

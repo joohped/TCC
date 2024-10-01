@@ -33,7 +33,7 @@ export default function Tela_Home({navigation}) {
         saboresEvita_outro,
         personagemEscolhido,
         fontSize,
-        scale
+        scale,
   } = userData;
 
   const [personageEscolhido, setPersonageEscolhido] = useState(null);
