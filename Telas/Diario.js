@@ -73,12 +73,30 @@ const Diario = ({ navigation }) => {
     comi_Bem: false,
     comi_Tudo: false
   });
+  const [lancheTarde, setLancheTarde] = useState({
+    nao_Comi: false,
+    comi_Pouco: false,
+    comi_Bem: false,
+    comi_Tudo: false
+  });
+  const [comidaNoite, setComidaNoite] = useState({
+    nao_Comi: false,
+    comi_Pouco: false,
+    comi_Bem: false,
+    comi_Tudo: false
+  });
 
   const comiDSelecionados = (comi) => {
     setComidaDia((prevState) => ({ ...prevState, [comi]: !prevState[comi] }));
   };
   const comiTSelecionados = (comi) => {
     setComidaTarde((prevState) => ({ ...prevState, [comi]: !prevState[comi] }));
+  };
+  const comiLSelecionados = (comi) => {
+    setLancheTarde((prevState) => ({ ...prevState, [comi]: !prevState[comi] }));
+  };
+  const comiNSelecionados = (comi) => {
+    setComidaNoite((prevState) => ({ ...prevState, [comi]: !prevState[comi] }));
   };
 
   const [personageEscolhido, setPersonageEscolhido] = useState(null);
@@ -212,7 +230,7 @@ const Diario = ({ navigation }) => {
   const Modificar = async () => {
     const user = auth.currentUser;
 
-    if (hoje_comi.trim() !== '' || hoje_gostei.trim() !== '' || hoje_evitei.trim() !== '' || Object.values(comidaDia).some(value => value) || Object.values(comidaTarde).some(value => value)) {
+    if (hoje_comi.trim() !== '' || hoje_gostei.trim() !== '' || hoje_evitei.trim() !== '' || Object.values(comidaDia).some(value => value) || Object.values(comidaTarde).some(value => value) || Object.values(lancheTarde).some(value => value) || Object.values(comidaDia).some(value => value)) {
       setModificar((entradasAnteriores) => {
         const datas = value.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -222,6 +240,8 @@ const Diario = ({ navigation }) => {
           hoje_evitei: '',
           cafe: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
           almoco: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
+          lanche: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
+          janta: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
         };
 
         if (hoje_comi.trim() !== '') {
@@ -236,6 +256,8 @@ const Diario = ({ navigation }) => {
 
         hoje.cafe = { ...hoje.cafe, ...comidaDia}
         hoje.almoco = { ...hoje.almoco, ...comidaTarde}
+        hoje.lanche = { ...hoje.lanche, ...lancheTarde}
+        hoje.janta = { ...hoje.janta, ...comidaNoite}
 
         if(user){
           try { 
@@ -247,7 +269,9 @@ const Diario = ({ navigation }) => {
                 hoje_gostei: hoje.hoje_gostei,
                 hoje_evitei: hoje.hoje_evitei,
                 cafe: hoje.cafe,
-                almoco: hoje.almoco
+                almoco: hoje.almoco,
+                lanche: hoje.lanche,
+                janta: hoje.janta,
               }
             }
           }, { merge: true });
@@ -301,6 +325,8 @@ const Diario = ({ navigation }) => {
             setHoje_evitei(comis.hoje_evitei || '');
             setComidaDia(comis.cafe || comidaDia);
             setComidaTarde(comis.almoco || comidaTarde);
+            setLancheTarde(comis.lanche || lancheTarde);
+            setComidaNoite(comis.janta || comidaNoite);
           }
           if (!diarioData[datas]) {
 
@@ -309,6 +335,8 @@ const Diario = ({ navigation }) => {
             setHoje_evitei('');
             setComidaDia({nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false});
             setComidaTarde({nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false});
+            setLancheTarde({nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false});
+            setComidaNoite({nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false});
           }
         } 
       }
@@ -327,7 +355,9 @@ const Diario = ({ navigation }) => {
   
 
   const almoco = (
-    <Animated.View style={{alignItems: 'center', transform: [{ translateY: Descer }] }}>
+    <ScrollView style={{flex: 2}}>
+    <Animated.View style={{height: 710, alignItems: 'center', transform: [{ translateY: Descer }] }}>
+      
     <Text style={{fontSize: fontSize, textAlign: 'center', top: 20, zIndex: 100, fontFamily: 'QuickDelight'}}>Refeição do dia:
     </Text>
     <View style={{backgroundColor: '#F1F0F0', width: 280, height: 125, top: 30, borderRadius:  10}}>
@@ -350,6 +380,7 @@ const Diario = ({ navigation }) => {
           </TouchableOpacity>
           ))}
     </View>
+    
     <View style={{backgroundColor: '#F1F0F0', width: 280, height: 125, top: 50, borderRadius:  10}}>
             <Text style={{fontFamily: 'QuickDelight', fontSize: fontSize, color: '#F7B61A', marginLeft: 20, marginTop: 2, maxHeight: 26 }}>Almoço</Text>
     {Object.keys(comidaTarde).map(comi => (
@@ -370,11 +401,53 @@ const Diario = ({ navigation }) => {
           </TouchableOpacity>
           ))}
     </View>
+    <View style={{backgroundColor: '#F1F0F0', width: 280, height: 125, top: 70, borderRadius:  10}}>
+            <Text style={{fontFamily: 'QuickDelight', fontSize: fontSize, color: '#F7B61A', marginLeft: 20, marginTop: 2, maxHeight: 26 }}>Lanche da Tarde</Text>
+    {Object.keys(lancheTarde).map(comi => (
+            
+            <TouchableOpacity
+            key={comi}
+            style={styles.containerCheckBox}
+            onPress={() => comiLSelecionados(comi)}
+          >
+              <Checkbox
+                value={lancheTarde[comi]}
+                onValueChange={() => comiLSelecionados(comi)}
+                color={lancheTarde[comi] ? '#00FF00' : '#FF0000'}
+              />
+              <Text style={{ color: '#5C5C5C', fontFamily: 'QuickDelight', marginLeft: 10, fontSize: fontSize, maxHeight: 22}}>
+                {comi.charAt(0).toUpperCase() + comi.slice(1).replace('_', ' ')}
+              </Text>
+          </TouchableOpacity>
+          ))}
+    </View>
+    <View style={{backgroundColor: '#F1F0F0', width: 280, height: 125, top: 90, borderRadius:  10}}>
+            <Text style={{fontFamily: 'QuickDelight', fontSize: fontSize, color: '#F7B61A', marginLeft: 20, marginTop: 2, maxHeight: 26 }}>Janta</Text>
+    {Object.keys(comidaNoite).map(comi => (
+            
+            <TouchableOpacity
+            key={comi}
+            style={styles.containerCheckBox}
+            onPress={() => comiNSelecionados(comi)}
+          >
+              <Checkbox
+                value={comidaNoite[comi]}
+                onValueChange={() => comiNSelecionados(comi)}
+                color={comidaNoite[comi] ? '#00FF00' : '#FF0000'}
+              />
+              <Text style={{ color: '#5C5C5C', fontFamily: 'QuickDelight', marginLeft: 10, fontSize: fontSize, maxHeight: 22}}>
+                {comi.charAt(0).toUpperCase() + comi.slice(1).replace('_', ' ')}
+              </Text>
+          </TouchableOpacity>
+          ))}
+    </View>
 
-    <TouchableOpacity style={{backgroundColor: '#F1F0F0', width: 280, height: 45, top: 75, borderRadius:  20, alignItems: 'center', justifyContent: 'center'}} onPress={Mais}>
+    <TouchableOpacity style={{backgroundColor: '#F1F0F0', width: 280, height: 45, top: 110, borderRadius:  20, alignItems: 'center', justifyContent: 'center'}} onPress={Mais}>
         <Image source={require('../img/Mais.png')} style={{width: 18, height: 10}}/>
     </TouchableOpacity>
+    
     </Animated.View>
+    </ScrollView>
   );
 
 

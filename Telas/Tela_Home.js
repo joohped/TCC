@@ -165,6 +165,35 @@ export default function Tela_Home({navigation}) {
             });
         };
 
+        const Desafios = async () => {
+          navigation.navigate('Desafios', { 
+            email,
+            nome_r, 
+            nome_usuario, 
+            data_nasc_resp, 
+            data_nasc_usua, 
+            alergia, 
+            alergia_outro, 
+            comida_gosta,
+            comidaFavorita_outro,
+            comidasFavoritas,
+            texturaFavorita_outro,
+            texturasFavoritas,
+            saborFavorito_outro,
+            saboresFavoritos,
+            comida_evita,
+            comidasEvita,
+            comidasEvita_outro,
+            texturasEvita,
+            texturasEvita_outro,
+            saboresEvita,
+            saboresEvita_outro,
+            personagemEscolhido,
+            scale,
+            fontSize
+              });
+          };
+
 
 
   return (
@@ -280,7 +309,7 @@ export default function Tela_Home({navigation}) {
             shadowColor: "#E54A4A",
             shadowRadius: 4,
             shadowOffset: {width: 0, height: 3}
-            }}>
+            }} onPress={Desafios}>
 
             <Image source={require('../img/botao2D.png')} style={{width: 117,
             height: 112, borderRadius: 48,}}/>
