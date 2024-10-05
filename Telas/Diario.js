@@ -241,7 +241,7 @@ const Diario = ({ navigation }) => {
           cafe: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
           almoco: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
           lanche: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
-          janta: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
+          Jantar: { nao_Comi: false, comi_Pouco: false, comi_Bem: false, comi_Tudo: false },
         };
 
         if (hoje_comi.trim() !== '') {
@@ -257,7 +257,7 @@ const Diario = ({ navigation }) => {
         hoje.cafe = { ...hoje.cafe, ...comidaDia}
         hoje.almoco = { ...hoje.almoco, ...comidaTarde}
         hoje.lanche = { ...hoje.lanche, ...lancheTarde}
-        hoje.janta = { ...hoje.janta, ...comidaNoite}
+        hoje.Jantar = { ...hoje.Jantar, ...comidaNoite}
 
         if(user){
           try { 
@@ -271,7 +271,7 @@ const Diario = ({ navigation }) => {
                 cafe: hoje.cafe,
                 almoco: hoje.almoco,
                 lanche: hoje.lanche,
-                janta: hoje.janta,
+                Jantar: hoje.Jantar,
               }
             }
           }, { merge: true });
@@ -326,7 +326,7 @@ const Diario = ({ navigation }) => {
             setComidaDia(comis.cafe || comidaDia);
             setComidaTarde(comis.almoco || comidaTarde);
             setLancheTarde(comis.lanche || lancheTarde);
-            setComidaNoite(comis.janta || comidaNoite);
+            setComidaNoite(comis.Jantar || comidaNoite);
           }
           if (!diarioData[datas]) {
 
@@ -422,7 +422,7 @@ const Diario = ({ navigation }) => {
           ))}
     </View>
     <View style={{backgroundColor: '#F1F0F0', width: 280, height: 125, top: 90, borderRadius:  10}}>
-            <Text style={{fontFamily: 'QuickDelight', fontSize: fontSize, color: '#F7B61A', marginLeft: 20, marginTop: 2, maxHeight: 26 }}>Janta</Text>
+            <Text style={{fontFamily: 'QuickDelight', fontSize: fontSize, color: '#F7B61A', marginLeft: 20, marginTop: 2, maxHeight: 26 }}>Jantar</Text>
     {Object.keys(comidaNoite).map(comi => (
             
             <TouchableOpacity

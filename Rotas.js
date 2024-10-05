@@ -5,6 +5,10 @@ import Inicio from './Telas/Inicio';
 import Diario from './Telas/Diario';
 import Desafios from './Telas/Desafios';
 import Perfil from './Telas/Perfil';
+import InicioQuiz from './Telas/InicioQuiz';
+import Quiz from './Telas/Quiz';
+import Result from './Telas/Result';
+import Conquistas from './Telas/Conquistas';
 import Config from './Telas/Config';
 import Tela_Login from './Telas/Tela_Login';
 import Tela_Cadastro1 from './Telas/Tela_Cadastro1';
@@ -44,7 +48,11 @@ const Rotas = () => {
         <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
         <Stack.Screen name="Config" component={Config} options={{ headerShown: false }} />
         <Stack.Screen name="Diario" component={Diario} options={{ headerShown: false }} />
+        <Stack.Screen name="Conquistas" component={Conquistas} options={{ headerShown: false }} />
         <Stack.Screen name="Desafios" component={Desafios} options={{ headerShown: false }} />
+        <Stack.Screen name="InicioQuiz" component={InicioQuiz} options={{ headerShown: false }} />
+        <Stack.Screen name="Quiz" component={Quiz} options={{ headerShown: false }} />
+        <Stack.Screen name="Result" component={Result} options={{ headerShown: false }} />
         <Stack.Screen name="Tela_Login" component={Tela_Login} options={{ headerShown: false }} />
         <Stack.Screen name="Tela_Cadastro1" component={Tela_Cadastro1} options={{ headerShown: false }} />
         <Stack.Screen name="Tela_Cadastro2" component={Tela_Cadastro2} options={{ headerShown: false }}/>

@@ -174,6 +174,69 @@ export default function Desafios({ navigation }) {
         fontSize});
   };
 
+  const [personageEscolhido, setPersonageEscolhido] = useState(null);
+
+  useEffect(() => {
+    var imagem;
+    
+    switch (personagemEscolhido) {
+      case 'personagem1':
+        imagem = require('../img/circuloTommy.png');
+
+        break;
+      case 'personagem2':
+        imagem = require('../img/circuloToby.png');
+
+        break;
+      case 'personagem3':
+        imagem = require('../img/circuloBella.png');
+
+        break;
+      case 'personagem4':
+        imagem = require('../img/circuloBob.png');
+
+        break;
+      case 'personagem5':
+        imagem = require('../img/circuloBete.png');
+
+        break;
+
+      default:
+        imagem = null;
+    }
+
+    setPersonageEscolhido(imagem);
+  }, [personagemEscolhido]);
+
+  const Perfil = async () => {
+    navigation.navigate('Perfil', { 
+      email,
+      nome_r, 
+      nome_usuario, 
+      data_nasc_resp, 
+      data_nasc_usua, 
+      alergia, 
+      alergia_outro, 
+      comida_gosta,
+      comidaFavorita_outro,
+      comidasFavoritas,
+      texturaFavorita_outro,
+      texturasFavoritas,
+      saborFavorito_outro,
+      saboresFavoritos,
+      comida_evita,
+      comidasEvita,
+      comidasEvita_outro,
+      texturasEvita,
+      texturasEvita_outro,
+      saboresEvita,
+      saboresEvita_outro,
+      personagemEscolhido,
+      scale,
+      fontSize
+        });
+    };
+
   const Buscar = async () => {
     const user = auth.currentUser;
 
@@ -210,12 +273,23 @@ export default function Desafios({ navigation }) {
     
       <ImageBackground style={{ width: width , height: height , top: 0 }} source={require('../img/fundoDesafios.png')}> 
 
-        <View style={{backgroundColor: '#E54A4A', shadowColor: "#000", shadowOffset: {width: 1, height: 10}, shadowOpacity: 0.38, shadowRadius: 4, height: 150, width: 420, borderBottomEndRadius: 55, borderBottomStartRadius: 55}}>
+        <View style={{backgroundColor: '#E54A4A', shadowColor: "#000", shadowRadius: 4, elevation: 5, height: 150, width: 420, borderBottomEndRadius: 55, borderBottomStartRadius: 55}}>
 
-           <Image source={require('../img/tituloDesafios.png')} style={{ width: 170 , height: 50  , top: 65, left: 120 }} />
+          <View style={styles.containerPersonagem}>
+            <TouchableOpacity onPress={Perfil} style={{ width: 70, zIndex: 1000,   left: 310, top: 55}}>
+            {personageEscolhido && (
+              <Image 
+                source={personageEscolhido} 
+                style={styles.imagemPersonagem}
+              />
+            )}
+            </TouchableOpacity>
+          </View>
 
-           <TouchableOpacity onPress={Voltar}>
-            <Image source={require('../img/voltarDesafios.png')} style={{ width: 25 , height: 25  , top: 30, left: 30 }} />
+           <Image source={require('../img/tituloDesafios.png')} style={{ width: 170 , height: 50  , top: -10, left: 115 }} />
+
+           <TouchableOpacity onPress={Voltar} style={{width: 40, height: 40, top: -50, left: 35}}>
+            <Image source={require('../img/voltarDesafios.png')} style={{ width: 25 , height: 30, top: 5, left: 5}} />
           </TouchableOpacity>
 
         </View>
@@ -225,8 +299,8 @@ export default function Desafios({ navigation }) {
         <View style={{backgroundColor: '#fff', shadowColor: "#000", shadowRadius: 4, height: 700, width: 420, borderTopEndRadius: 55, borderTopStartRadius: 55, top: 190, }}>
 
 
-        <TouchableOpacity style={{zIndex: 1000}}>
-          <View style={{backgroundColor: '#E54A4A', shadowColor: "#000", shadowOffset: {width: 1, height: 10}, shadowOpacity: 0.38, shadowRadius: 4, height: 42, width: 62, left: 360, top: -165, zIndex: 1000, borderRadius: 13}}>
+        <TouchableOpacity style={{zIndex: 100, height: 42, width: 62, left: 360, top: -165}}>
+          <View style={{backgroundColor: '#E54A4A', shadowColor: "#000", shadowOffset: {width: 1, height: 10}, shadowOpacity: 0.38, shadowRadius: 4, height: 42, width: 62,  zIndex: 1000, borderRadius: 13}}>
           
             <Image source={require('../img/emblema.png')} style={{ width: 24 , height: 26, top: 7, left: 9 }} />
           
@@ -255,9 +329,9 @@ export default function Desafios({ navigation }) {
               
               
 
-                {barraProgesso.map((item, index, barra) => (
-                  <View style={{bottom: 15, width: 330}}>
-              <TouchableOpacity key={barra.title} onPress={() => aumentarProgresso(index)} style={[styles.progressoContendo, barraProgesso[index].progress >= 1, { 
+                {barraProgesso.map((item, index) => (
+                  <View key={item.title} style={{bottom: 15, width: 330}}>
+              <TouchableOpacity  onPress={() => aumentarProgresso(index)} style={[styles.progressoContendo, barraProgesso[index].progress >= 1, { 
                 backgroundColor: barraProgesso[index].progress >= 1 ? 'lightgreen' : bgColor,
                 shadowColor: barraProgesso[index].progress >= 1 ? 'green' : bgColor2}]} disabled={barraProgesso[index].progress >= 1 }>
                 
@@ -280,6 +354,7 @@ export default function Desafios({ navigation }) {
               onRequestClose={() => setVerModal(false)}
             >
               <View style={styles.modal}>
+                <View style={{backgroundColor: 'white', width: 370, alignItems: 'center', justifyContent: 'center', height: 320, borderRadius: 50}}>
                 <Text style={styles.tituloModal}>Adicionar Progresso</Text>
 
                 <TextInput
@@ -292,7 +367,7 @@ export default function Desafios({ navigation }) {
                 <TouchableOpacity onPress={adicionarBarraProgresso} style={{ width: 300, marginBottom: 20, left: -10}}>
                   <View style={{backgroundColor: '#4df489', shadowColor: "#E54A4A", height: 65, width: 325, borderRadius: 35, zIndex: 1000, alignItems: 'center', justifyContent:'center'}}>
 
-                      <Text style={{ fontFamily: 'QuickDelight', fontSize: fontSize}}> Adicionar </Text>
+                      <Text style={{ fontFamily: 'QuickDelight', fontSize: fontSize, color: 'white'}}> Adicionar </Text>
                     </View>
                     
                   </TouchableOpacity>
@@ -302,6 +377,7 @@ export default function Desafios({ navigation }) {
                       <Text style={{ fontFamily: 'QuickDelight',  fontSize: fontSize, color:'white'}}> Cancelar </Text>
                     </View>
                   </TouchableOpacity>
+                  </View>
               </View>
             </Modal>
             </ScrollView>
@@ -346,7 +422,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(255,10,0,0.3)'
   },
   tituloModal: {
     fontSize: 20,
@@ -357,15 +433,24 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     backgroundColor: 'white',
-    borderColor: 'white',
+    borderColor: 'gray',
     fontFamily: 'QuickDelight',
     fontSize: 20,
     borderWidth: 1,
-    width: 340,
+    width: 320,
     marginBottom: 20,
     color: 'black',
     whiteSpace: 'nowrap',
     paddingHorizontal: 10,
+    marginTop: -30,
   },
+  imagemPersonagem: {
+    width: 70,
+    height: 70,
+    zIndex: 1000
+  },
+  containerPersonagem: {
+    zIndex: 1000,
+  }
 });
 

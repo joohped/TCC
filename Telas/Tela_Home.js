@@ -193,7 +193,64 @@ export default function Tela_Home({navigation}) {
             fontSize
               });
           };
+          
+          const Conquistas = async () => {
+            navigation.navigate('Conquistas', { 
+              email,
+              nome_r, 
+              nome_usuario, 
+              data_nasc_resp, 
+              data_nasc_usua, 
+              alergia, 
+              alergia_outro, 
+              comida_gosta,
+              comidaFavorita_outro,
+              comidasFavoritas,
+              texturaFavorita_outro,
+              texturasFavoritas,
+              saborFavorito_outro,
+              saboresFavoritos,
+              comida_evita,
+              comidasEvita,
+              comidasEvita_outro,
+              texturasEvita,
+              texturasEvita_outro,
+              saboresEvita,
+              saboresEvita_outro,
+              personagemEscolhido,
+              scale,
+              fontSize
+                });
+            };
 
+            const Quiz = async () => {
+              navigation.navigate('InicioQuiz', { 
+                email,
+                nome_r, 
+                nome_usuario, 
+                data_nasc_resp, 
+                data_nasc_usua, 
+                alergia, 
+                alergia_outro, 
+                comida_gosta,
+                comidaFavorita_outro,
+                comidasFavoritas,
+                texturaFavorita_outro,
+                texturasFavoritas,
+                saborFavorito_outro,
+                saboresFavoritos,
+                comida_evita,
+                comidasEvita,
+                comidasEvita_outro,
+                texturasEvita,
+                texturasEvita_outro,
+                saboresEvita,
+                saboresEvita_outro,
+                personagemEscolhido,
+                scale,
+                fontSize
+                  });
+              };
 
 
   return (
@@ -334,7 +391,7 @@ export default function Tela_Home({navigation}) {
             shadowColor: "#9BCB3C",
             shadowRadius: 4,
             shadowOffset: {width: 0, height: 3}
-            }}> 
+            }} onPress={Conquistas}> 
 
             <Image source={require('../img/botao3M.png')} style={{width: 117,
             height: 112, borderRadius: 48,}}/>
@@ -397,7 +454,7 @@ export default function Tela_Home({navigation}) {
             height: 158, borderRadius: 52,}}/>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={Quiz}>
           <Image
           style={{
             width: 450, 
