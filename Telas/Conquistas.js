@@ -904,11 +904,11 @@ export default function Conquistas({navigation}) {
               onRequestClose={() => setVerModal(false)}
             >
               <View style={styles.modal}>
-                <View style={{backgroundColor: 'white', width: 370, alignItems: 'center', justifyContent: 'center', height: 320, borderRadius: 50}}>
+                <View style={{backgroundColor: 'white', width: 370, alignItems: 'center', justifyContent: 'center', height: 405, borderRadius: 45}}>
                 
-                  <View style={{ height: 200, width: 310, borderRadius: 35, zIndex: 1000, alignItems: 'center', justifyContent:'center'}}>
+                  <View style={{ height: 275, width: 310, borderRadius: 35, zIndex: 1000, alignItems: 'center', justifyContent:'center'}}>
 
-                      <Text style={{ fontFamily: 'QuickDelight', fontSize: fontSize, textAlign: 'justify'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat, commodo.</Text>
+                      <Text style={{ fontFamily: 'QuickDelight', fontSize: fontSize, textAlign: 'justify'}}>Essa tela é dedicada para você usuário, visualizar suas conquistas em relação a progressão da alimentação do seu filho. Na qual, ao decorrer do tempo que for marcado na aba de desafios os alimentos que foram “superados”, aparecerá um novo ícone nesta parte especial do app, mostrando que a criança melhorou em mais um nível de conquista.</Text>
                     </View>
 
                   <TouchableOpacity onPress={() => setVerModal(false)} style={{ width: 300, width: 200, marginTop: 20}}>
