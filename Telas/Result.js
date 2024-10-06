@@ -72,9 +72,9 @@ const Result = ({ route, navigation }) => {
   }, [personagemEscolhido]);
 
   const { score, total } = route.params;
-  const message = score === 0 ? "Que pena que você acertou" : "Parabéns você acertou";
-  const imageSource = score === 0 ? require('../img/fail.png') : require('../img/success.png');
-  const imageStyle = score === 0 ? styles.failImage : styles.successImage;
+  const message = score < 3 ? "Que pena que você acertou" : "Parabéns você acertou";
+  const imageSource = score < 3 ? require('../img/fail.png') : require('../img/success.png');
+  const imageStyle = score < 3 ? styles.failImage : styles.successImage;
 
   const Voltar = async () => {
     navigation.navigate('Tela_Home', { 

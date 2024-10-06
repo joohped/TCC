@@ -193,6 +193,62 @@ const Diario = ({ navigation }) => {
         fontSize});
   };
 
+  const Conq = async () => {
+    navigation.navigate('Conquistas', { 
+        email,
+        nome_r, 
+        nome_usuario, 
+        data_nasc_resp, 
+        data_nasc_usua, 
+        alergia, 
+        alergia_outro, 
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro,
+        personagemEscolhido,
+        scale,
+        fontSize});
+  };
+
+  const Perfil = async () => {
+    navigation.navigate('Perfil', { 
+      email,
+      nome_r, 
+      nome_usuario, 
+      data_nasc_resp, 
+      data_nasc_usua, 
+      alergia, 
+      alergia_outro, 
+      comida_gosta,
+      comidaFavorita_outro,
+      comidasFavoritas,
+      texturaFavorita_outro,
+      texturasFavoritas,
+      saborFavorito_outro,
+      saboresFavoritos,
+      comida_evita,
+      comidasEvita,
+      comidasEvita_outro,
+      texturasEvita,
+      texturasEvita_outro,
+      saboresEvita,
+      saboresEvita_outro,
+      personagemEscolhido,
+      scale,
+      fontSize
+        });
+    };
 
 
   const Subir = useRef(new Animated.Value(0)).current;  // View atual (sai descendo)
@@ -524,12 +580,23 @@ const Diario = ({ navigation }) => {
         <TouchableOpacity style={{ width: 32, height: 32, top: 95, left: 40}} onPress={Voltar}>
           <Image source={require('../img/voltar4.png')} style={{ width: 20, height: 24, top: 4, left: 5 }} />
         </TouchableOpacity >
+
+        <View style={styles.containerPersonagem}>
+            <TouchableOpacity onPress={Perfil} style={{ width: 70, zIndex: 1000,   left: 310, top: 55}}>
+            {personageEscolhido && (
+              <Image 
+                source={personageEscolhido} 
+                style={styles.imagemPersonagem}
+              />
+            )}
+            </TouchableOpacity>
+          </View>
         
-          <Image source={require('../img/diario.png')} style={{ width: 140, height: 58   , top: 55, left: 130 }} />
+          <Image source={require('../img/diario.png')} style={{ width: 140, height: 58   , top: -10, left: 130 }} />
         
         </View>
-        <TouchableOpacity style={{ width: 62, height: 58   , top: 25, left: 350}}>
-          <Image source={require('../img/desafios.png')} style={{ width: 62, height: 58  }} />
+        <TouchableOpacity style={{ width: 62, height: 58   , top: 25, left: 350}} onPress={Conq}>
+          <Image source={require('../img/conquistas.png')} style={{ width: 62, height: 58  }} />
         </TouchableOpacity>
         <View style={{justifyContent: 'center', alignItems: 'center', marginTop: -50, marginBottom: -85, }}>
           {personageEscolhido && (
@@ -682,6 +749,14 @@ const styles = StyleSheet.create({
     marginTop: -1,
     marginLeft: 20,
   },
+  imagemPersonagem: {
+    width: 70,
+    height: 70,
+    zIndex: 1000
+  },
+  containerPersonagem: {
+    zIndex: 1000,
+  }
 });
 
 export default Diario;

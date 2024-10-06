@@ -258,8 +258,8 @@ export default function Tela_Home({navigation}) {
 
       <View>
 
-        <View style={{width: 450, height: 200, backgroundColor: '#F7B61A', borderRadius: 150, 
-        borderTopLeftRadius: 0, borderTopRightRadius: 0, top: -60, marginLeft: -20, marginRight: 0, alignItems: "center", justifyContent: "center", flexDirection: "row", display: 'flex', zIndex: 1000}}>
+        <View style={{width: 450, height: 200, backgroundColor: '#F7B61A', borderRadius: 130, 
+        borderTopLeftRadius: 0, borderTopRightRadius: 0, top: -60, marginLeft: -20, marginRight: 0, alignItems: "center", justifyContent: "center", flexDirection: "row", display: 'flex', zIndex: 100, shadowColor:'black', elevation: 4}}>
 
         <TouchableOpacity style={{zIndex: 1000, left: 75, top: 45}} onPress={Config}>
           <Image
@@ -322,10 +322,8 @@ export default function Tela_Home({navigation}) {
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: -1859,
-            shadowColor: "#000", 
-            shadowOffset: {width: 10, height: 4},
-            shadowOpacity: 0.25,
-            shadowRadius: 4,
+            shadowColor:'black', 
+            elevation: 5,
 
             borderStyle: 'solid',
             borderColor: "#FDCB53",
@@ -362,10 +360,8 @@ export default function Tela_Home({navigation}) {
             borderBottomWidth: 4,
             borderRadius: 53,
 
-            shadowOpacity: 0.7,
-            shadowColor: "#E54A4A",
-            shadowRadius: 4,
-            shadowOffset: {width: 0, height: 3}
+            shadowColor:'red', 
+            elevation: 6,
             }} onPress={Desafios}>
 
             <Image source={require('../img/botao2D.png')} style={{width: 117,
@@ -387,10 +383,8 @@ export default function Tela_Home({navigation}) {
             borderBottomWidth: 4,
             borderRadius: 53,
 
-            shadowOpacity: 0.7,
-            shadowColor: "#9BCB3C",
-            shadowRadius: 4,
-            shadowOffset: {width: 0, height: 3}
+            shadowColor:'green', 
+            elevation: 6,
             }} onPress={Conquistas}> 
 
             <Image source={require('../img/botao3M.png')} style={{width: 117,
@@ -411,10 +405,8 @@ export default function Tela_Home({navigation}) {
             borderBottomWidth: 4,
             borderRadius: 53,
 
-            shadowOpacity: 0.7,
-            shadowColor: "#388388",
-            shadowRadius: 4,
-            shadowOffset: {width: 0, height: 3}
+            shadowColor:'blue', 
+            elevation: 6,
             }}>
 
             <Image source={require('../img/botao4DI.png')} style={{width: 117,
@@ -444,10 +436,8 @@ export default function Tela_Home({navigation}) {
           borderBottomWidth: 4,
           borderRadius: 53,
 
-          shadowOpacity: 0.7,
-          shadowColor: "#7CC9BC",
-          shadowRadius: 4,
-          shadowOffset: {width: 0, height: 4}
+          shadowColor:'#4BBFBE', 
+          elevation: 6,
           }}>
 
             <Image source={require('../img/botao5VC.png')} style={{width: 314,

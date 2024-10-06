@@ -58,7 +58,7 @@ export default function Desafios({ navigation }) {
         scale
   } = userData;
 
-  const [barraProgesso, setBarraProgresso] = useState([]);
+  const [barraProgresso, setBarraProgresso] = useState([]);
   const [concluidos, setConcluidos] = useState([]);
   const [bgColor, setBgColor] = useState('#F6F6F6');
   const [bgColor2, setBgColor2] = useState('red');
@@ -76,26 +76,43 @@ export default function Desafios({ navigation }) {
     setVerModal(true);
   };
 
-  const adicionarBarraProgresso = () => {
+  const adicionarBarraProgresso = (index) => {
 
     if(titulo === ''){
       Alert.alert('Não deixe vazio', ' escreva algum alimento na caixa de texto');
       return;
     }
 
-    const value = parseFloat(0);
-    if (!isNaN(value) && value >= 0) {
-      setBarraProgresso([...barraProgesso, { progress: value, title: titulo }]);
+    const existeTitulo = barraProgresso.some(item => item.title === titulo);
+    if (existeTitulo) {
+        Alert.alert('Alimento já utilizado anteriormente', 'Esse alimento já foi adicionado, tente outro semelhante.');
+        return;
+    }
+
+    const value = 0;
+
+    const user = auth.currentUser;
+
+      if (user) {
+          try {
+              const userDocRef = doc(db, 'users', user.uid);
+              const desafios = {
+                  [titulo]: value, 
+              };
+              setDoc(userDocRef, { desafios }, { merge: true });
+          } catch (error) {
+              Alert.alert('Erro ao enviar o desafio para o Firestore:', error.message);
+          }
+        }
+
+      setBarraProgresso([...barraProgresso, { progress: value, title: titulo }]);
       setTitulo('');
       setView(view+100);
       setVerModal(false);
-      
-    }
-    
-  };
+    };
 
   const aumentarProgresso = (index) => {
-    const barraProgressoNova = [...barraProgesso];
+    const barraProgressoNova = [...barraProgresso];
 
     if (barraProgressoNova[index].progress < 1) {
       barraProgressoNova[index].progress += 0.20; 
@@ -115,6 +132,7 @@ export default function Desafios({ navigation }) {
     } else {
       return [...anteriores, { title: barraProgressoNova[index].title, progress: barraProgressoNova[index].progress }];
     }
+
     
   });
   const user = auth.currentUser;
@@ -135,6 +153,11 @@ export default function Desafios({ navigation }) {
 
       
     }
+    if (barraProgressoNova[index].progress === 1) {
+      Alert.alert('Parabéns por completar um desafio! !','E conseguir uma nova conquista, clique no emblema de medalha, ao lado do Tommy Tomate, e veja a nova conquista desbloqueada');
+    }
+
+
     setBarraProgresso(barraProgressoNova);
     
 
@@ -148,6 +171,34 @@ export default function Desafios({ navigation }) {
 
   const Voltar = async () => {
     navigation.navigate('Tela_Home', { 
+        email,
+        nome_r, 
+        nome_usuario, 
+        data_nasc_resp, 
+        data_nasc_usua, 
+        alergia, 
+        alergia_outro, 
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro,
+        personagemEscolhido,
+        scale,
+        fontSize});
+  };
+
+  const Conq = async () => {
+    navigation.navigate('Conquistas', { 
         email,
         nome_r, 
         nome_usuario, 
@@ -251,8 +302,8 @@ export default function Desafios({ navigation }) {
           title,
           progress: desa[title],
         }));
-        botao.sort((a, b) => a.progress - b.progress);
         setBarraProgresso(botao);
+        
       } else {
         setBarraProgresso([]);
       }
@@ -299,7 +350,7 @@ export default function Desafios({ navigation }) {
         <View style={{backgroundColor: '#fff', shadowColor: "#000", shadowRadius: 4, height: 700, width: 420, borderTopEndRadius: 55, borderTopStartRadius: 55, top: 190, }}>
 
 
-        <TouchableOpacity style={{zIndex: 100, height: 42, width: 62, left: 360, top: -165}}>
+        <TouchableOpacity style={{zIndex: 100, height: 42, width: 62, left: 360, top: -165}} onPress={Conq}>
           <View style={{backgroundColor: '#E54A4A', shadowColor: "#000", shadowOffset: {width: 1, height: 10}, shadowOpacity: 0.38, shadowRadius: 4, height: 42, width: 62,  zIndex: 1000, borderRadius: 13}}>
           
             <Image source={require('../img/emblema.png')} style={{ width: 24 , height: 26, top: 7, left: 9 }} />
@@ -329,18 +380,19 @@ export default function Desafios({ navigation }) {
               
               
 
-                {barraProgesso.map((item, index) => (
+                {barraProgresso .sort((a, b) => a.progress - b.progress) .map((item, index) => (
                   <View key={item.title} style={{bottom: 15, width: 330}}>
-              <TouchableOpacity  onPress={() => aumentarProgresso(index)} style={[styles.progressoContendo, barraProgesso[index].progress >= 1, { 
-                backgroundColor: barraProgesso[index].progress >= 1 ? 'lightgreen' : bgColor,
-                shadowColor: barraProgesso[index].progress >= 1 ? 'green' : bgColor2}]} disabled={barraProgesso[index].progress >= 1 }>
+              <TouchableOpacity  onPress={() => aumentarProgresso(index)} 
+              style={[styles.progressoContendo, barraProgresso[index].progress >= 1, { 
+                backgroundColor: barraProgresso[index].progress >= 1 ? 'lightgreen' : bgColor,
+                shadowColor: barraProgresso[index].progress >= 1 ? 'green' : bgColor2}]} disabled={barraProgresso[index].progress >= 1 }>
                 
                     <Text style={{left: 20, top: 5, width: 290, marginBottom: 5, color: 'black', fontFamily: 'QuickDelight', fontSize: fontSize}}>{item.title}</Text>
 
-                {barraProgesso[index].progress >= 1 ? (
+                {barraProgresso[index].progress >= 1 ? (
         <Text style={{fontSize: fontSize, top: 0, left: 20, color: 'white', fontFamily: 'QuickDelight'}}>Concluído</Text>
       ) : (
-                  <ProgressBar progress={item.progress} style={styles.barraProgresso} color={bgColor2} disabled={barraProgesso[index].progress >= 1}/>
+                  <ProgressBar progress={item.progress} style={styles.barraProgresso} color={bgColor2} disabled={barraProgresso[index].progress >= 1}/>
                 )}
 
               </TouchableOpacity>
@@ -422,7 +474,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255,10,0,0.3)'
+    backgroundColor: 'rgba(0,0,0,0.3)'
   },
   tituloModal: {
     fontSize: 20,
