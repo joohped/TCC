@@ -6,6 +6,7 @@ import Diario from './Telas/Diario';
 import Desafios from './Telas/Desafios';
 import Perfil from './Telas/Perfil';
 import InicioQuiz from './Telas/InicioQuiz';
+import DicasInicio from './Telas/DicasInicio';
 import Quiz from './Telas/Quiz';
 import Result from './Telas/Result';
 import Conquistas from './Telas/Conquistas';
@@ -51,6 +52,7 @@ const Rotas = () => {
         <Stack.Screen name="Conquistas" component={Conquistas} options={{ headerShown: false }} />
         <Stack.Screen name="Desafios" component={Desafios} options={{ headerShown: false }} />
         <Stack.Screen name="InicioQuiz" component={InicioQuiz} options={{ headerShown: false }} />
+        <Stack.Screen name="DicasInicio" component={DicasInicio} options={{ headerShown: false }} />
         <Stack.Screen name="Quiz" component={Quiz} options={{ headerShown: false }} />
         <Stack.Screen name="Result" component={Result} options={{ headerShown: false }} />
         <Stack.Screen name="Tela_Login" component={Tela_Login} options={{ headerShown: false }} />

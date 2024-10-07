@@ -106,7 +106,7 @@ export default function Conquistas({navigation}) {
   });
   const [dataLoaded, setDataLoaded] = useState(false);
   const [barraProgresso, setBarraProgresso] = useState([]);
-  const [overlayIndexes, setOverlayIndexes] = useState([]);
+  const [conquistas, setConquistas] = useState([]);
 
   const Voltar = async () => {
     navigation.navigate('Tela_Home', { 
@@ -183,17 +183,17 @@ export default function Conquistas({navigation}) {
           
 
           setBarraProgresso(botao);
-          const overlayIndexes = botao.reduce((indexes, item, index) => {
+          const conquistas = botao.reduce((conjunto, item, conquista) => {
             if (item.progress >= 1) {
-              indexes.push(index);
+              conjunto.push(conquista);
             }
             if (item.progress < 1){
-              indexes.push((index) => index === 1);
+              conjunto.push((conquista) => conquista === 1);
             }
-            return indexes;
+            return conjunto;
           }, []);
 
-          setOverlayIndexes(overlayIndexes);
+          setConquistas(conquistas);
         } else {
           setBarraProgresso([]);
         }
@@ -245,17 +245,17 @@ export default function Conquistas({navigation}) {
         <ScrollView style={{width: width,  marginTop: -25}} contentContainerStyle={{alignItems:'center'}} onScroll={handleScroll} >
           <View style={{backgroundColor: '#BAD487', shadowColor: "#000", height: 100, width: 320, borderRadius: 30, marginTop: 20, top: 5, alignItems: 'center', justifyContent: 'center'}}>
 
-                <Text style={{color: 'white', fontSize: 23.5, width: 200, textAlign: 'center', fontFamily:'QuickDelight'}}>Ver todas as minhas conquistas!</Text>
+                <Text style={{color: 'white', fontSize: fontSize, width: 200, textAlign: 'center', fontFamily:'QuickDelight'}}>Ver todas as minhas conquistas!</Text>
 
             </View>
-        {achievements.map((item, index) => (
-          <View key={index} style={{alignItems: 'center',  height: height*8.75}}>
+        {achievements.map((item, conquista) => (
+          <View key={conquista} style={{alignItems: 'center',  height: height*8.75}}>
           
           <View style={{ height: 125, width: 130, top: 40, left: 50, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index) && overlayIndexes.indexOf(index) === 0 ? (
+              {conquistas.includes(conquista) && conquistas.indexOf(conquista) === 0 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -266,7 +266,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+1) && overlayIndexes.indexOf(index+1) === 1 ? (
+              {conquistas.includes(conquista+1) && conquistas.indexOf(conquista+1) === 1 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -277,7 +277,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+2) && overlayIndexes.indexOf(index+2) === 2 ? (
+              {conquistas.includes(conquista+2) && conquistas.indexOf(conquista+2) === 2 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -287,7 +287,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+3) && overlayIndexes.indexOf(index+3) === 3 ? (
+              {conquistas.includes(conquista+3) && conquistas.indexOf(conquista+3) === 3 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -297,7 +297,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+4) && overlayIndexes.indexOf(index+4) === 4 ? (
+              {conquistas.includes(conquista+4) && conquistas.indexOf(conquista+4) === 4 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -314,7 +314,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+5) && overlayIndexes.indexOf(index+5) === 5 ? (
+              {conquistas.includes(conquista+5) && conquistas.indexOf(conquista+5) === 5 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -325,7 +325,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+6) && overlayIndexes.indexOf(index+6) === 6 ? (
+              {conquistas.includes(conquista+6) && conquistas.indexOf(conquista+6) === 6 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -336,7 +336,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+7) && overlayIndexes.indexOf(index+7) === 7 ? (
+              {conquistas.includes(conquista+7) && conquistas.indexOf(conquista+7) === 7 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -346,7 +346,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+8) && overlayIndexes.indexOf(index+8) === 8 ? (
+              {conquistas.includes(conquista+8) && conquistas.indexOf(conquista+8) === 8 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -356,7 +356,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+9) && overlayIndexes.indexOf(index+9) === 9 ? (
+              {conquistas.includes(conquista+9) && conquistas.indexOf(conquista+9) === 9 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -373,7 +373,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+10) && overlayIndexes.indexOf(index+10) === 10 ? (
+              {conquistas.includes(conquista+10) && conquistas.indexOf(conquista+10) === 10 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -384,7 +384,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+11) && overlayIndexes.indexOf(index+11) === 11 ? (
+              {conquistas.includes(conquista+11) && conquistas.indexOf(conquista+11) === 11 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -395,7 +395,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+12) && overlayIndexes.indexOf(index+12) === 12 ? (
+              {conquistas.includes(conquista+12) && conquistas.indexOf(conquista+12) === 12 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -405,7 +405,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+13) && overlayIndexes.indexOf(index+13) === 13 ? (
+              {conquistas.includes(conquista+13) && conquistas.indexOf(conquista+13) === 13 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -415,7 +415,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+14) && overlayIndexes.indexOf(index+14) === 14 ? (
+              {conquistas.includes(conquista+14) && conquistas.indexOf(conquista+14) === 14 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -432,7 +432,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+15) && overlayIndexes.indexOf(index+15) === 15 ? (
+              {conquistas.includes(conquista+15) && conquistas.indexOf(conquista+15) === 15 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -443,7 +443,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+16) && overlayIndexes.indexOf(index+16) === 16 ? (
+              {conquistas.includes(conquista+16) && conquistas.indexOf(conquista+16) === 16 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -454,7 +454,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+17) && overlayIndexes.indexOf(index+17) === 17 ? (
+              {conquistas.includes(conquista+17) && conquistas.indexOf(conquista+17) === 17 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -464,7 +464,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+18) && overlayIndexes.indexOf(index+18) === 18 ? (
+              {conquistas.includes(conquista+18) && conquistas.indexOf(conquista+18) === 18 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -474,7 +474,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+19) && overlayIndexes.indexOf(index+19) === 19 ? (
+              {conquistas.includes(conquista+19) && conquistas.indexOf(conquista+19) === 19 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -491,7 +491,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+20) && overlayIndexes.indexOf(index+20) === 20 ? (
+              {conquistas.includes(conquista+20) && conquistas.indexOf(conquista+20) === 20 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -502,7 +502,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+21) && overlayIndexes.indexOf(index+21) === 21 ? (
+              {conquistas.includes(conquista+21) && conquistas.indexOf(conquista+21) === 21 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -513,7 +513,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+22) && overlayIndexes.indexOf(index+22) === 22 ? (
+              {conquistas.includes(conquista+22) && conquistas.indexOf(conquista+22) === 22 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -523,7 +523,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+23) && overlayIndexes.indexOf(index+23) === 23 ? (
+              {conquistas.includes(conquista+23) && conquistas.indexOf(conquista+23) === 23 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -533,7 +533,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+24) && overlayIndexes.indexOf(index+24) === 24 ? (
+              {conquistas.includes(conquista+24) && conquistas.indexOf(conquista+24) === 24 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -550,7 +550,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+25) && overlayIndexes.indexOf(index+25) === 25 ? (
+              {conquistas.includes(conquista+25) && conquistas.indexOf(conquista+25) === 25 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -561,7 +561,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+26) && overlayIndexes.indexOf(index+26) === 26 ? (
+              {conquistas.includes(conquista+26) && conquistas.indexOf(conquista+26) === 26 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -572,7 +572,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+27) && overlayIndexes.indexOf(index+27) === 27 ? (
+              {conquistas.includes(conquista+27) && conquistas.indexOf(conquista+27) === 27 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -582,7 +582,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+28) && overlayIndexes.indexOf(index+28) === 28 ? (
+              {conquistas.includes(conquista+28) && conquistas.indexOf(conquista+28) === 28 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -592,7 +592,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+29) && overlayIndexes.indexOf(index+29) === 29 ? (
+              {conquistas.includes(conquista+29) && conquistas.indexOf(conquista+29) === 29 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -608,7 +608,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+30) && overlayIndexes.indexOf(index+30) === 30 ? (
+              {conquistas.includes(conquista+30) && conquistas.indexOf(conquista+30) === 30 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -619,7 +619,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+31) && overlayIndexes.indexOf(index+31) === 31 ? (
+              {conquistas.includes(conquista+31) && conquistas.indexOf(conquista+31) === 31 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -630,7 +630,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+32) && overlayIndexes.indexOf(index+32) === 32 ? (
+              {conquistas.includes(conquista+32) && conquistas.indexOf(conquista+32) === 32 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -640,7 +640,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+33) && overlayIndexes.indexOf(index+33) === 33 ? (
+              {conquistas.includes(conquista+33) && conquistas.indexOf(conquista+33) === 33 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -650,7 +650,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+34) && overlayIndexes.indexOf(index+34) === 34 ? (
+              {conquistas.includes(conquista+34) && conquistas.indexOf(conquista+34) === 34 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -667,7 +667,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+35) && overlayIndexes.indexOf(index+35) === 35 ? (
+              {conquistas.includes(conquista+35) && conquistas.indexOf(conquista+35) === 35 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -678,7 +678,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+36) && overlayIndexes.indexOf(index+36) === 36 ? (
+              {conquistas.includes(conquista+36) && conquistas.indexOf(conquista+36) === 36 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -689,7 +689,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+37) && overlayIndexes.indexOf(index+37) === 37 ? (
+              {conquistas.includes(conquista+37) && conquistas.indexOf(conquista+37) === 37 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -699,7 +699,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+38) && overlayIndexes.indexOf(index+38) === 38 ? (
+              {conquistas.includes(conquista+38) && conquistas.indexOf(conquista+38) === 38 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -709,7 +709,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+39) && overlayIndexes.indexOf(index+39) === 39 ? (
+              {conquistas.includes(conquista+39) && conquistas.indexOf(conquista+39) === 39 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -724,7 +724,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+40) && overlayIndexes.indexOf(index+40) === 40 ? (
+              {conquistas.includes(conquista+40) && conquistas.indexOf(conquista+40) === 40 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -735,7 +735,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+41) && overlayIndexes.indexOf(index+41) === 41 ? (
+              {conquistas.includes(conquista+41) && conquistas.indexOf(conquista+41) === 41 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -746,7 +746,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+42) && overlayIndexes.indexOf(index+42) === 42 ? (
+              {conquistas.includes(conquista+42) && conquistas.indexOf(conquista+42) === 42 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -756,7 +756,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+43) && overlayIndexes.indexOf(index+43) === 43 ? (
+              {conquistas.includes(conquista+43) && conquistas.indexOf(conquista+43) === 43 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -766,7 +766,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+44) && overlayIndexes.indexOf(index+44) === 44 ? (
+              {conquistas.includes(conquista+44) && conquistas.indexOf(conquista+44) === 44 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -781,7 +781,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+45) && overlayIndexes.indexOf(index+45) === 45 ? (
+              {conquistas.includes(conquista+45) && conquistas.indexOf(conquista+45) === 45 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -792,7 +792,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+46) && overlayIndexes.indexOf(index+46) === 46 ? (
+              {conquistas.includes(conquista+46) && conquistas.indexOf(conquista+46) === 46 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -803,7 +803,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+47) && overlayIndexes.indexOf(index+47) === 47 ? (
+              {conquistas.includes(conquista+47) && conquistas.indexOf(conquista+47) === 47 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -813,7 +813,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+48) && overlayIndexes.indexOf(index+48) === 48 ? (
+              {conquistas.includes(conquista+48) && conquistas.indexOf(conquista+48) === 48 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -823,7 +823,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+49) && overlayIndexes.indexOf(index+49) === 49 ? (
+              {conquistas.includes(conquista+49) && conquistas.indexOf(conquista+49) === 49 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -838,7 +838,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+50) && overlayIndexes.indexOf(index+50) === 50 ? (
+              {conquistas.includes(conquista+50) && conquistas.indexOf(conquista+50) === 50 ? (
             <Image source={require('../img/circuloBete.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -849,7 +849,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
 
-              {overlayIndexes.includes(index+51) && overlayIndexes.indexOf(index+51) === 51 ? (
+              {conquistas.includes(conquista+51) && conquistas.indexOf(conquista+51) === 51 ? (
             <Image source={require('../img/circuloBella.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
@@ -860,7 +860,7 @@ export default function Conquistas({navigation}) {
 
               <Image source={require('../img/conquista1.png')} style={{ width: 115 , height: 125  ,  }} />
 
-              {overlayIndexes.includes(index+52) && overlayIndexes.indexOf(index+52) === 52 ? (
+              {conquistas.includes(conquista+52) && conquistas.indexOf(conquista+52) === 52 ? (
             <Image source={require('../img/circuloTommy.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -46, left: 2  }} />
@@ -870,7 +870,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 125, width: 130, top: 40, left: -35, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista3.png')} style={{ width: 110 , height: 140}} />
-              {overlayIndexes.includes(index+53) && overlayIndexes.indexOf(index+53) === 53 ? (
+              {conquistas.includes(conquista+53) && conquistas.indexOf(conquista+53) === 53 ? (
             <Image source={require('../img/circuloToby.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -64 }} />
@@ -880,7 +880,7 @@ export default function Conquistas({navigation}) {
             <View style={{ height: 160, width: 130, top: 45, left: 30, alignItems: 'center', justifyContent: 'center'}}>
 
               <Image source={require('../img/conquista2.png')} style={{ width: 105 , height: 160}} />
-              {overlayIndexes.includes(index+54) && overlayIndexes.indexOf(index+54) === 54 ? (
+              {conquistas.includes(conquista+54) && conquistas.indexOf(conquista+54) === 54 ? (
             <Image source={require('../img/circuloBob.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />
           ) : (
               <Image source={require('../img/cadeado.png')} style={{ width: 50 , height: 55  , marginTop: -55, top: -82 }} />

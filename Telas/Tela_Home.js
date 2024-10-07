@@ -252,6 +252,35 @@ export default function Tela_Home({navigation}) {
                   });
               };
 
+              const Dicas = async () => {
+                navigation.navigate('DicasInicio', { 
+                  email,
+                  nome_r, 
+                  nome_usuario, 
+                  data_nasc_resp, 
+                  data_nasc_usua, 
+                  alergia, 
+                  alergia_outro, 
+                  comida_gosta,
+                  comidaFavorita_outro,
+                  comidasFavoritas,
+                  texturaFavorita_outro,
+                  texturasFavoritas,
+                  saborFavorito_outro,
+                  saboresFavoritos,
+                  comida_evita,
+                  comidasEvita,
+                  comidasEvita_outro,
+                  texturasEvita,
+                  texturasEvita_outro,
+                  saboresEvita,
+                  saboresEvita_outro,
+                  personagemEscolhido,
+                  scale,
+                  fontSize
+                    });
+                };
+
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: 'white'}}>
@@ -407,7 +436,7 @@ export default function Tela_Home({navigation}) {
 
             shadowColor:'blue', 
             elevation: 6,
-            }}>
+            }} onPress={Dicas}>
 
             <Image source={require('../img/botao4DI.png')} style={{width: 117,
             height: 112, borderRadius: 48,}}/>

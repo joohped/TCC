@@ -143,18 +143,7 @@ const Diario = ({ navigation }) => {
   const [hoje_evitei, setHoje_evitei] = useState('');
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  const weeks = React.useMemo(() => {
-    const start = moment().add(week, 'weeks').startOf('week');
-    return [-1, 0, 1].map(adj => {
-      return Array.from({ length: 7 }).map((_, index) => {
-        const date = moment(start).add(adj, 'week').add(index, 'day');
-        return {
-          weekday: date.format('ddd'),
-          date: date.toDate(),
-        };
-      });
-    });
-  }, [week]);
+ 
 
   const [fontsLoaded] = useFonts({
     'Lollypop': require('../fonts/Lollypop.otf'),
@@ -251,7 +240,7 @@ const Diario = ({ navigation }) => {
     };
 
 
-  const Subir = useRef(new Animated.Value(0)).current;  // View atual (sai descendo)
+  const Subir = useRef(new Animated.Value(0)).current;
   const Descer = useRef(new Animated.Value(0)).current;
 
   const Mais = () => {
@@ -573,12 +562,25 @@ const Diario = ({ navigation }) => {
     </ScrollView>
   );
 
+  const weeks = React.useMemo(() => {
+    const start = moment().add(week, 'weeks').startOf('week');
+    return [-1, 0, 1].map(adj => {
+      return Array.from({ length: 7 }).map((_, index) => {
+        const date = moment(start).add(adj, 'week').add(index, 'day');
+        return {
+          weekday: date.format('ddd'),
+          date: date.toDate(),
+        };
+      });
+    });
+  }, [week]);
+
   return (
   <View style={styles.container}>
     <ImageBackground source={require('../img/Gradient.png')} style={{width: width, top: 380, height: height,}}>
       <View style={{backgroundColor: '#F7B61A', shadowColor: "black",  elevation: 4, height: 170, width: width,borderBottomEndRadius: 60, borderBottomStartRadius: 60, top: -30}}>
         <TouchableOpacity style={{ width: 32, height: 32, top: 95, left: 40}} onPress={Voltar}>
-          <Image source={require('../img/voltar4.png')} style={{ width: 20, height: 24, top: 4, left: 5 }} />
+          <Image source={require('../img/voltarDesafios.png')} style={{ width: 26, height: 30, top: 4, left: 5 }} />
         </TouchableOpacity >
 
         <View style={styles.containerPersonagem}>
@@ -623,7 +625,7 @@ const Diario = ({ navigation }) => {
 
       <View style={styles.container2}>
         <View style={styles.picker}>
-          <Swiper
+        <Swiper
             index={1}
             ref={swiper}
             loop={false}
@@ -638,7 +640,6 @@ const Diario = ({ navigation }) => {
                 setWeek(newWeek);
                 setValue(moment(value).add(newIndex, 'week').toDate());
                 swiper.current.scrollTo(1, true);
-                Data(value);
               }, 10);
             }}>
             {weeks.map((dates, index) => (
@@ -646,14 +647,16 @@ const Diario = ({ navigation }) => {
               <View style={styles.itemRow} key={index}>
                 {dates.map((item, dateIndex) => {
                   const isActive =
-                    value.toDateString() === item.date.toDateString();
+                  value.toDateString() === item.date.toDateString();
                   return (
                     <TouchableWithoutFeedback
                       key={dateIndex}
-                      onPress={() => Data(item.date) }>
+                      onPress={() => 
+                        Data(item.date) 
+                      }>
                       <View
                         style={[
-                          styles.item,
+                          styles.item2,
                           isActive && {
                             backgroundColor: '#F69343',
                           },
@@ -714,7 +717,7 @@ const styles = StyleSheet.create({
     width: 345,
   },
 
-  item: {
+  item2: {
     flex: 1,
     height: 50,
     marginHorizontal: 35,

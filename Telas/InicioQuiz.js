@@ -173,19 +173,18 @@ export default function InicioQuiz({ navigation }) {
         </TouchableOpacity>
 
         <View style={styles.containerPersonagem}>
-                <TouchableOpacity onPress={Perfil} style={{ width: 70, zIndex: 1000,   left: 310, top: 60, marginTop: -50}}>
+            <TouchableOpacity onPress={Perfil} style={{ width: 70, zIndex: 1000,   left: 310, top: 75, marginTop: -70}}>
                 {personageEscolhido && (
                 <Image 
                     source={personageEscolhido} 
                     style={styles.imagemPersonagem}
                 />
                 )}
-                </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
+        </View>
 
         <View style={styles.resultContainer}>
           <Text style={{ fontSize: fontSize, top: -10, textAlign: 'center', zIndex: 1000, fontFamily: 'QuickDelight', width: 250}}> Como é bom te ver por aqui, {nome_usuario}! Eu preparei uma grande aventura para nós dois. Clique em "Continuar" para a diversão começar: </Text>
-
           <TouchableOpacity onPress={Quiz} style={styles.buttonComecar}>
             <Text style={styles.textComecar}>Continuar</Text>
           </TouchableOpacity>
