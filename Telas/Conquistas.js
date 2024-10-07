@@ -52,6 +52,8 @@ export default function Conquistas({navigation}) {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         fontSize,
         scale
@@ -131,6 +133,8 @@ export default function Conquistas({navigation}) {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize});
@@ -159,6 +163,8 @@ export default function Conquistas({navigation}) {
       texturasEvita_outro,
       saboresEvita,
       saboresEvita_outro,
+      deficiencia,
+      deficiencia_outro,
       personagemEscolhido,
       scale,
       fontSize

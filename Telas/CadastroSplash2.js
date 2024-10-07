@@ -27,7 +27,9 @@ const CadastroSplash2 = ({ navigation, route }) => {
     texturasEvita,
     texturasEvita_outro,
     saboresEvita,
-    saboresEvita_outro } = route.params;
+    saboresEvita_outro,
+    deficiencia,
+    deficiencia_outro } = route.params;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,7 +55,9 @@ const CadastroSplash2 = ({ navigation, route }) => {
         texturasEvita,
         texturasEvita_outro,
         saboresEvita,
-        saboresEvita_outro });
+        saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro });
     }, 3000); 
 
     return () => clearTimeout(timer); 
@@ -79,7 +83,9 @@ const CadastroSplash2 = ({ navigation, route }) => {
     texturasEvita,
     texturasEvita_outro,
     saboresEvita,
-    saboresEvita_outro]);
+    saboresEvita_outro,
+    deficiencia,
+    deficiencia_outro]);
 
   return (
     <LottieView

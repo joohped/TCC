@@ -32,6 +32,8 @@ const Result = ({ route, navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         fontSize,
         scale
@@ -99,6 +101,8 @@ const Result = ({ route, navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize});
@@ -127,6 +131,8 @@ const Result = ({ route, navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize});
@@ -155,6 +161,8 @@ const Result = ({ route, navigation }) => {
       texturasEvita_outro,
       saboresEvita,
       saboresEvita_outro,
+      deficiencia,
+      deficiencia_outro,
       personagemEscolhido,
       scale,
       fontSize

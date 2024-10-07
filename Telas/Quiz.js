@@ -81,6 +81,8 @@ const {
       texturasEvita_outro,
       saboresEvita,
       saboresEvita_outro,
+      deficiencia,
+      deficiencia_outro,
       personagemEscolhido,
       fontSize,
       scale
@@ -109,6 +111,8 @@ const Voltar = async () => {
       texturasEvita_outro,
       saboresEvita,
       saboresEvita_outro,
+      deficiencia,
+      deficiencia_outro,
       personagemEscolhido,
       scale,
       fontSize});
@@ -197,6 +201,8 @@ const Voltar = async () => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize
@@ -245,6 +251,8 @@ const Voltar = async () => {
       texturasEvita_outro,
       saboresEvita,
       saboresEvita_outro,
+      deficiencia,
+      deficiencia_outro,
       personagemEscolhido,
       scale,
       fontSize

@@ -53,6 +53,8 @@ export default function Desafios({ navigation }) {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         fontSize,
         scale
@@ -192,6 +194,8 @@ export default function Desafios({ navigation }) {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize});
@@ -220,6 +224,8 @@ export default function Desafios({ navigation }) {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize});
@@ -282,6 +288,8 @@ export default function Desafios({ navigation }) {
       texturasEvita_outro,
       saboresEvita,
       saboresEvita_outro,
+      deficiencia,
+      deficiencia_outro,
       personagemEscolhido,
       scale,
       fontSize

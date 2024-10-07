@@ -1,59 +1,97 @@
-import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Image, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Text, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
 
 const Tela_Cadastro12 = ({ route, navigation }) => {
-  const { 
-    email, 
-    senha, 
-    nome_r, 
-    nome_usuario, 
-    data_nasc_resp, 
-    data_nasc_usua, 
-    alergia, 
-    alergia_outro, 
-    comida_gosta,
-    comidaFavorita_outro,
-    comidasFavoritas,
-    texturaFavorita_outro,
-    texturasFavoritas,
-    saborFavorito_outro,
-    saboresFavoritos,
-    comida_evita,
-    comidasEvita,
-    comidasEvita_outro,
-    texturasEvita,
-    texturasEvita_outro,
-    saboresEvita,
-    saboresEvita_outro} = route.params;
+    const { 
+        email, 
+        senha, 
+        nome_r, 
+        nome_usuario, 
+        data_nasc_resp, 
+        data_nasc_usua, 
+        alergia, 
+        alergia_outro, 
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro} = route.params;
 
+  const [deficiencia, setDeficiencia] = useState('');
+  const [deficiencia_outro, setDeficiencia_outro] = useState('');
 
   const CadastroParte = async () => {
-    navigation.navigate('CadastroSplash2', { 
-      email, 
-      senha, 
-      nome_r, 
-      nome_usuario, 
-      data_nasc_resp, 
-      data_nasc_usua, 
-      alergia, 
-      alergia_outro, 
-      comida_gosta,
-      comidaFavorita_outro,
-      comidasFavoritas,
-      texturaFavorita_outro,
-      texturasFavoritas,
-      saborFavorito_outro,
-      saboresFavoritos,
-      comida_evita,
-      comidasEvita,
-      comidasEvita_outro,
-      texturasEvita,
-      texturasEvita_outro,
-      saboresEvita,
-      saboresEvita_outro});
+    if (deficiencia === ""){
+      Alert.alert('Erro de cadastro','Informe se tem algum tipo de deficiência ou não, por favor');
+      return;
+    }
+    
+    if (deficiencia === 'sim') {
+      navigation.navigate('Tela_Cadastro13', { 
+        email, 
+        senha, 
+        nome_r, 
+        nome_usuario, 
+        data_nasc_resp, 
+        data_nasc_usua, 
+        alergia, 
+        alergia_outro, 
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro, });
+    }
+    if (deficiencia === 'não') {
+      setDeficiencia('não tem');
+      setDeficiencia_outro(null);
+      navigation.navigate('Tela_Cadastro14', { email, 
+        senha, 
+        nome_r, 
+        nome_usuario, 
+        data_nasc_resp, 
+        data_nasc_usua, 
+        alergia, 
+        alergia_outro, 
+        comida_gosta,
+        comidaFavorita_outro,
+        comidasFavoritas,
+        texturaFavorita_outro,
+        texturasFavoritas,
+        saborFavorito_outro,
+        saboresFavoritos,
+        comida_evita,
+        comidasEvita,
+        comidasEvita_outro,
+        texturasEvita,
+        texturasEvita_outro,
+        saboresEvita,
+        saboresEvita_outro,
+        deficiencia: deficiencia === 'não' ? 'não tem':deficiencia, deficiencia_outro });
+    }
+ 
   };
 
   const [fontsLoaded] = useFonts({
@@ -67,20 +105,32 @@ const Tela_Cadastro12 = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../img/fundo_cadastro6.jpg')} 
-        style={styles.imagemFundo}
+        source={require('../img/fundo_cadastro13.jpg')} 
+        style={styles.imagemmFundo}
       >
-        <View style={styles.desce}>
+        <View style={styles.subir}>
           <View style={styles.botaoCentralizado}>
             <Text style={styles.titulo}>
-            Iremos nos conhecer melhor em breve! 
-            Enquanto isso, escolha seu personagem favorito!
+              Para finalizar preciso que me responda essa ultima essa última pergunta
             </Text>
           </View>
 
           <View style={styles.botaoCentralizado}>
+            <View style={styles.containerPicker}>
+              <Picker
+                selectedValue={deficiencia}
+                style={styles.picker}
+                onValueChange={(itemValue) => setDeficiencia(itemValue)}
+              >
+                <Picker.Item label="Tem alguma deficiência?" value="" />
+                <Picker.Item label="Sim" value="sim" />
+                <Picker.Item label="Não" value="não" />
+              </Picker>
+            </View>
+          </View>
+
+          <View style={styles.botaoCentralizado}>
             <TouchableHighlight
-              title="Concluir Cadastro"
               onPress={CadastroParte}
               style={styles.input2}
               underlayColor="#F39C12"
@@ -95,14 +145,14 @@ const Tela_Cadastro12 = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  imagemFundo: {
+  imagemmFundo: {
     marginLeft: -20,
     flex: 1,
     marginTop: -20,
-    width: width + 10,
-    height: height + 50,
-    resizeMode: 'cover',
-    justifyContent: 'center',
+    width: width+10,
+    height: height+50, 
+    resizeMode: 'cover', 
+    justifyContent: 'center', 
   },
   container: {
     flex: 1,
@@ -111,33 +161,62 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f0f0f0',
   },
-  desce: {
-    marginTop: 155,
+  subir: {
+    marginTop: -320,
+  },
+  input: {
+    marginLeft: 10,
+    alignItems: 'center',
+    fontFamily: 'QuickDelight',
+    backgroundColor: '#FDCB53',
+    padding: 12,
+    borderRadius: 20,
+    width: 300,
+    fontSize: 21,
   },
   input2: {
     alignItems: 'center',
-    backgroundColor: '#FDCB53',
+    backgroundColor: '#FDCB53', 
     padding: 12,
     borderRadius: 50,
-    marginLeft: 10,
+    marginTop: 20,
+    marginLeft: 20,
     width: 58,
     fontSize: 18,
   },
+  picker: {
+    height: 50,
+    width: 300,
+    backgroundColor: '#FDCB53',
+    borderRadius: 50,
+    color: 'white',
+    textAlign: 'center',
+    justifyContent: 'center'
+  },
   botaoCentralizado: {
     alignItems: 'center',
-    marginVertical: 10,
-    marginTop: 5,
+    marginVertical: 12,
+    marginTop: 0,
+  },
+  containerPicker: {
+    marginLeft: 10,
+    height: 50,
+    width: 300,
+    backgroundColor: '#FDCB53',
+    borderRadius: 20,
+    overflow: 'hidden',
   },
   imagem: {
-    width: 30,
-    height: 30,
+    width: 30, 
+    height: 30, 
   },
   titulo: {
-    marginBottom: 10,
-    width: 290,
     fontFamily: 'QuickDelight',
+    marginBottom: 15,
+    width: 300,
     textAlign: 'center',
-    fontSize: 24,
+    marginTop: -10,
+    fontSize: 21,
   },
 });
 

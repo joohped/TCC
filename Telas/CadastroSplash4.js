@@ -34,6 +34,8 @@ const CadastroSplash4 = ({ navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         fontSize,
         scale
@@ -63,6 +65,8 @@ const CadastroSplash4 = ({ navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         fontSize,
         scale});
@@ -91,6 +95,8 @@ const CadastroSplash4 = ({ navigation }) => {
     texturasEvita_outro,
     saboresEvita,
     saboresEvita_outro,
+    deficiencia,
+    deficiencia_outro,
     personagemEscolhido,
     fontSize,
     scale ]);

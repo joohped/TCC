@@ -54,7 +54,9 @@ const Personagem2 = ({ route, navigation }) => {
     texturasEvita,
     texturasEvita_outro,
     saboresEvita,
-    saboresEvita_outro
+    saboresEvita_outro,
+    deficiencia,
+    deficiencia_outro
   } = route.params;
 
   const [personagemEscolhido, setPersonagemEscolhido] = useState(null);
@@ -105,6 +107,8 @@ const Personagem2 = ({ route, navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido: personagem,
         uid: user.uid
       });
@@ -133,6 +137,8 @@ const Personagem2 = ({ route, navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido: personagemImagem
       });
     } catch (error) {
@@ -185,6 +191,8 @@ const Personagem2 = ({ route, navigation }) => {
             texturasEvita_outro,
             saboresEvita,
             saboresEvita_outro,
+            deficiencia,
+            deficiencia_outro
           })}
         style={styles.containerItem}
       >

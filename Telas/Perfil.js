@@ -10,6 +10,7 @@ const { width, height } = Dimensions.get('window');
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mostrarModal2, setMostrarModal2] = useState(false);
     const [mostrarModal3, setMostrarModal3] = useState(false);
+    const [mostrarModal4, setMostrarModal4] = useState(false);
 
     const {    
         email,
@@ -33,6 +34,8 @@ const { width, height } = Dimensions.get('window');
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize } = route.params;
@@ -119,6 +122,8 @@ const { width, height } = Dimensions.get('window');
             texturasEvita_outro,
             saboresEvita,
             saboresEvita_outro,
+            deficiencia,
+            deficiencia_outro,
             personagemEscolhido,
             scale,
             fontSize});
@@ -195,11 +200,25 @@ const { width, height } = Dimensions.get('window');
             </Modal>
 
           <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 40, borderRadius: 32, left: 25}}>
-            
-          <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>PcD</Text>
-          <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>Não</Text>
-            
+          <TouchableOpacity onPress={() => setMostrarModal4(true)}>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginLeft: 25, marginTop: 5}}>PcD</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize,marginLeft: 25}}>{deficiencia}...    veja mais</Text>
+          </TouchableOpacity>
           </View>
+
+          <Modal
+                animationType="slide"
+                transparent={true}
+                visible={mostrarModal4}
+                onRequestClose={() => setMostrarModal4(false)}
+            >
+                <View style={styles.modal}>
+                    <View style={styles.dentroModal}>
+                        <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize, marginTop: 5, marginBottom: 20}}>{deficiencia}, {deficiencia_outro}</Text>
+                        <TouchableOpacity onPress={() => setMostrarModal4(false)} style={styles.fechar}><Text style={{fontFamily: 'QuickDelight', color: 'white', fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20, height: 20}}>Fechar</Text></TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
 
           <View style={{backgroundColor: '#F5F5F5', height: 53, width: 300, top: 45, borderRadius: 32, left: 25}}>
           <TouchableOpacity onPress={() => setMostrarModal2(true)}>

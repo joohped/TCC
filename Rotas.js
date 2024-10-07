@@ -30,6 +30,8 @@ import Tela_Cadastro9 from './Telas/Tela_Cadastro9';
 import Tela_Cadastro10 from './Telas/Tela_Cadastro10';
 import Tela_Cadastro11 from './Telas/Tela_Cadastro11';
 import Tela_Cadastro12 from './Telas/Tela_Cadastro12';
+import Tela_Cadastro13 from './Telas/Tela_Cadastro13';
+import Tela_Cadastro14 from './Telas/Tela_Cadastro14';
 import Personagem1 from './Telas/Personagem1';
 import Personagem2 from './Telas/Personagem2';
 import Personagem3 from './Telas/Personagem3';
@@ -68,6 +70,8 @@ const Rotas = () => {
         <Stack.Screen name="Tela_Cadastro10" component={Tela_Cadastro10} options={{ headerShown: false }}/>
         <Stack.Screen name="Tela_Cadastro11" component={Tela_Cadastro11} options={{ headerShown: false }}/>
         <Stack.Screen name="Tela_Cadastro12" component={Tela_Cadastro12} options={{ headerShown: false }}/>
+        <Stack.Screen name="Tela_Cadastro13" component={Tela_Cadastro13} options={{ headerShown: false }}/>
+        <Stack.Screen name="Tela_Cadastro14" component={Tela_Cadastro14} options={{ headerShown: false }}/>
         <Stack.Screen name="Personagem1" component={Personagem1} options={{ headerShown: false }}/>
         <Stack.Screen name="Personagem2" component={Personagem2} options={{ headerShown: false }}/>
         <Stack.Screen name="Personagem3" component={Personagem3} options={{ headerShown: false }}/>

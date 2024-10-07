@@ -7,8 +7,8 @@ const { width, height } = Dimensions.get('window');
 
 const CadastroSplash3 = ({ navigation, route }) => {
   const {       
-    email,
-    senha,
+        email,
+        senha,
         nome_r,
         nome_usuario,
         data_nasc_resp,
@@ -29,34 +29,13 @@ const CadastroSplash3 = ({ navigation, route }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido: personagemImagem  } = route.params;
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate('Tela_Login', {       
-        email, 
-        senha, 
-        nome_r, 
-        nome_usuario, 
-        data_nasc_resp, 
-        data_nasc_usua, 
-        alergia, 
-        alergia_outro, 
-        comida_gosta,
-        comidaFavorita_outro,
-        comidasFavoritas,
-        texturaFavorita_outro,
-        texturasFavoritas,
-        saborFavorito_outro,
-        saboresFavoritos,
-        comida_evita,
-        comidasEvita,
-        comidasEvita_outro,
-        texturasEvita,
-        texturasEvita_outro,
-        saboresEvita,
-        saboresEvita_outro,
-        personagemEscolhido: personagemImagem});
+      navigation.navigate('Tela_Login');
     }, 3000); 
 
     return () => clearTimeout(timer); 
@@ -83,6 +62,8 @@ const CadastroSplash3 = ({ navigation, route }) => {
     texturasEvita_outro,
     saboresEvita,
     saboresEvita_outro,
+    deficiencia,
+    deficiencia_outro,
     personagemImagem  ]);
  
   return (

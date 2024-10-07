@@ -56,6 +56,8 @@ const Diario = ({ navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         fontSize,
         scale
@@ -177,6 +179,8 @@ const Diario = ({ navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize});
@@ -205,6 +209,8 @@ const Diario = ({ navigation }) => {
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize});
@@ -233,6 +239,8 @@ const Diario = ({ navigation }) => {
       texturasEvita_outro,
       saboresEvita,
       saboresEvita_outro,
+      deficiencia,
+      deficiencia_outro,
       personagemEscolhido,
       scale,
       fontSize

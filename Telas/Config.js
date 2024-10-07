@@ -60,6 +60,8 @@ const db = getFirestore(app);
             texturasEvita_outro,
             saboresEvita,
             saboresEvita_outro,
+            deficiencia,
+            deficiencia_outro,
             personagemEscolhido
              } = route.params;
 
@@ -86,6 +88,8 @@ const db = getFirestore(app);
                 texturasEvita_outro,
                 saboresEvita,
                 saboresEvita_outro,
+                deficiencia,
+                deficiencia_outro,
                 personagemEscolhido,
                 fontSize,
                 scale});
@@ -114,6 +118,8 @@ const db = getFirestore(app);
             texturasEvita_outro,
             saboresEvita,
             saboresEvita_outro,
+            deficiencia,
+            deficiencia_outro,
             personagemEscolhido,
             scale,
             fontSize
@@ -182,9 +188,7 @@ const db = getFirestore(app);
                     setFontSize(17);
                     setScale(1);
                   }
-                } else {
-                  Alert.alert('Aviso', 'Nenhum diário encontrado.');
-                }
+                } 
               }
             } catch (error) {
               console.error("Erro ao obter diário: ", error);

@@ -267,6 +267,8 @@ const {
     texturasEvita_outro,
     saboresEvita,
     saboresEvita_outro,
+    deficiencia,
+    deficiencia_outro,
     personagemEscolhido,
     fontSize,
     scale
@@ -329,6 +331,8 @@ const [personageEscolhido, setPersonageEscolhido] = useState(null);
         texturasEvita_outro,
         saboresEvita,
         saboresEvita_outro,
+        deficiencia,
+        deficiencia_outro,
         personagemEscolhido,
         scale,
         fontSize});
@@ -386,6 +390,8 @@ const [personageEscolhido, setPersonageEscolhido] = useState(null);
           texturasEvita_outro,
           saboresEvita,
           saboresEvita_outro,
+          deficiencia,
+          deficiencia_outro,
           personagemEscolhido,
           scale,
           fontSize
