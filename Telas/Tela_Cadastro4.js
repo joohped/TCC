@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Image, Dimensions, Alert } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Image, Dimensions, Alert, Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useFonts } from 'expo-font';
 
@@ -47,7 +47,7 @@ const Tela_Cadastro4 = ({ route, navigation }) => {
                 onValueChange={(itemValue, itemIndex) => setComida_gosta(itemValue)}
                 >
                 <Picker.Item label="Gosto de comer ..." value="" />
-                <Picker.Item label="verduras" value="verduras" />
+                <Picker.Item label="Verduras" value="verduras" />
                 <Picker.Item label="Doces" value="doces" />
                 <Picker.Item label="Frutas" value="frutas" />
                 <Picker.Item label="Carnes" value="carnes" />
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   titulo: {
-    marginBottom: 25,
+    marginBottom: 20,
     width: 290,
     fontFamily: 'QuickDelight',
     textAlign: 'center',
@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
   },
   containerPicker: {
     marginLeft: 10,
-    height: 50,
+    marginTop: -10,
+    height: Platform.OS === 'ios' ? 95 : 50,
     width: 300,
     backgroundColor: '#FDCB53',
     borderRadius: 20,

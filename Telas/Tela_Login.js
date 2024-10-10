@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, ImageBackground, Dimensions, Alert } from 'react-native';
+import { View, TextInput, StyleSheet, Text, ImageBackground, Dimensions, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { signInWithEmailAndPassword,  initializeAuth, getReactNativePersistence } from '@firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { initializeApp } from '@firebase/app';
 import { getFirestore, doc, getDoc } from '@firebase/firestore';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 const { width, height } = Dimensions.get('window');
@@ -42,10 +43,7 @@ const Tela_Login = ({ navigation }) => {
         Alert.alert('Erro de Login', 'Por favor coloque email e senha');
         return;
       }
-      if (!validar(email)) {
-        Alert.alert('Erro de cadastro','Coloque um Email válido, \n@gmail.com | @hotmail.com | @outlook.com | @yahoo.com');
-        return;
-      }
+      
       if (senha.length < 7) {
         Alert.alert('Erro de cadastro','Coloque a senha, que deve ser maior que 6 dígitos');
         return;
@@ -79,7 +77,14 @@ const Tela_Login = ({ navigation }) => {
     return null;
   }
 
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+
+  const MostrarSenha = () => {
+    setMostrarSenha(!mostrarSenha);
+  };
+
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_login.jpg')}
@@ -96,16 +101,21 @@ const Tela_Login = ({ navigation }) => {
             textAlign="center"
           />
         </View>
-        <View style={styles.botaoCentralizado}>
-          <TextInput
-            style={styles.input}
-            value={senha}
-            onChangeText={setSenha}
-            placeholder="Senha"
-            secureTextEntry
-            placeholderTextColor="#ffffff"
-            textAlign="center"
-          />
+        <View style={styles.botaoCentralizado4}>
+          <View style={styles.botaoCentralizado3}>
+            <TextInput
+              style={styles.input}
+              value={senha}
+              onChangeText={setSenha}
+              placeholder="Senha"
+              secureTextEntry={!mostrarSenha}
+              placeholderTextColor="#ffffff"
+              textAlign="center"
+            />
+            <TouchableOpacity onPress={MostrarSenha} style={{padding: -10, marginLeft: -22, left: -15}}>
+              <Icon name={mostrarSenha ? "visibility-off" : "visibility"} size={22} left={-5} />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.botaoCentralizado}>
           <TouchableHighlight title="Login" onPress={logarUsuario} style={styles.input2} underlayColor="#F39C12">
@@ -118,6 +128,7 @@ const Tela_Login = ({ navigation }) => {
         </Text>
       </ImageBackground>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -173,6 +184,15 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     marginBottom: 30,
+  },
+  botaoCentralizado3: {
+    alignItems: 'center',
+    marginVertical: 10,
+    marginTop: 10,
+    flexDirection:'row'
+  },
+  botaoCentralizado4: {
+    alignItems: 'center',
   },
 });
 

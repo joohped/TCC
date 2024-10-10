@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { initializeApp} from '@firebase/app';
 import { getAuth } from '@firebase/auth';
 import { doc, getFirestore, getDoc, updateDoc } from '@firebase/firestore';
-import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, Linking, Alert } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, Linking, Alert, ScrollView } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -23,12 +23,12 @@ const db = getFirestore(app);
     const Config = ({route, navigation}) => {
       const auth = getAuth();
 
-      const [fontSize, setFontSize] = useState(17);
+      const [fontSize, setFontSize] = useState(18);
       const [scale, setScale] = useState(1);
 
       const scaleMaxima = 1.28;
-      const fontSizeMaxima = 23.5;
-      const fontSizeMinima = 14.5;
+      const fontSizeMaxima = 22;
+      const fontSizeMinima = 16;
       const scaleMinima = 0.96;
 
         const Insta = () => {
@@ -204,21 +204,26 @@ useEffect(() => {
   return (
     <View>
       <ImageBackground style={{ width: width + 10 , height: height+50 , top: 0 }} source={require('../img/fundo.png')}> 
-        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 7}, shadowOpacity: 0.25, shadowRadius: 4, height: 150, width: 420,borderBottomEndRadius: 55, borderBottomStartRadius: 55}}>
+      <ScrollView showsVerticalScrollIndicator={false} >
+        <View style={{height: 930}}>
+        <View style={{backgroundColor: 'white', shadowColor: "#000", height: 160, width: width,borderBottomEndRadius: 55, borderBottomStartRadius: 55, }}>
         
-        
-            <TouchableOpacity onPress={Voltar} style={{ width: 40, left: 30, marginTop: 50, marginBottom: -60, top: 10 }}>
+    
+            <TouchableOpacity onPress={Voltar} style={{ width: 40, left: 30, marginTop: 60, marginBottom: -60, top: 10 }}>
                 <Image source={require('../img/voltar.png')} style={{ width: 35 , height: 35  }} />
             </TouchableOpacity>
-            <Text style={{fontFamily: 'Lollypop', color: 'black', fontSize: 40, marginLeft: 25, top: 5, width: 240, textAlign: 'center', marginLeft: 100, marginBottom: -40}}>Ajustes & Configurações</Text>
+            <Text style={{fontFamily: 'Lollypop', color: 'black', fontSize: 40, marginLeft: 25, top: 10, width: 250, textAlign: 'center', marginLeft: 100, marginBottom: -40, height: 55}}>Ajustes & </Text>
+            <Text style={{fontFamily: 'Lollypop', color: 'black', fontSize: 40, marginLeft: 25, top: 10, width: 250, textAlign: 'center', marginLeft: 100, marginBottom: -40, marginTop: 30}}>Configurações</Text>
+
+        
           <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 193, width: 337, top: 100, borderRadius: 32, left: 35}}>
 
           <Image source={require('../img/titulo2.png')} style={{ width: 150 , height: 20  , top: 20, left: 40, transform: [{ scale }]}} />
           
           <View style={{backgroundColor: '#E9E9E9', height: 38, width: 300, top: -40, borderRadius: 32, left: 17, marginTop: 70}}><Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize , left: 18, zIndex: 1000, top: 0, marginTop: 10}}>Assinante do plano grátis</Text></View>
           <View style={{backgroundColor: '#E9E9E9', height: 77, width: 300, top: -30, borderRadius: 32, left: 17}}>
-            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize , left: 17, marginTop: -5, zIndex: 1000, top: 10}}>Mudar de Plano ?</Text>
-            <Text style={{fontFamily: 'QuickDelight', color: '#ACACAC', fontSize , left: 17,marginTop: -32, zIndex: 1000, top: 42, width: 260}}>Conheça nosso plano pago e todos os beneficios oferecidos.</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize: fontSize , left: 17, marginTop: -5, zIndex: 1000, top: 10}}>Mudar de Plano ?</Text>
+            <Text style={{fontFamily: 'QuickDelight', color: '#ACACAC', fontSize: fontSize-3 , left: 17,marginTop: -32, zIndex: 1000, top: 42, width: 260}}>Conheça nosso plano pago e todos os beneficios oferecidos.</Text>
           </View>
           </View>
 
@@ -275,7 +280,10 @@ useEffect(() => {
                 <Image source={require('../img/titulo11.png')} style={{ width: 125 , height: 38,  zIndex: 1000, transform: [{ scale }] }} />
             </TouchableOpacity>
           </View>
+          
         </View>
+        </View>
+        </ScrollView>
       </ImageBackground>
     </View>
   );

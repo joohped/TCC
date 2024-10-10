@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useFonts } from 'expo-font';
 
@@ -44,10 +44,14 @@ const Tela_Cadastro13 = ({ route, navigation }) => {
   };
 
   const CadastroParte = async () => {
-    const deficienciasSelecionados = Object.keys(deficiencias).filter(key => deficiencias[key]);
+    const deficienciasSelecionadas = Object.keys(deficiencias).filter(key => deficiencias[key]);
 
     if (deficiencia_outro === ""){
         setDeficiencia_outro('não informou');
+    }
+    if (deficienciasSelecionadas.length === 0){
+      Alert.alert('Erro de cadastro','Escolha pelo menos uma, a mais próxima do seu tipo de deficiência, por favor');
+      return;
     }
     navigation.navigate('Tela_Cadastro14', {
         email, 
@@ -73,7 +77,7 @@ const Tela_Cadastro13 = ({ route, navigation }) => {
         saboresEvita,
         saboresEvita_outro,
         deficiencia_outro,
-        deficiencia: deficienciasSelecionados.join(', ')
+        deficiencia: deficienciasSelecionadas.join(', ')
         });
     };
 
@@ -86,6 +90,7 @@ const Tela_Cadastro13 = ({ route, navigation }) => {
     }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro13.jpg')} 
@@ -137,6 +142,7 @@ const Tela_Cadastro13 = ({ route, navigation }) => {
             </View>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
           
@@ -155,7 +161,7 @@ const Tela_Cadastro13 = ({ route, navigation }) => {
       },
       titulo: {
         fontSize: 21,
-        marginBottom: 5,
+        marginBottom: 0,
         fontFamily: 'QuickDelight',
         textAlign: 'center',
       },
@@ -165,7 +171,7 @@ const Tela_Cadastro13 = ({ route, navigation }) => {
       containerCheckBox: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 9,
+        marginBottom: 7,
         marginTop: -2,
         marginLeft: 50,
       },

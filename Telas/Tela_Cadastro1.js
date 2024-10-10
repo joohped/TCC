@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Alert, Linking, TouchableOpacity, BackHandler } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Dimensions, ImageBackground, TouchableHighlight, Alert, Linking, TouchableOpacity, Keyboard, TouchableWithoutFeedback  } from 'react-native';
 import { useFonts } from 'expo-font';
 import Checkbox from 'expo-checkbox';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const { width, height } = Dimensions.get('window');
 
@@ -95,9 +96,16 @@ const Tela_Cadastro1 = ({ navigation }) => {
     return null;
   }
 
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+
+  const MostrarSenha = () => {
+    setMostrarSenha(!mostrarSenha);
+  };
+
 
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <ImageBackground
           source={require('../img/fundo_cadastro.jpg')}
@@ -130,25 +138,31 @@ const Tela_Cadastro1 = ({ navigation }) => {
               style={styles.input}
               value={data_nasc_resp}
               onChangeText={(nasci) => setData_nasc_resp(formatData(nasci))}
-              placeholder="Data de Nascimento"
+              placeholder="Data de Nascimento (responsável)"
               maxLength={10}
               autoCapitalize="none"
               placeholderTextColor="#ffffff"
               textAlign="center"
               keyboardType="numeric" 
             />
+            
           </View>
-          <View style={styles.botaoCentralizado}>
+          <View style={styles.botaoCentralizado4}>
+          <View style={styles.botaoCentralizado3}>
             <TextInput
               style={styles.input}
               value={senha}
               onChangeText={setSenha}
               autoCapitalize="none"
-              secureTextEntry
+              secureTextEntry={!mostrarSenha}
               placeholder="Senha"
               placeholderTextColor="#ffffff"
               textAlign="center"
             />
+            <TouchableOpacity onPress={MostrarSenha} style={{padding: -10, marginLeft: -22, left: -15}}>
+              <Icon name={mostrarSenha ? "visibility-off" : "visibility"} size={22} left={-5} />
+            </TouchableOpacity>
+          </View>
           </View>
 
           <View style={styles.botaoCentralizado}>
@@ -183,6 +197,7 @@ const Tela_Cadastro1 = ({ navigation }) => {
           </Text>
         </ImageBackground>
       </View>
+      </TouchableWithoutFeedback>
   );
 };
 
@@ -241,6 +256,15 @@ const styles = StyleSheet.create({
     marginTop: 40,
 
   },
+  botaoCentralizado3: {
+    alignItems: 'center',
+    marginVertical: 10,
+    marginTop: 10,
+    flexDirection:'row'
+  },
+  botaoCentralizado4: {
+    alignItems: 'center',
+  },
   imagem: {
     width: 60, 
     height: 60, 
@@ -251,7 +275,9 @@ const styles = StyleSheet.create({
     fontFamily: 'QuickDelight',
     display: 'flex',
     flexDirection: 'row',
+    top: 6,
     fontSize: 19,
+    height: 50,
   },
   containerCheckBox: {
     flexDirection: 'row',

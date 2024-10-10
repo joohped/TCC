@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useFonts } from 'expo-font';
 
@@ -44,7 +44,7 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
     const texturasSelecionadas = Object.keys(texturasEvita).filter(key => texturasEvita[key]);
 
     if (texturasSelecionadas.length === 0){
-      Alert.alert('Erro de cadastro','Escolha pelo menos uma, a que mais te agrada dentre as opções');
+      Alert.alert('Erro de cadastro','Escolha pelo menos uma, a que mais te desagrada dentre as opções');
       return;
     }
     if (texturasEvita_outro === ""){
@@ -83,6 +83,7 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
     }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro12.jpg')} 
@@ -134,6 +135,7 @@ const Tela_Cadastro10 = ({ route, navigation }) => {
             </View>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
       
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
     fontSize: 21,
     width: 320,
     fontFamily: 'QuickDelight',
-    marginBottom: 10,
+    marginBottom: 8,
     marginLeft: 10,
     textAlign: 'center',
   },
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
   containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 9,
+    marginBottom: 8,
     marginTop: -2,
     marginLeft: 50,
     borderRadius: 50,

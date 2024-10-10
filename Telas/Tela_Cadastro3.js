@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Text, Alert } from 'react-native';
+import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Text, Alert, Platform, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useFonts } from 'expo-font';
 
@@ -59,6 +59,7 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro4.jpg')} 
@@ -67,7 +68,7 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
         <View style={styles.subir}>
           <View style={styles.botaoCentralizado}>
             <Text style={styles.titulo}>
-              Muito prazer {nome_usuario}!! preciso de algumas informações que vocé deve preencher com um responsável tá?
+              Muito prazer {nome_usuario}!! preciso de algumas informações que você deve preencher com um responsável tá?
             </Text>
           </View>
 
@@ -111,6 +112,7 @@ const Tela_Cadastro3 = ({ route, navigation }) => {
         </View>
       </ImageBackground>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDCB53', 
     padding: 12,
     borderRadius: 50,
-    marginTop: 20,
+    marginTop: 10,
     marginLeft: 20,
     width: 58,
     fontSize: 18,
@@ -170,7 +172,7 @@ const styles = StyleSheet.create({
   },
   containerPicker: {
     marginLeft: 10,
-    height: 50,
+    height: Platform.OS === 'ios' ? 95 : 50,
     width: 300,
     backgroundColor: '#FDCB53',
     borderRadius: 20,

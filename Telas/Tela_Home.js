@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
-import { StyleSheet, View, TouchableOpacity, Image, ScrollView, Text} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image, Dimensions, ScrollView, Text} from 'react-native';
 import { useFonts } from 'expo-font';
+
+const { width, height } = Dimensions.get('window');
 
 export default function Tela_Home({navigation}) {
   const route = useRoute();
@@ -297,20 +299,52 @@ export default function Tela_Home({navigation}) {
                     });
                 };
 
+                const Videos = async () => {
+                  navigation.navigate('Videos', { 
+                    email,
+                    nome_r, 
+                    nome_usuario, 
+                    data_nasc_resp, 
+                    data_nasc_usua, 
+                    alergia, 
+                    alergia_outro, 
+                    comida_gosta,
+                    comidaFavorita_outro,
+                    comidasFavoritas,
+                    texturaFavorita_outro,
+                    texturasFavoritas,
+                    saborFavorito_outro,
+                    saboresFavoritos,
+                    comida_evita,
+                    comidasEvita,
+                    comidasEvita_outro,
+                    texturasEvita,
+                    texturasEvita_outro,
+                    saboresEvita,
+                    saboresEvita_outro,
+                    deficiencia,
+                    deficiencia_outro,
+                    personagemEscolhido,
+                    scale,
+                    fontSize
+                      });
+                  };
+
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: 'white'}}>
+    <ScrollView style={{ flex: 1, backgroundColor: 'white'}} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
 
       <View>
 
-        <View style={{width: 450, height: 200, backgroundColor: '#F7B61A', borderRadius: 130, 
+        <View style={{width: width+40, height: 210, backgroundColor: '#F7B61A', borderRadius: 130, 
         borderTopLeftRadius: 0, borderTopRightRadius: 0, top: -60, marginLeft: -20, marginRight: 0, alignItems: "center", justifyContent: "center", flexDirection: "row", display: 'flex', zIndex: 100, shadowColor:'black', elevation: 4}}>
 
-        <TouchableOpacity style={{zIndex: 1000, left: 75, top: 45}} onPress={Config}>
+        <TouchableOpacity style={{zIndex: 1000, left: 80, top: 46, width: 45, height: 28, marginLeft: -10 }} onPress={Config}>
           <Image
           style={{
             width: 35, 
             height: 20, 
+            top: 3,
             resizeMode:'contain',
             marginLeft: "auto", 
             marginRight: "auto" 
@@ -483,7 +517,7 @@ export default function Tela_Home({navigation}) {
 
           shadowColor:'#4BBFBE', 
           elevation: 6,
-          }}>
+          }} onPress={Videos}>
 
             <Image source={require('../img/botao5VC.png')} style={{width: 314,
             height: 158, borderRadius: 52,}}/>

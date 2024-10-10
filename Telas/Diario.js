@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
-import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, TouchableWithoutFeedback, Animated, ScrollView, TextInput, Alert } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, TouchableWithoutFeedback, Animated, ScrollView, TextInput, Alert, Keyboard  } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { initializeApp} from '@firebase/app';
 import { getAuth } from '@firebase/auth';
@@ -408,7 +408,7 @@ const Diario = ({ navigation }) => {
   
 
   const almoco = (
-    <ScrollView style={{flex: 2}}>
+    <ScrollView style={{flex: 2}} showsVerticalScrollIndicator={false} >
     <Animated.View style={{height: 710, alignItems: 'center', transform: [{ translateY: Descer }] }}>
       
     <Text style={{fontSize: fontSize, textAlign: 'center', top: 20, zIndex: 100, fontFamily: 'QuickDelight'}}>Refeição do dia:
@@ -505,7 +505,8 @@ const Diario = ({ navigation }) => {
 
 
   const comi = (
-    <ScrollView style={{flex: 2}}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <ScrollView style={{flex: 2}} showsVerticalScrollIndicator={false} >
       <Animated.View style={{height: 1150, alignItems: 'center', transform: [{ translateY: Subir }] }}>
       <Text style={{fontSize: fontSize, textAlign: 'center', top: 20, zIndex: 100, fontFamily: 'QuickDelight'}}>Hoje eu comi:
       </Text>
@@ -568,6 +569,7 @@ const Diario = ({ navigation }) => {
 
       </Animated.View>
     </ScrollView>
+    </TouchableWithoutFeedback>
   );
 
   const weeks = React.useMemo(() => {
@@ -584,15 +586,17 @@ const Diario = ({ navigation }) => {
   }, [week]);
 
   return (
+    
   <View style={styles.container}>
+    
     <ImageBackground source={require('../img/Gradient.png')} style={{width: width, top: 380, height: height,}}>
-      <View style={{backgroundColor: '#F7B61A', shadowColor: "black",  elevation: 4, height: 170, width: width,borderBottomEndRadius: 60, borderBottomStartRadius: 60, top: -30}}>
-        <TouchableOpacity style={{ width: 32, height: 32, top: 95, left: 40}} onPress={Voltar}>
+      <View style={{backgroundColor: '#F7B61A', shadowColor: "black",  elevation: 4, height: 180, width: width,borderBottomEndRadius: 60, borderBottomStartRadius: 60, top: -30}}>
+        <TouchableOpacity style={{ width: 32, height: 32, top: 105, left: 40}} onPress={Voltar}>
           <Image source={require('../img/voltarDesafios.png')} style={{ width: 26, height: 30, top: 4, left: 5 }} />
         </TouchableOpacity >
 
         <View style={styles.containerPersonagem}>
-            <TouchableOpacity onPress={Perfil} style={{ width: 70, zIndex: 1000,   left: 310, top: 55}}>
+            <TouchableOpacity onPress={Perfil} style={{ width: 70, zIndex: 1000,   left: 310, top: 65}}>
             {personageEscolhido && (
               <Image 
                 source={personageEscolhido} 
@@ -602,11 +606,11 @@ const Diario = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         
-          <Image source={require('../img/diario.png')} style={{ width: 140, height: 58   , top: -10, left: 130 }} />
+          <Image source={require('../img/diario.png')} style={{ width: 140, height: 58   , top: 0, left: 130 }} />
         
         </View>
-        <TouchableOpacity style={{ width: 62, height: 58   , top: 25, left: 350}} onPress={Conq}>
-          <Image source={require('../img/conquistas.png')} style={{ width: 62, height: 58  }} />
+        <TouchableOpacity style={{ width: 62, height: 58   , top: 25, left: 350, zIndex:1000}} onPress={Conq}>
+          <Image source={require('../img/conquistas.png')} style={{ width: 62, height: 58}} />
         </TouchableOpacity>
         <View style={{justifyContent: 'center', alignItems: 'center', marginTop: -50, marginBottom: -85, }}>
           {personageEscolhido && (

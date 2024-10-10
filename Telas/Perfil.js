@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, Modal } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Dimensions, Image, TouchableOpacity, Modal, ScrollView } from 'react-native';
 import { useFonts } from 'expo-font';
 
 const { width, height } = Dimensions.get('window');
@@ -133,15 +133,17 @@ const { width, height } = Dimensions.get('window');
   return (
     <View>
       <ImageBackground style={{ width: width+10 , height: height+50 , top: 0 }} source={require('../img/fundo2.png')}> 
-        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 5}, shadowOpacity: 0.30, shadowRadius: 15, height: 190, width: 420,borderBottomEndRadius: 400, borderBottomStartRadius: 400}}>
+      <ScrollView showsVerticalScrollIndicator={false} >
+        <View style={{height: 920, alignItems:'center'}}>
+        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 5}, shadowOpacity: 0.30, shadowRadius: 15, height: 190, width: width+10,borderBottomEndRadius: 400, borderBottomStartRadius: 400}}>
             <TouchableOpacity onPress={Voltar} style={{ width: 50, top: 60, left: 50, height: 50}}>
                 <Image source={require('../img/voltar2.png')} style={{ width: 35 , height: 35, left: 5, top: 5 }} />
             </TouchableOpacity>
             <View style={{     
               backgroundColor: '#F69343',   
               marginTop: 80,
-              width: 105,
-              height: 110,
+              width: 93,
+              height: 96,
               borderStyle: 'solid',
               borderColor: "#F69343",
               borderRightWidth: 2,
@@ -150,7 +152,7 @@ const { width, height } = Dimensions.get('window');
               borderBottomWidth: 5,
               borderRadius: 57,
               resizeMode: 'contain',
-              marginLeft: 280,
+              marginLeft: 290,
               zIndex: 1000,
               position: 'absolute'}}>
                 {personageEscolhido && (
@@ -162,12 +164,12 @@ const { width, height } = Dimensions.get('window');
                 
             </View>
 
-            <Text style={{fontFamily: 'Lollypop', color: '#F69343', fontSize: 32, textAlign: 'right', marginTop: 40, marginRight: 150}}>{nome_usuario}</Text>
-                <Text style={{fontFamily: 'QuickDelight', color: 'black', fontSize: 25,textAlign: 'right', marginRight: 150, top: -4}} >{nome}</Text>
+            <Text style={{fontFamily: 'Lollypop', color: '#F69343', fontSize: 32, textAlign: 'right', marginTop: 40, marginRight: 155}}>{nome_usuario}</Text>
+                <Text style={{fontFamily: 'QuickDelight', color: 'black', fontSize: 25,textAlign: 'right', marginRight: 155, top: -4}} >{nome}</Text>
         </View>
 
-
-        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 360, width: 347, top: 40, borderRadius: 55, left: 35}}>
+      
+        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 360, width: 347, top: 40, borderRadius: 55}}>
 
           <Image source={require('../img/titulo12.png')} style={{ width: 180 , height: 35  , top: 20, left: 25 }} />
           
@@ -266,7 +268,7 @@ const { width, height } = Dimensions.get('window');
         </View>
 
 
-          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 245, width: 346, top: 70, borderRadius: 55, left: 35}}>
+          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 245, width: 346, top: 70, borderRadius: 55}}>
 
             <Image source={require('../img/titulo18.png')} style={{ width: 200 , height: 35  , top: 20, left: 25 }} />
           
@@ -291,6 +293,8 @@ const { width, height } = Dimensions.get('window');
             </View>
 
           </View>
+          </View>
+        </ScrollView>
       </ImageBackground>
     </View>
   );
@@ -321,9 +325,9 @@ const styles = StyleSheet.create({
         height: 45
     },
     imagemPersonagem: {
-      width: 101,
-      height: 101,
-      left: -1,
+      width: 88,
+      height: 88,
+      left:-1,
       top: 1
       },
 });

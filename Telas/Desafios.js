@@ -332,7 +332,7 @@ export default function Desafios({ navigation }) {
     
       <ImageBackground style={{ width: width , height: height , top: 0 }} source={require('../img/fundoDesafios.png')}> 
 
-        <View style={{backgroundColor: '#E54A4A', shadowColor: "#000", shadowRadius: 4, elevation: 5, height: 150, width: 420, borderBottomEndRadius: 55, borderBottomStartRadius: 55}}>
+        <View style={{backgroundColor: '#E54A4A', shadowColor: "#000", shadowRadius: 4, elevation: 5, height: 150, width: width+5, borderBottomEndRadius: 55, borderBottomStartRadius: 55}}>
 
           <View style={styles.containerPersonagem}>
             <TouchableOpacity onPress={Perfil} style={{ width: 70, zIndex: 1000,   left: 310, top: 55}}>
@@ -376,7 +376,7 @@ export default function Desafios({ navigation }) {
 
             
               <View style={{ height: 510,top: -430, alignItems: 'center'}}>
-              <ScrollView style={{  height: 1000, zIndex: 1000}}>
+              <ScrollView style={{  height: 1000, zIndex: 1000}} showsVerticalScrollIndicator={false} >
             
                 <TouchableOpacity onPress={adicionar} style={{ width: 325, marginBottom: 40}}>
                   <View style={{backgroundColor: '#D9D9D9', shadowColor: "#E54A4A", shadowOffset: {width: 1, height: 5}, shadowOpacity: 1, shadowRadius: 4, height: 76, width: 325, borderRadius: 35, zIndex: 1000, alignItems:'center', justifyContent:'center'}}>
@@ -420,6 +420,7 @@ export default function Desafios({ navigation }) {
                 <TextInput
                   style={styles.input}
                   placeholder="Informe o alimento/desafio"
+                  placeholderTextColor={'lightgray'}
                   value={titulo}
                   onChangeText={setTitulo}
                   maxLength={55}
@@ -486,10 +487,11 @@ const styles = StyleSheet.create({
   },
   tituloModal: {
     fontSize: 20,
-    marginBottom: 20,
-    color: 'white',
+    marginBottom: 50,
+    color: 'black',
   },
   input: {
+    color: 'black',
     height: 50,
     borderRadius: 10,
     backgroundColor: 'white',
@@ -499,7 +501,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 320,
     marginBottom: 20,
-    color: 'black',
     whiteSpace: 'nowrap',
     paddingHorizontal: 10,
     marginTop: -30,

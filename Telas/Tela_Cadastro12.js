@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Text, Alert } from 'react-native';
+import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Text, Alert, Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useFonts } from 'expo-font';
 
@@ -111,7 +111,7 @@ const Tela_Cadastro12 = ({ route, navigation }) => {
         <View style={styles.subir}>
           <View style={styles.botaoCentralizado}>
             <Text style={styles.titulo}>
-              Para finalizar preciso que me responda essa ultima essa última pergunta
+              Para finalizar preciso que me responda essa última pergunta
             </Text>
           </View>
 
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   subir: {
-    marginTop: -320,
+    marginTop: -340,
   },
   input: {
     marginLeft: 10,
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDCB53', 
     padding: 12,
     borderRadius: 50,
-    marginTop: 20,
+    marginTop: 15,
     marginLeft: 20,
     width: 58,
     fontSize: 18,
@@ -195,12 +195,12 @@ const styles = StyleSheet.create({
   },
   botaoCentralizado: {
     alignItems: 'center',
-    marginVertical: 12,
+    marginVertical: 8,
     marginTop: 0,
   },
   containerPicker: {
     marginLeft: 10,
-    height: 50,
+    height: Platform.OS === 'ios' ? 95 : 50,
     width: 300,
     backgroundColor: '#FDCB53',
     borderRadius: 20,

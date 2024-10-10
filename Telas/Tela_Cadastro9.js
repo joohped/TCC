@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useFonts } from 'expo-font';
 
@@ -41,7 +41,7 @@ const Tela_Cadastro9 = ({ route, navigation }) => {
     const comidasSelecionadas = Object.keys(comidasEvita).filter(key => comidasEvita[key]);
 
     if (comidasSelecionadas.length === 0){
-      Alert.alert('Erro de cadastro','Escolha pelo menos uma, a que mais te agrada dentre as opções');
+      Alert.alert('Erro de cadastro','Escolha pelo menos uma, a que mais te desagrada dentre as opções');
       return;
     }
     if (comidasEvita_outro === ""){
@@ -78,6 +78,7 @@ const Tela_Cadastro9 = ({ route, navigation }) => {
     }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro11.jpg')} 
@@ -129,6 +130,7 @@ const Tela_Cadastro9 = ({ route, navigation }) => {
             </View>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 };
           
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
   containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 8,
     marginTop: -2,
     marginLeft: 50,
   },

@@ -263,8 +263,8 @@ const Voltar = async () => {
     <View style={styles.container}>
       <ImageBackground style={{ width: width , height: height+30 , top: 0 }} source={require('../img/fundoQuiz2.png')}>
 
-        <TouchableOpacity onPress={Voltar}>
-          <Image source={require('../img/voltarQuiz.png')} style={{ width: 55 , height: 55  , top: '110%', left: 30 }} /> 
+        <TouchableOpacity onPress={Voltar} style={{ top: 65, left: 30,  width: 55 , height: 55 }}>
+          <Image source={require('../img/voltarQuiz.png')} style={{ width: 55 , height: 55 }} /> 
         </TouchableOpacity>
 
         <View style={styles.containerPersonagem}>

@@ -401,7 +401,7 @@ const [personageEscolhido, setPersonageEscolhido] = useState(null);
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View>
-                <ImageBackground style={{ width: width, height: height }} source={require('../img/fundoDicasInstrucoes.png')}>
+                <ImageBackground style={{ width: width, height: height+25 }} source={require('../img/fundoDicasInstrucoes.png')}>
                     <View style={{ backgroundColor: '#388388', shadowColor: "black", shadowOffset: { width: 1, height: 10 }, shadowOpacity: 0.38, shadowRadius: 4, height: 148, width: width, borderBottomEndRadius: 55, borderBottomStartRadius: 55, zIndex: 1000, elevation: 4 }}>
                         
                     <View style={styles.containerPersonagem}>
@@ -421,10 +421,10 @@ const [personageEscolhido, setPersonageEscolhido] = useState(null);
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <Text style={{ color: 'white', marginTop: 50, marginLeft: 28, marginRight: 160, fontFamily: 'QuickDelight', fontSize: fontSize, textAlign: 'left' }}> Nesta página você irá encontrar dicas para adicionar na sua rotina. </Text>
+                        <Text style={{ color: 'white', marginTop: 60, top: -10,marginLeft: 28, marginRight: 160, fontFamily: 'QuickDelight', fontSize: fontSize, textAlign: 'left' }}> Nesta página você irá encontrar dicas para adicionar na sua rotina. </Text>
                         <Image source={require('../img/detalhe1Dicas.png')} style={{ width: 185, height: 140, marginTop: -110, marginLeft: 235 }} />
                     </View>
-                    <View style={{ alignItems: 'center', marginTop: 20 }}>
+                    <View style={{ alignItems: 'center', marginTop: 30 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#388388', borderRadius: 21.5, padding: 10, width: 291, height: 43, top: 20 }}>
                             <TextInput
                                 style={{ color: 'white', flex: 1 }}
@@ -443,7 +443,7 @@ const [personageEscolhido, setPersonageEscolhido] = useState(null);
                             )}
                         </View>
                     </View>
-                    <ScrollView style={{ marginTop: '8%', marginBottom: -25, backgroundColor:'white' }}>
+                    <ScrollView style={{ marginTop: '11%', marginBottom: 25, backgroundColor:'white' }}>
                         {filteredDicas.map(dica => (
                             <TouchableOpacity key={dica.id} onPress={() => handleDicaPress(dica)}>
                                 <View style={{ backgroundColor: '#FFFFFF', shadowColor: "#000000", shadowOffset: { width: 1, height: 5 }, shadowOpacity: 0.4, shadowRadius: 4, elevation: 3,height: 120, width: 325, borderRadius: 40, marginTop: 10, alignSelf: 'center', padding: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>

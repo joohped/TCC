@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity, Image, Dimensions, TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useFonts } from 'expo-font';
 
@@ -57,6 +57,7 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
   
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro7.jpg')} 
@@ -109,7 +110,7 @@ const Tela_Cadastro5 = ({ route, navigation }) => {
           </View>
       </View>
     </View>
-    
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -128,10 +129,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   titulo: {
-    fontSize: 21,
+    fontSize: 20,
     width: 320,
     fontFamily: 'QuickDelight',
-    marginBottom: 2,
+    marginBottom: -4,
     marginLeft: 10,
     textAlign: 'center',
   },
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
   containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 9,
+    marginBottom: 8,
     marginTop: -2,
     marginLeft: 50,
     borderRadius: 50,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, StyleSheet, Text, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity, Image, Dimensions } from 'react-native';
+import {View, StyleSheet, Text, ImageBackground, TextInput, TouchableHighlight, TouchableOpacity, Image, Dimensions, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useFonts } from 'expo-font';
 
@@ -55,6 +55,7 @@ const Tela_Alergia = ({ route, navigation }) => {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <ImageBackground
         source={require('../img/fundo_cadastro4.jpg')} 
@@ -101,7 +102,7 @@ const Tela_Alergia = ({ route, navigation }) => {
           </View>
       </View>
     </View>
-    
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -120,7 +121,8 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontSize: 22,
-    marginBottom: 15,
+    left: 5,
+    marginBottom: 12,
     fontFamily: 'QuickDelight',
     textAlign: 'center',
   },
@@ -130,9 +132,9 @@ const styles = StyleSheet.create({
   containerCheckBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 9,
+    marginBottom: 7,
     marginTop: -2,
-    marginLeft: 50,
+    marginLeft: 55,
   },
   input: {
     alignItems: 'center',
@@ -142,6 +144,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 300,
     fontSize: 20,
+    marginLeft: 15,
     marginTop: 15,
     
   },
@@ -159,7 +162,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDCB53',
     padding: 12,
     borderRadius: 50,
-    marginLeft: 20,
+    marginLeft: 25,
     width: 58,
     fontSize: 18,
   },

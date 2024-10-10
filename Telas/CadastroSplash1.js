@@ -18,7 +18,7 @@ const CadastroSplash1 = ({ navigation, route }) => {
   return (
       <LottieView
       source={require("../splash/Tela_Splash_Nhac.json")}
-      style={{width: width+10, height: height+50, marginTop: -10}}
+      style={{width: width+10, height: height+55, marginTop: -20}}
       autoPlay
       speed={0.95}
     />

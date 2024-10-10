@@ -90,7 +90,7 @@ const CadastroSplash2 = ({ navigation, route }) => {
   return (
     <LottieView
     source={require("../splash/Tela_Splash_2.json")}
-    style={{width: width+10, height: height+50, marginTop: -10}}
+    style={{width: width+10, height: height+55, marginTop: -15}}
     autoPlay
     speed={0.75}
   />

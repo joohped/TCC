@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Alert } from 'react-native';
+import { View, TextInput, Image, StyleSheet, Dimensions, ImageBackground, TouchableHighlight, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import {useFonts} from 'expo-font'
 
 const { width, height } = Dimensions.get('window');
@@ -28,6 +28,7 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
 
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <ImageBackground
           source={require('../img/fundo_cadastro2.jpg')}
@@ -38,7 +39,7 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
               style={styles.input}
               value={nome_usuario}
               onChangeText={setNome_usuario}
-              placeholder="Nome de Usuário"
+              placeholder="Nome da criança"
               maxLength={14}
               autoCapitalize="none"
               placeholderTextColor="#ffffff"
@@ -55,6 +56,7 @@ const Tela_Cadastro2 = ({ route, navigation }) => {
 
         
       </View>
+      </TouchableWithoutFeedback>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Image, Dimensions, Alert } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableHighlight, Image, Dimensions, Alert, Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useFonts } from 'expo-font';
 
@@ -27,7 +27,7 @@ const Tela_Cadastro8 = ({ route, navigation }) => {
   const CadastroParte = async () => {
 
     if (comida_evita === ""){
-      Alert.alert('Erro de cadastro','Precisamos que coloque os tipos de comida que mais gosta');
+      Alert.alert('Erro de cadastro','Precisamos que coloque os tipos de comida que mais evita');
       return;
     }else{
     navigation.navigate('Tela_Cadastro9', {         
@@ -164,7 +164,8 @@ const styles = StyleSheet.create({
   },
   containerPicker: {
     marginLeft: 10,
-    height: 50,
+    marginTop: -25,
+    height: Platform.OS === 'ios' ? 95 : 50,
     width: 300,
     backgroundColor: '#FDCB53',
     borderRadius: 20,

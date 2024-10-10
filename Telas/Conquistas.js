@@ -225,7 +225,7 @@ export default function Conquistas({navigation}) {
   return (
 
     
-      <ImageBackground style={{ width: width , height: height+10 , top: 15, alignItems: 'center', zIndex: 1000}} source={require('../img/fundoConquistas.png')}> 
+      <ImageBackground style={{ width: width , height: height+20 , top: 15, alignItems: 'center', zIndex: 1000}} source={require('../img/fundoConquistas.png')}> 
 
         <View style={{backgroundColor: '#9BCB3C', shadowColor: "#000", elevation: 4, height: 150, width: width, borderBottomEndRadius: 50, borderBottomStartRadius: 50, top: -25, zIndex: 1000}}>
 
@@ -248,14 +248,14 @@ export default function Conquistas({navigation}) {
 
         </View>
         
-        <ScrollView style={{width: width,  marginTop: -25}} contentContainerStyle={{alignItems:'center'}} onScroll={handleScroll} >
+        <ScrollView style={{width: width,  marginTop: -25}} contentContainerStyle={{alignItems:'center'}} onScroll={handleScroll} showsVerticalScrollIndicator={false} >
           <View style={{backgroundColor: '#BAD487', shadowColor: "#000", height: 100, width: 320, borderRadius: 30, marginTop: 20, top: 5, alignItems: 'center', justifyContent: 'center'}}>
 
                 <Text style={{color: 'white', fontSize: fontSize, width: 200, textAlign: 'center', fontFamily:'QuickDelight'}}>Ver todas as minhas conquistas!</Text>
 
             </View>
         {achievements.map((item, conquista) => (
-          <View key={conquista} style={{alignItems: 'center',  height: height*8.75}}>
+          <View key={conquista} style={{alignItems: 'center',  height: 200*38.4}}>
           
           <View style={{ height: 125, width: 130, top: 40, left: 50, alignItems: 'center', justifyContent: 'center'}}>
 
