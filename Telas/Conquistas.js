@@ -249,7 +249,7 @@ export default function Conquistas({navigation}) {
         </View>
         
         <ScrollView style={{width: width,  marginTop: -25}} contentContainerStyle={{alignItems:'center'}} onScroll={handleScroll} showsVerticalScrollIndicator={false} >
-          <View style={{backgroundColor: '#BAD487', shadowColor: "#000", height: 100, width: 320, borderRadius: 30, marginTop: 20, top: 5, alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{backgroundColor: '#BAD487', shadowColor: "#000", elevation: 4, height: 100, width: 320, borderRadius: 30, marginTop: 20, top: 5, alignItems: 'center', justifyContent: 'center'}}>
 
                 <Text style={{color: 'white', fontSize: fontSize, width: 200, textAlign: 'center', fontFamily:'QuickDelight'}}>Ver todas as minhas conquistas!</Text>
 

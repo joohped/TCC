@@ -367,7 +367,7 @@ export default function Tela_Home({navigation}) {
           </TouchableOpacity>
         </View>
         
-          <Text style={{fontSize: 26, zIndex: 1000, marginTop: -60, color: 'white', marginLeft: 30, fontFamily: 'QuickDelight' }}>Olá!,</Text>
+          <Text style={{fontSize: 26, zIndex: 1000, marginTop: -50, color: 'white', marginLeft: 30, fontFamily: 'QuickDelight' }}>Olá!,</Text>
           <Text style={{fontSize: 32, zIndex: 1000, marginTop: -10, color: 'white', marginLeft: 30, fontFamily: 'Lollypop' }}>{nome_usuario}</Text>
           <Image
           style={{width: 505, height: 740, resizeMode:'contain', left: -50, top: -450}}

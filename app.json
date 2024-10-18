@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "teste.02",
-    "slug": "teste.02",
-    "version": "1.0.0",
+    "name": "Nhac",
+    "icon": "./img/icone.png",
+    "slug": "Nhac",
+    "version": "1.0.2",
     "scheme": "teste.02",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -10,7 +11,8 @@
       "supportsTablet": true
     },
     "android": {
-      
+      "package": "com.joaozin_1117.Nhac",
+      "versionCode": "3"
     },
     "web": {
       "favicon": "./img/favicon.png"
@@ -20,6 +22,11 @@
         "google": {
           "clientId": "887696697850-s3uevbgvsn1l095fn5dsbc6ui3jpm206.apps.googleusercontent.com"
         }
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0be42657-9fd2-432d-a975-9636aa95f95b"
       }
     }
   }

@@ -32,7 +32,7 @@ const db = getFirestore(app);
       const scaleMinima = 0.96;
 
         const Insta = () => {
-            Linking.openURL("https://www.instagram.com/nhackids._/");
+            Linking.openURL("https://www.instagram.com/nhac.app/");
           };
         const Email = () => {
             Linking.openURL("mailto:nhac.kids00@gmail.com");
@@ -206,7 +206,7 @@ useEffect(() => {
       <ImageBackground style={{ width: width + 10 , height: height+50 , top: 0 }} source={require('../img/fundo.png')}> 
       <ScrollView showsVerticalScrollIndicator={false} >
         <View style={{height: 930}}>
-        <View style={{backgroundColor: 'white', shadowColor: "#000", height: 160, width: width,borderBottomEndRadius: 55, borderBottomStartRadius: 55, }}>
+        <View style={{backgroundColor: 'white', shadowColor: "#000", height: 160, width: width,borderBottomEndRadius: 55, borderBottomStartRadius: 55, elevation: 4}}>
         
     
             <TouchableOpacity onPress={Voltar} style={{ width: 40, left: 30, marginTop: 60, marginBottom: -60, top: 10 }}>
@@ -216,7 +216,7 @@ useEffect(() => {
             <Text style={{fontFamily: 'Lollypop', color: 'black', fontSize: 40, marginLeft: 25, top: 10, width: 250, textAlign: 'center', marginLeft: 100, marginBottom: -40, marginTop: 30}}>Configurações</Text>
 
         
-          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 193, width: 337, top: 100, borderRadius: 32, left: 35}}>
+          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4 , elevation: 4, height: 193, width: 337, top: 100, borderRadius: 32, left: 35}}>
 
           <Image source={require('../img/titulo2.png')} style={{ width: 150 , height: 20  , top: 20, left: 40, transform: [{ scale }]}} />
           
@@ -230,7 +230,7 @@ useEffect(() => {
 
 
 
-          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 109, width: 337, top: 120, borderRadius: 32, left: 35}}>
+          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4 , elevation: 4, height: 109, width: 337, top: 120, borderRadius: 32, left: 35}}>
 
           <Image source={require('../img/titulo5.png')} style={{ width: 150 , height: 20  , top: 20, left: 40, transform: [{ scale }] }} />
           
@@ -245,7 +245,7 @@ useEffect(() => {
 
 
       
-          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 148, width: 337, top: 140, borderRadius: 32, left: 35}}>
+          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, elevation: 4, height: 148, width: 337, top: 140, borderRadius: 32, left: 35}}>
 
           <Image source={require('../img/titulo7.png')} style={{ width: 125 , height: 20  , top: 20, left: 40, transform: [{ scale }] }} />
 
@@ -266,7 +266,7 @@ useEffect(() => {
 
 
 
-          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 171, width: 337, top: 160, borderRadius: 32, left: 35}}>
+          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, elevation: 4, height: 171, width: 337, top: 160, borderRadius: 32, left: 35}}>
           
           <Image source={require('../img/titulo9.png')} style={{ width: 75 , height: 24  , top: 20, left: 40, transform: [{ scale }] }} />
           
@@ -276,8 +276,9 @@ useEffect(() => {
             </TouchableOpacity>
 
             <View style={{backgroundColor: '#E9E9E9', height: 50, width: 300, top: -2, borderRadius: 32, left: 17}}></View>
-            <TouchableOpacity style={{ top: -48, width: 180,left: 45}} onPress={Insta}>
-                <Image source={require('../img/titulo11.png')} style={{ width: 125 , height: 38,  zIndex: 1000, transform: [{ scale }] }} />
+            <TouchableOpacity style={{ top: -48, width: 250,left: 45, flexDirection: 'row', alignItems: 'center'}} onPress={Insta}>
+                <Image source={require('../img/titulo11.png')} style={{ width: 40 , height: 40,  zIndex: 1000, transform: [{ scale }] }} />
+                <Text style={{fontFamily: 'QuickDelight', color: '#959595', fontSize , left: 10}}>nhac.app</Text>
             </TouchableOpacity>
           </View>
           

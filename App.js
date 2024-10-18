@@ -1,11 +1,18 @@
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 import Rotas from './Rotas';
 
 export default function App() {
   return (
-    <Rotas />
+    <>
+      <StatusBar 
+        barStyle="dark-content" 
+        backgroundColor="transparent"
+        translucent={true}
+      />
+      <Rotas/>
+    </>
   );
 }
 

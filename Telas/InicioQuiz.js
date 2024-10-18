@@ -214,6 +214,8 @@ const styles = StyleSheet.create({
     left: '15%',
     top: '25%', 
     borderRadius: 60,
+    shadowColor: '#000',
+    elevation: 4
   },
   inicioText: {
     fontSize: 20,

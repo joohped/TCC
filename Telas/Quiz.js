@@ -279,7 +279,8 @@ const Voltar = async () => {
         </View>
         
           <View style={styles.questionContainer}>
-            <Text style={{ fontSize: fontSize, textAlign: 'center', fontFamily: 'QuickDelight'}}>{currentQuestion.question}</Text>
+            <Text style={{ fontSize: fontSize, textAlign: 'center', fontFamily: 'QuickDelight', shadowColor: '#000',
+    elevation: 4}}>{currentQuestion.question}</Text>
           </View>
           <View style={styles.answers}>
             {currentQuestion.answers.map((answer) => (
@@ -326,6 +327,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     top: "15%",
+    
   },
   imageBackground: {
     backgroundColor: 'white',

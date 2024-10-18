@@ -173,7 +173,7 @@ const Result = ({ route, navigation }) => {
     <View style={styles.container}>
       <ImageBackground style={{ width: width , height: height+30 , top: 0 }} source={require('../img/fundoQuiz.png')}>
 
-        <TouchableOpacity onPress={Voltar} style={{backgroundColor:'gray', top: 65, left: 30,  width: 55 , height: 55 }}>
+        <TouchableOpacity onPress={Voltar} style={{top: 65, left: 30,  width: 55 , height: 55 }}>
           <Image source={require('../img/voltarQuiz.png')} style={{ width: 55 , height: 55 }} /> 
         </TouchableOpacity>
 
@@ -226,6 +226,8 @@ const styles = StyleSheet.create({
     left: '15%',
     top: '25%', 
     borderRadius: 60,
+    shadowColor: '#000',
+    elevation: 4
   },
   failImage: {
     width: 170, 

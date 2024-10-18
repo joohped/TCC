@@ -467,7 +467,7 @@ const openModal = async (video) => {
       playThroughEarpieceAndroid: false,
     });
   } catch (error) {
-    console.error("Error setting audio mode:", error);
+    console.error("Erro no áudio:", error);
   }
 };
 
@@ -591,7 +591,7 @@ const handleCloseModal = () => {
 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View>
         <ImageBackground style={{ width: width, height: height+25, top: 0 }} source={require('../img/fundoVideos.png')}>
-          <View style={{ backgroundColor: '#7CC9BC', shadowColor: "#000", shadowOffset: { width: 1, height: 10 }, shadowOpacity: 0.38, shadowRadius: 4, height: 150, width: 420, borderBottomEndRadius: 55, borderBottomStartRadius: 55 }}>
+          <View style={{ backgroundColor: '#7CC9BC', shadowColor: "#000", shadowOffset: { width: 1, height: 10 }, shadowOpacity: 0.38, shadowRadius: 4, elevation: 4, height: 150, width: 420, borderBottomEndRadius: 55, borderBottomStartRadius: 55 }}>
             <Image source={require('../img/tituloVideos.png')} style={{ width: 180, height: 80, top: 50, left: 105 }} />
             
             <TouchableOpacity onPress={Voltar} style={{width: 30, height: 35, top: -10, left: 30 }}>
@@ -609,10 +609,11 @@ const handleCloseModal = () => {
             </TouchableOpacity>
           </View>
           </View>
-
-          <Text style={{ color: 'white', top: 10, left: 35, marginRight: 230, marginTop: 10,fontFamily: 'QuickDelight', fontSize: fontSize, textAlign: 'left' }}>
-            Aqui você encontrará algumas receitas nutritivas e diferentes para introduzir novos alimentos à sua rotina.
-          </Text>
+          <View style={{alignItems:'center', height: 110}}>
+            <Text style={{ color: 'white', top: 15, left: 35, marginRight: 230,fontFamily: 'QuickDelight', fontSize: fontSize, textAlign: 'left' }}>
+              Aqui você encontrará algumas receitas nutritivas e diferentes para introduzir novos alimentos à sua rotina.
+            </Text>
+          </View>
 
           <View style={styles.searchBarContainer}>
             <TextInput
@@ -647,7 +648,7 @@ const handleCloseModal = () => {
             visible={modalVisible}
             onRequestClose={closeModal}
           >
-            <View style={{ backgroundColor: '#7CC9BC', shadowColor: "#000", shadowOffset: { width: 1, height: 10 }, shadowOpacity: 0.38, shadowRadius: 4, height: 150, width: '100%', borderBottomEndRadius: 55, borderBottomStartRadius: 55, position: 'absolute', zIndex: 1000 }}>
+            <View style={{ backgroundColor: '#7CC9BC', shadowColor: "#000", shadowOffset: { width: 1, height: 10 }, shadowOpacity: 0.38, shadowRadius: 4, elevation: 4, height: 150, width: '100%', borderBottomEndRadius: 55, borderBottomStartRadius: 55, position: 'absolute', zIndex: 1000 }}>
               <Image source={require('../img/tituloVideos.png')} style={{ width: 180, height: 80, top: 45, left: 125 }} />
               <TouchableOpacity onPress={closeModal} style={{ width: 30, height: 35, top: -15, left: 40 }}>
                 <Image source={require('../img/voltarDesafios.png')} style={{ width: 30, height: 35}} />
@@ -667,7 +668,7 @@ const handleCloseModal = () => {
                     useNativeControls
                     onPlaybackStatusUpdate={status => setStatus(() => status)}
                   />
-                  <ScrollView style={styles.recipeContainer}>
+                  <ScrollView style={styles.recipeContainer} showsVerticalScrollIndicator={false}>
                     <Text style={styles.recipeTitle}>{selectedVideo.alt}</Text>
                     <Text style={styles.recipeIngredients}>Ingredientes:</Text>
                     {selectedVideo.ingredients.map((ingredient, index) => (
@@ -710,7 +711,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4BBFBE',
     borderRadius: 21.5,
     paddingHorizontal: 10,
-    marginTop: 80,
+    marginTop: 65,
     marginBottom: 25,
     marginLeft: 'auto',
     marginRight: 'auto',

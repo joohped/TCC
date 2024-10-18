@@ -128,14 +128,18 @@ const { width, height } = Dimensions.get('window');
             scale,
             fontSize});
       };
+
+      const Sair = async () => {
+        navigation.navigate('Tela_Login');
+      };
       
 
   return (
     <View>
       <ImageBackground style={{ width: width+10 , height: height+50 , top: 0 }} source={require('../img/fundo2.png')}> 
       <ScrollView showsVerticalScrollIndicator={false} >
-        <View style={{height: 920, alignItems:'center'}}>
-        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 5}, shadowOpacity: 0.30, shadowRadius: 15, height: 190, width: width+10,borderBottomEndRadius: 400, borderBottomStartRadius: 400}}>
+        <View style={{height: 1000,alignItems:'center'}}>
+        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 5}, shadowOpacity: 0.30, shadowRadius: 15 , elevation: 2, height: 190, width: width+10,borderBottomEndRadius: 400, borderBottomStartRadius: 400}}>
             <TouchableOpacity onPress={Voltar} style={{ width: 50, top: 60, left: 50, height: 50}}>
                 <Image source={require('../img/voltar2.png')} style={{ width: 35 , height: 35, left: 5, top: 5 }} />
             </TouchableOpacity>
@@ -153,7 +157,8 @@ const { width, height } = Dimensions.get('window');
               borderRadius: 57,
               resizeMode: 'contain',
               marginLeft: 290,
-              zIndex: 1000,
+              zIndex: 1000, 
+              elevation: 4,
               position: 'absolute'}}>
                 {personageEscolhido && (
                     <Image 
@@ -168,8 +173,7 @@ const { width, height } = Dimensions.get('window');
                 <Text style={{fontFamily: 'QuickDelight', color: 'black', fontSize: 25,textAlign: 'right', marginRight: 155, top: -4}} >{nome}</Text>
         </View>
 
-      
-        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 360, width: 347, top: 40, borderRadius: 55}}>
+        <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4 , elevation: 4, height: 360, width: 347, top: 40, borderRadius: 55}}>
 
           <Image source={require('../img/titulo12.png')} style={{ width: 180 , height: 35  , top: 20, left: 25 }} />
           
@@ -268,7 +272,7 @@ const { width, height } = Dimensions.get('window');
         </View>
 
 
-          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4, height: 245, width: 346, top: 70, borderRadius: 55}}>
+          <View style={{backgroundColor: 'white', shadowColor: "#000", shadowOffset: {width: 1, height: 6}, shadowOpacity: 0.35, shadowRadius: 4 , elevation: 4, height: 245, width: 346, top: 70, borderRadius: 55}}>
 
             <Image source={require('../img/titulo18.png')} style={{ width: 200 , height: 35  , top: 20, left: 25 }} />
           
@@ -293,7 +297,14 @@ const { width, height } = Dimensions.get('window');
             </View>
 
           </View>
-          </View>
+          
+            <TouchableOpacity onPress={Sair} style={{ backgroundColor: 'white', width: 238, height: 50, borderRadius: 18, marginTop: 100, shadowColor: "#000", elevation: 2,  alignItems: 'center', justifyContent:'center'}}>
+              <Text style={{fontFamily: 'QuickDelight', fontSize: fontSize, color: 'red'}}>Sair da Conta</Text>
+            </TouchableOpacity>
+        </View>
+          
+            
+
         </ScrollView>
       </ImageBackground>
     </View>

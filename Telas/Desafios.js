@@ -379,7 +379,7 @@ export default function Desafios({ navigation }) {
               <ScrollView style={{  height: 1000, zIndex: 1000}} showsVerticalScrollIndicator={false} >
             
                 <TouchableOpacity onPress={adicionar} style={{ width: 325, marginBottom: 40}}>
-                  <View style={{backgroundColor: '#D9D9D9', shadowColor: "#E54A4A", shadowOffset: {width: 1, height: 5}, shadowOpacity: 1, shadowRadius: 4, height: 76, width: 325, borderRadius: 35, zIndex: 1000, alignItems:'center', justifyContent:'center'}}>
+                  <View style={{backgroundColor: '#D9D9D9', shadowColor: "#E54A4A", shadowOffset: {width: 1, height: 5}, shadowOpacity: 1, shadowRadius: 4 , elevation: 3, height: 76, width: 325, borderRadius: 35, zIndex: 1000, alignItems:'center', justifyContent:'center'}}>
 
                       <Text style={{ fontFamily: 'QuickDelight', right: 5, fontSize: fontSize}}> Adicionar </Text>
                     </View>
